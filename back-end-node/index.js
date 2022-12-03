@@ -6,9 +6,11 @@ app.use(cors())
 
 // for test
 const person = [{
+  "id": 1,
   "name": "Attila",
   "age": 28
 },{
+  "id": 2,
   "name": "Levente",
   "age": 30
 }]
