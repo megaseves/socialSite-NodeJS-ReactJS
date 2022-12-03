@@ -6,25 +6,29 @@ export function Home() {
 
 
     useEffect(() => {
-        axios
-            .get('http://localhost:8080/names')
-            .then(res => {
-                setNames(res.data)
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        try {
+            const fetchData = async () => {
+                const result = await axios(
+                    'http://localhost:8080/names'
+                );
+                setNames(result.data)
+            };
 
-    })
+            fetchData();
+        } catch (err) {
+            console.log(err);
+        }
+    }, []);
 
     return (
         <div className={'home-container'}>
             <h1>Hello ...</h1>
                 {
-                    names.map(name => <div className={'name-card'} key={name.id}>
-                        <h3>{name.name}</h3>
-                        <p>{name.age}</p>
-                    </div> )
+                    names.map(name =>
+                        <div className={'name-card'} key={name.id}>
+                            <h3>{name.name}</h3>
+                            <p>{name.age}</p>
+                        </div>)
                 }
         </div>
     )
