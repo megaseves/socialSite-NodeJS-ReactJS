@@ -1,35 +1,92 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import { useFormik } from "formik";
+import api from '../api/users';
+import axios from "axios";
+
 
 export function Home() {
-    const [names, setNames] = useState([]);
+    const [users, setUsers] = useState([]);
+
+    const onSubmit = (values) => {
+        console.log("submitted");
+        console.log(values);
+    }
+    const { values, handleBlur, handleChange, handleSubmit } = useFormik({
+        initialValues: {
+            name: "",
+            age: ""
+        },
+        onSubmit,
+    });
 
 
-    useEffect(() => {
+
+
+    const fetchUsers = async () => {
         try {
-            const fetchData = async () => {
-                const result = await axios(
-                    'http://localhost:8080/names'
-                );
-                setNames(result.data)
-            };
-
-            fetchData();
+            const response = await api.get('names');
+            setUsers(response.data);
         } catch (err) {
-            console.log(err);
+            if (err.response) {
+                console.log(err.response.data);
+                console.log(err.response.status);
+            } else {
+                console.log(err.message)
+            }
+
         }
-    }, []);
+    }
+    fetchUsers()
+
+
+    const fetchPostUsers = async () => {
+        try {
+            axios({
+                method: "post",
+                url: "http://localhost:8080/names",
+                headers: {'Content-Type': 'application/json'},
+                data: values
+            })
+
+        } catch (err) {
+            if (err.response) {
+                console.log(err.response.data);
+                console.log(err.response.status);
+            } else {
+                console.log(err.message)
+            }
+        }
+    }
+
 
     return (
         <div className={'home-container'}>
             <h1>Hello ...</h1>
                 {
-                    names.map(name =>
-                        <div className={'name-card'} key={name.id}>
-                            <h3>{name.name}</h3>
-                            <p>{name.age}</p>
+                    users.map(user =>
+                        <div className={'name-card'}>
+                            <h3>{user.name}</h3>
+                            <p>{user.age}</p>
                         </div>)
                 }
+            <div className={'post-form'}>
+                <form onSubmit={handleSubmit}>
+                    <h3>Add new user</h3>
+
+                    <p>Name</p>
+                    <input value={values.name} onBlur={handleBlur} onChange={handleChange} id={'name'} type={'text'} name={'name'} placeholder={'Enter your name'} />
+
+                    <p>Age</p>
+                    <input value={values.age} onBlur={handleBlur} onChange={handleChange} id={'age'} type={'number'} name={'age'} placeholder={'Enter your age'} />
+
+
+                    <button type={'submit'} onClick={async event => {
+                        event.preventDefault();
+                        fetchPostUsers();
+                    }
+                    }>Submit</button>
+                </form>
+            </div>
         </div>
     )
 }

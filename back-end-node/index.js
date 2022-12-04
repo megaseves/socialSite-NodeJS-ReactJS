@@ -1,23 +1,35 @@
 const express = require('express');
 const cors = require('cors');
+const fs = require("fs");
+
+var data = fs.readFileSync("users.json");
+var users = JSON.parse(data);
+
 
 const app = express();
 app.use(cors())
+app.use(express.json())
 
-// for test
-const person = [{
-  "id": 1,
-  "name": "Attila",
-  "age": 28
-},{
-  "id": 2,
-  "name": "Levente",
-  "age": 30
-}]
+let newData = {};
+function addNewDataToJsonFile() {
+    users.push(newData);
+    var newData2 = JSON.stringify(users);
+    fs.writeFile("users.json", newData2, (err) => {
+      // Error checking
+      if (err) throw err;
+      console.log("New data added");
+    });
+}
 
 
 app.get('/names', (req, res) => {
-    res.json(person);
+    res.json(users);
+})
+
+app.post('/names', (req, res) => {
+    console.log('You did it!');
+    newData = req.body;
+    addNewDataToJsonFile()
 })
 
 
