@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import { useFormik } from "formik";
 import api from '../api/users';
 import axios from "axios";
@@ -24,7 +24,7 @@ export function Home() {
 
     const fetchUsers = async () => {
         try {
-            const response = await api.get('names');
+            const response = await api.get('users');
             setUsers(response.data);
         } catch (err) {
             if (err.response) {
@@ -43,7 +43,7 @@ export function Home() {
         try {
             axios({
                 method: "post",
-                url: "http://localhost:8080/names",
+                url: "http://localhost:8080/users",
                 headers: {'Content-Type': 'application/json'},
                 data: values
             })
@@ -62,13 +62,13 @@ export function Home() {
     return (
         <div className={'home-container'}>
             <h1>Hello ...</h1>
-                {
-                    users.map(user =>
-                        <div className={'name-card'}>
-                            <h3>{user.name}</h3>
-                            <p>{user.age}</p>
-                        </div>)
-                }
+            {
+                users.map(user =>
+                    <div className={'name-card'} key={user.id}>
+                        <h3>{user.username}</h3>
+                        <p>{user.email}</p>
+                    </div>)
+            }
             <div className={'post-form'}>
                 <form onSubmit={handleSubmit}>
                     <h3>Add new user</h3>
