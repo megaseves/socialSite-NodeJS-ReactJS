@@ -13,8 +13,9 @@ export function Home() {
     }
     const { values, handleBlur, handleChange, handleSubmit } = useFormik({
         initialValues: {
-            name: "",
-            age: ""
+            username: "",
+            email: "",
+            password: ""
         },
         onSubmit,
     });
@@ -73,11 +74,14 @@ export function Home() {
                 <form onSubmit={handleSubmit}>
                     <h3>Add new user</h3>
 
-                    <p>Name</p>
-                    <input value={values.name} onBlur={handleBlur} onChange={handleChange} id={'name'} type={'text'} name={'name'} placeholder={'Enter your name'} />
+                    <p>Username</p>
+                    <input value={values.username} onBlur={handleBlur} onChange={handleChange} id={'username'} type={'text'} name={'username'} placeholder={'Enter your username'} />
 
-                    <p>Age</p>
-                    <input value={values.age} onBlur={handleBlur} onChange={handleChange} id={'age'} type={'number'} name={'age'} placeholder={'Enter your age'} />
+                    <p>Email</p>
+                    <input value={values.email} onBlur={handleBlur} onChange={handleChange} id={'email'} type={'email'} name={'email'} placeholder={'Enter your email'} />
+
+                    <p>Password</p>
+                    <input value={values.password} onBlur={handleBlur} onChange={handleChange} id={'password'} type={'password'} name={'password'} placeholder={'Enter your password'} />
 
 
                     <button type={'submit'} onClick={async event => {

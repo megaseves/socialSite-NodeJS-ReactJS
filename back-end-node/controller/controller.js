@@ -12,9 +12,22 @@ const getAllUsers = (req, res) => {
 }
 
 const addUser = (req, res) => {
-    //client.query(`INSERT INTO users (username, password, email, created_on) VALUES (${reg.param('username')})`)
+    const user = req.body;
+    console.log(user)
+    let insertQuery = (`INSERT INTO users (username, password, email, created_on) 
+        VALUES (${user.username}, ${user.password}, ${user.email}, current_date)`);
+
+    client.query(insertQuery, (err) =>{
+        if(!err) {
+            res.send("Insertion was successful");
+        } else {
+            console.log(err.message);
+        }
+    });
+    client.end;
 }
 
 module.exports = {
-    getAllUsers
+    getAllUsers,
+    addUser
 };
