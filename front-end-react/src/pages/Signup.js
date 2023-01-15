@@ -1,8 +1,10 @@
 import React from 'react';
 import {useFormik} from "formik";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 export default function Signup() {
+    const navigate = useNavigate();
 
     const onSubmit = (values) => {
         console.log("submitted");
@@ -56,7 +58,8 @@ export default function Signup() {
 
                     <button type={'submit'} onClick={async event => {
                         event.preventDefault();
-                        fetchPostUsers();
+                        await fetchPostUsers().then(()=>navigate('/'));
+
                     }
                     }>Submit</button>
                 </form>
