@@ -11,19 +11,10 @@ const getAllUsers = (req, res) => {
     client.end;
 }
 
-const addUser = (req, res) => {
+const addUser = async (req, res) => {
     const user = req.body;
-    console.log(user)
-    let insertQuery = (`INSERT INTO users (username, password, email, created_on) 
-        VALUES (${user.username}, ${user.password}, ${user.email}, current_date)`);
-
-    client.query(insertQuery, (err) =>{
-        if(!err) {
-            res.send("Insertion was successful");
-        } else {
-            console.log(err.message);
-        }
-    });
+    await client.query(`INSERT INTO users (username, password, email, created_on)
+                       VALUES ($1, $2, $3, current_date)`, [user.username, user.password, user.email]);
     client.end;
 }
 
