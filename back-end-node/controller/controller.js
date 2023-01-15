@@ -24,7 +24,19 @@ const addUser = async (req, res) => {
     client.end;
 }
 
+const getAllLatestUsers = (req, res) => {
+    client.query(`SELECT * FROM users ORDER BY user_id DESC LIMIT 8`, (err, result)=>{
+        if(!err){
+            res.send(result.rows);
+        } else {
+            console.log(err.message);
+        }
+    });
+    client.end;
+}
+
 module.exports = {
     getAllUsers,
-    addUser
+    addUser,
+    getAllLatestUsers
 };

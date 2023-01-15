@@ -10,7 +10,7 @@ export function Home() {
 
     const fetchUsers = async () => {
         try {
-            const response = await api.get('users');
+            const response = await api.get('latestUsers');
             setUsers(response.data);
         } catch (err) {
             if (err.response) {
