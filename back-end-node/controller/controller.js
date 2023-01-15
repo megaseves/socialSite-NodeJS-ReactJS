@@ -14,7 +14,13 @@ const getAllUsers = (req, res) => {
 const addUser = async (req, res) => {
     const user = req.body;
     await client.query(`INSERT INTO users (username, password, email, created_on)
-                       VALUES ($1, $2, $3, current_date)`, [user.username, user.password, user.email]);
+           VALUES ($1, $2, $3, current_date)`, [user.username, user.password, user.email] ,(err, result) => {
+                if(!err){
+                    console.log("Successfully inserted")
+                } else {
+                    console.log(err.message);
+                }
+        });
     client.end;
 }
 
