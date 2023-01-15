@@ -1,0 +1,22 @@
+.home-container {
+    margin: 30px;
+}
+.registered-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.name-card {
+    width: 200px;
+    height: 80px;
+    background-color: #242526;
+    padding: 20px;
+    margin: 25px;
+    border-top: 1px solid green;
+}
+.design-line {
+    width: 500px;
+    height: 1px;
+    background-color: green;
+    margin-top: 10px;
+}
