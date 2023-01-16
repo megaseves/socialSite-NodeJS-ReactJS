@@ -2,6 +2,8 @@ import React from 'react';
 import {useFormik} from "formik";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {checkLogin} from "../api/CheckLogin";
+
 
 export default function Signup() {
     const navigate = useNavigate();
@@ -20,7 +22,8 @@ export default function Signup() {
     });
 
 
-    const fetchPostUsers = async () => {
+
+    const fetchSignUp = async () => {
         try {
             axios({
                 method: "post",
@@ -28,7 +31,7 @@ export default function Signup() {
                 headers: {'Content-Type': 'application/json'},
                 data: values
             })
-
+            await checkLogin(values);
         } catch (err) {
             if (err.response) {
                 console.log(err.response.data);
@@ -58,7 +61,7 @@ export default function Signup() {
 
                     <button type={'submit'} onClick={async event => {
                         event.preventDefault();
-                        await fetchPostUsers().then(()=>navigate('/'));
+                        await fetchSignUp().then(()=>navigate('/'));
 
                     }
                     }>Submit</button>

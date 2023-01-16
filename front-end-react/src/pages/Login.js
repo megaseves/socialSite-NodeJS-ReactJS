@@ -1,12 +1,9 @@
 import React from 'react';
 import {useFormik} from "formik";
 import './Form.css';
-import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {checkLogin} from "../api/CheckLogin";
 
-export function Login(props) {
-
-    const navigate = useNavigate();
+export function Login() {
 
     const { values, handleBlur, handleChange } = useFormik({
         initialValues: {
@@ -15,34 +12,6 @@ export function Login(props) {
         },
 
     });
-
-    const login = async () => {
-        try {
-            axios({
-                method: "post",
-                url: "http://localhost:8080/login",
-                data: values
-            }).then(data => {
-                const user = data.data.rows[0];
-                console.log(user.email);
-                console.log(user.username);
-                //props.setEmail(user.email);
-                //props.setUsername(user.username);
-                localStorage.setItem("username", user.username);
-                navigate('/');
-                window.location.reload(false);
-            })
-
-        } catch (err) {
-            if (err.response) {
-                console.log(err.response.data);
-                console.log(err.response.status);
-            } else {
-                console.log(err.message)
-            }
-        }
-    }
-
 
     return (
         <div className={'form-container'}>
@@ -60,7 +29,7 @@ export function Login(props) {
                     <a href="/" className={'forgot-password'}>Forgot password?</a>
                     <button type={'submit'} onClick={async event => {
                         event.preventDefault();
-                        await login();
+                        await checkLogin(values);
                     }
                     }>Submit</button>
                 </form>
