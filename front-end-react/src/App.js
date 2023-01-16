@@ -7,9 +7,9 @@ import {Watch} from "./pages/Watch";
 import {Messages} from "./pages/Messages";
 import {Login} from "./pages/Login";
 import {hasUsername} from "./components/localStorage";
+import {PageNotFound} from "./components/PageNotFound";
 
 function App() {
-
 
   return (
     <>
@@ -20,6 +20,9 @@ function App() {
                 <Route path={"/"} element={<Home />} />
                 <Route path={"/watch"} element={<Watch />} />
                 <Route path={"/messages"} element={<Messages />} />
+                <Route path={"/login"} element={<Home />} />
+                <Route path={"/signup"} element={<Home />} />
+                <Route path={"*"} element={<PageNotFound />} />
             </Routes>
             :
             <Routes>

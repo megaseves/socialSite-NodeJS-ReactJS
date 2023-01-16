@@ -1,6 +1,6 @@
 import React from 'react';
 import './Navbar.css';
-import {getUsername} from "./localStorage";
+import {getUsername, hasUsername} from "./localStorage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretDown} from "@fortawesome/free-solid-svg-icons";
 
@@ -21,6 +21,7 @@ export function Navbar() {
                         <li onClick={()=> window.location.assign("/messages")}>Messages</li>
                     </ul>
                 </div>
+            {hasUsername() ?
                 <div className={'profile-ui'}>
                     <img src={'SocialSiteNoFace.jpg'} width={30} height={30} alt={'profile-avatar'} />
                     <span>{username}</span>
@@ -33,6 +34,15 @@ export function Navbar() {
                         </ul>
                     </div>
                 </div>
+
+                :
+                <div className={'profile-ui-logout'}>
+                    <div className="login-btn" onClick={() => window.location.href = '/login'}>Login</div>
+                    <div className="signup-btn-container" onClick={() => window.location.href = '/signup'}><a href={'/signup'} className={'signup-btn'}>Sign Up</a></div>
+
+                </div>
+            }
+
 
         </div>
     )

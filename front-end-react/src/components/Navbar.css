@@ -67,3 +67,34 @@
 .options-ui:hover {
     background-color: #004f00;
 }
+.profile-ui-logout {
+    margin-right: 30px;
+
+}
+.profile-ui-logout {
+    display: flex;
+    align-items: center;
+}
+
+.signup-btn-container {
+    width: 70px;
+    height: 30px;
+    background-color: green;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.signup-btn {
+    margin: 0 auto;
+    color: white;
+}
+
+.login-btn {
+    margin-right: 16px;
+    font-size: 13px;
+}
+.login-btn:hover {
+    color: green;
+    cursor: pointer;
+}

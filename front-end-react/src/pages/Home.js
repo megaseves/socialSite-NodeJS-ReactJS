@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import api from '../api/users';
-import {Link} from "react-router-dom";
 import '../App.css';
 import './Home.css';
+import {hasUsername, getUsername } from "../components/localStorage";
 
 
 export function Home() {
@@ -25,7 +25,13 @@ export function Home() {
 
     return (
         <div className={'home-container'}>
-            <h1>Welcome to the SocialSite!</h1>
+            <h1>Welcome
+                {hasUsername()?
+                    <span> {getUsername()}!</span>
+                    :
+                    <span>to the SocialSite!</span>
+                }
+            </h1>
             <div className={'design-line'}></div>
             <br/>
             <h4>The newest registered users</h4>
@@ -39,7 +45,6 @@ export function Home() {
                         </div>)
                 }
             </div>
-            <Link to={'/signup'} className={'btn-primary'}>Sign Up</Link>
         </div>
     )
 }

@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useFormik} from "formik";
 import './Form.css';
 import {checkLogin} from "../api/CheckLogin";
 
 export function Login() {
+
+    const [err, setErr] = useState('');
 
     const { values, handleBlur, handleChange } = useFormik({
         initialValues: {
@@ -16,7 +18,11 @@ export function Login() {
     return (
         <div className={'form-container'}>
             <h2>Login</h2>
-
+            {err?
+                <p className={'err-message'}>{err}</p>
+                :
+                <p></p>
+            }
             <div className={'get-form'}>
                 <form>
 
@@ -29,7 +35,7 @@ export function Login() {
                     <a href="/" className={'forgot-password'}>Forgot password?</a>
                     <button type={'submit'} onClick={async event => {
                         event.preventDefault();
-                        await checkLogin(values);
+                        await checkLogin(values, setErr);
                     }
                     }>Submit</button>
                 </form>

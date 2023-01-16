@@ -56,3 +56,9 @@
 .signup-link {
     font-size: 13px;
 }
+
+.err-message {
+    background-color: red;
+    padding: 10px;
+    text-align: center;
+}

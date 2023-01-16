@@ -44,8 +44,13 @@ const checkForLogin = (req, res) => {
             res.send({err: err});
         }
         if (result) {
-            res.send(result.rows);
-            console.log(result.rows)
+            if (result.rows.length === 0) {
+                console.log('Üres lista')
+                res.send({message: "Incorrect Username or Password!"})
+            } else {
+                res.send(result.rows);
+                console.log(result.rows)
+            }
         } else {
             res.send({message: "Incorrect Username or Password!"})
         }
