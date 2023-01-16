@@ -10,9 +10,11 @@ app.use(express.json())
 
 app.get("/users", controller.getAllUsers);
 
+app.get("/latestUsers", controller.getAllLatestUsers);
+
 app.post("/users", controller.addUser);
 
-app.get("/latestUsers", controller.getAllLatestUsers);
+app.post("/login", controller.checkForLogin);
 
 
 const port = 8080;

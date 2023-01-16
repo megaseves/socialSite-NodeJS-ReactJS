@@ -1,17 +1,49 @@
 import React from 'react';
 import {useFormik} from "formik";
 import './Form.css';
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import {setUsername} from "../components/localStorage";
 
-export function Login() {
+export function Login(props) {
+
+    const navigate = useNavigate();
 
     const { values, handleBlur, handleChange } = useFormik({
         initialValues: {
-            username: "",
             email: "",
             password: ""
         },
 
     });
+
+    const login = async () => {
+        try {
+            axios({
+                method: "post",
+                url: "http://localhost:8080/login",
+                data: values
+            }).then(data => {
+                const user = data.data.rows[0];
+                console.log(user.email);
+                console.log(user.username);
+                //props.setEmail(user.email);
+                //props.setUsername(user.username);
+                setUsername(user.username)
+                navigate('/');
+                window.location.reload(false);
+            })
+
+        } catch (err) {
+            if (err.response) {
+                console.log(err.response.data);
+                console.log(err.response.status);
+            } else {
+                console.log(err.message)
+            }
+        }
+    }
+
 
     return (
         <div className={'form-container'}>
@@ -29,6 +61,7 @@ export function Login() {
 
                     <button type={'submit'} onClick={async event => {
                         event.preventDefault();
+                        await login();
                     }
                     }>Submit</button>
                 </form>

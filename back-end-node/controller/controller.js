@@ -35,8 +35,28 @@ const getAllLatestUsers = (req, res) => {
     client.end;
 }
 
+const checkForLogin = (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    client.query(`SELECT * FROM users WHERE email = $1 AND password = $2`, [email, password], (err, result) => {
+        if(err){
+            res.send({err: err});
+        }
+        if (result) {
+            res.send(result.rows);
+            console.log(result.rows)
+        } else {
+            res.send({message: "Incorrect Username or Password!"})
+        }
+
+    });
+    client.end;
+}
+
 module.exports = {
     getAllUsers,
     addUser,
-    getAllLatestUsers
+    getAllLatestUsers,
+    checkForLogin
 };

@@ -7,7 +7,6 @@ import './Home.css';
 
 export function Home() {
     const [users, setUsers] = useState([]);
-
     const fetchUsers = async () => {
         try {
             const response = await api.get('latestUsers');

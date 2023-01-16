@@ -1,7 +1,10 @@
 import React from 'react';
 import './Navbar.css';
+import {getUsername, setUsername} from "./localStorage";
 
 export function Navbar() {
+    const username = getUsername();
+
     return(
         <div className={'navbar-container'}>
 
@@ -18,7 +21,15 @@ export function Navbar() {
                 </div>
                 <div className={'profile-ui'}>
                     <img src={'SocialSiteNoFace.jpg'} width={30} height={30} alt={'profile-avatar'} />
-                    <span>Attila</span>
+                    <span>{username}</span>
+                </div>
+                <div className={'options-ui'}>
+                    <ul>
+                        <li onClick={()=> {
+                            setUsername('');
+                            window.location.href = '/';
+                        } }>Logout</li>
+                    </ul>
                 </div>
         </div>
     )
