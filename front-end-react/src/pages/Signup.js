@@ -40,10 +40,10 @@ export default function Signup() {
     }
 
     return(
-        <div>
+        <div className={'form-container'}>
             <h2>Register</h2>
 
-            <div className={'post-form'}>
+            <div className={'get-form'}>
                 <form onSubmit={handleSubmit}>
 
                     <p>Username</p>

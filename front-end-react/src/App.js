@@ -5,6 +5,7 @@ import Signup from "./pages/Signup";
 import {Navbar} from "./components/Navbar";
 import {Watch} from "./pages/Watch";
 import {Messages} from "./pages/Messages";
+import {Login} from "./pages/Login";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Router>
             <Routes>
                 <Route path={"/"} element={<Home />} />
+                <Route path={"/login"} element={<Login />} />
                 <Route path={"/signup"} element={<Signup />} />
                 <Route path={"/watch"} element={<Watch />} />
                 <Route path={"/messages"} element={<Messages />} />
