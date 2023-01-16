@@ -4,9 +4,5 @@ export function hasUsername() {
 }
 
 export function getUsername() {
-    return JSON.parse(localStorage.getItem("username"));
-}
-
-export function setUsername(username) {
-    localStorage.setItem("username", JSON.stringify(username));
+    return localStorage.getItem("username");
 }

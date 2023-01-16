@@ -1,6 +1,6 @@
 import React from 'react';
 import './Navbar.css';
-import {getUsername, setUsername} from "./localStorage";
+import {getUsername} from "./localStorage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretDown} from "@fortawesome/free-solid-svg-icons";
 
@@ -27,7 +27,7 @@ export function Navbar() {
                     <div className={'options-ui'}>
                         <ul>
                             <li onClick={()=> {
-                                setUsername('');
+                                localStorage.setItem("username", "");
                                 window.location.href = '/';
                             } }><FontAwesomeIcon icon={faCaretDown} /></li>
                         </ul>

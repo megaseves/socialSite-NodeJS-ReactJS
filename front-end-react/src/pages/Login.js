@@ -3,7 +3,6 @@ import {useFormik} from "formik";
 import './Form.css';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import {setUsername} from "../components/localStorage";
 
 export function Login(props) {
 
@@ -29,7 +28,7 @@ export function Login(props) {
                 console.log(user.username);
                 //props.setEmail(user.email);
                 //props.setUsername(user.username);
-                setUsername(user.username)
+                localStorage.setItem("username", user.username);
                 navigate('/');
                 window.location.reload(false);
             })
@@ -58,14 +57,14 @@ export function Login(props) {
                     <p>Password</p>
                     <input value={values.password} onBlur={handleBlur} onChange={handleChange} id={'password'} type={'password'} name={'password'} placeholder={'Enter your password'} />
 
-
+                    <a href="/" className={'forgot-password'}>Forgot password?</a>
                     <button type={'submit'} onClick={async event => {
                         event.preventDefault();
                         await login();
                     }
                     }>Submit</button>
                 </form>
-                <span>Forgot <a href="/">password</a>?</span>
+                <a href={"/signup"} className={'signup-link'}>Create an account</a>
             </div>
         </div>
     )

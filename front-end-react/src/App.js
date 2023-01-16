@@ -6,20 +6,29 @@ import {Navbar} from "./components/Navbar";
 import {Watch} from "./pages/Watch";
 import {Messages} from "./pages/Messages";
 import {Login} from "./pages/Login";
+import {hasUsername} from "./components/localStorage";
 
 function App() {
 
+
   return (
     <>
-        <Navbar />
+        <Navbar  />
         <Router>
+            {hasUsername() ?
             <Routes>
                 <Route path={"/"} element={<Home />} />
-                <Route path={"/login"} element={<Login />} />
-                <Route path={"/signup"} element={<Signup />} />
                 <Route path={"/watch"} element={<Watch />} />
                 <Route path={"/messages"} element={<Messages />} />
             </Routes>
+            :
+            <Routes>
+                <Route path={"/"} element={<Home />} />
+                <Route path={"/login"} element={<Login  />} />
+                <Route path={"/signup"} element={<Signup  />} />
+                <Route path={"*"} element={<Login />} />
+            </Routes>
+            }
         </Router>
     </>
   );
