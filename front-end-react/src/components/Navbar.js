@@ -1,6 +1,8 @@
 import React from 'react';
 import './Navbar.css';
 import {getUsername, setUsername} from "./localStorage";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCaretDown} from "@fortawesome/free-solid-svg-icons";
 
 export function Navbar() {
     const username = getUsername();
@@ -22,15 +24,16 @@ export function Navbar() {
                 <div className={'profile-ui'}>
                     <img src={'SocialSiteNoFace.jpg'} width={30} height={30} alt={'profile-avatar'} />
                     <span>{username}</span>
+                    <div className={'options-ui'}>
+                        <ul>
+                            <li onClick={()=> {
+                                setUsername('');
+                                window.location.href = '/';
+                            } }><FontAwesomeIcon icon={faCaretDown} /></li>
+                        </ul>
+                    </div>
                 </div>
-                <div className={'options-ui'}>
-                    <ul>
-                        <li onClick={()=> {
-                            setUsername('');
-                            window.location.href = '/';
-                        } }>Logout</li>
-                    </ul>
-                </div>
+
         </div>
     )
 }

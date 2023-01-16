@@ -54,3 +54,16 @@
     border-radius: 30px;
     margin-right: 8px;
 }
+
+.options-ui {
+    width: 25px;
+    height: 22px;
+    text-align: center;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-left: 10px;
+    padding-top: 4px;
+}
+.options-ui:hover {
+    background-color: #004f00;
+}
