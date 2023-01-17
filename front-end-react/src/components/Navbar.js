@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import './Navbar.css';
-import {getUsername, hasUsername} from "./localStorage";
+import {getId, getUsername, hasUsername} from "./localStorage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretDown} from "@fortawesome/free-solid-svg-icons";
 
@@ -25,15 +25,15 @@ export function Navbar() {
 
     const logout = () => {
         localStorage.setItem("username", "");
+        localStorage.setItem("id", "");
         window.location.href = '/';
     }
-
 
     return(
         <div className={'navbar-container'}>
 
                 <div className={'logo-ui'}>
-                    <img src={'socialSiteLogo.png'} width={40} height={40} alt={'logo'} onClick={()=> window.location.assign("/")} />
+                    <img src={'/socialSiteLogo.png'} width={40} height={40} alt={'logo'} onClick={()=> window.location.assign("/")} />
                 </div>
 
                 <div className={'menu-ui'}>
@@ -46,8 +46,8 @@ export function Navbar() {
             {hasUsername() ?
                 <div>
                 <div className={'profile'}>
-                    <div className={'profile-ui'} onClick={()=> window.location.assign("/profile")}>
-                        <img src={'SocialSiteNoFace.jpg'} width={30} height={30} alt={'profile-avatar'} />
+                    <div className={'profile-ui'} onClick={()=> window.location.assign(`/profile/${getId()}`)}>
+                        <img src={'/SocialSiteNoFace.jpg'} width={30} height={30} alt={'profile-avatar'} />
                         <span>{username}</span>
 
                     </div>
@@ -59,7 +59,7 @@ export function Navbar() {
                 </div>
                 {isOpenDropDown ?
                 <div ref={menuRef} className={'drop-down-container'}>
-                    <div className={'drop-down-btn'} onClick={()=> window.location.assign("/profile")}>Profile</div>
+                    <div className={'drop-down-btn'} onClick={()=> window.location.assign(`/profile/${getId()}`)}>Profile</div>
                     <div className={'drop-down-btn'} onClick={logout}>Logout</div>
                 </div>
                 :

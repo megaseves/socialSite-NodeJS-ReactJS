@@ -1,5 +1,6 @@
 const client = require('../db/dbconnection');
 
+
 const getAllUsers = (req, res) => {
     client.query(`Select * from users`, (err, result)=>{
         if(!err){
@@ -54,9 +55,23 @@ const checkForLogin = (req, res) => {
     client.end;
 }
 
+const getProfileById = async (req, res) => {
+    const id = req.query.id;
+    await client.query(`SELECT * FROM users WHERE user_id = $1`, [id], (err, result)=>{
+        if(!err){
+            console.log("I found it: " + JSON.stringify(result.rows[0]));
+            res.send(JSON.stringify(result.rows[0]));
+        } else {
+            console.log(err.message);
+        }
+    });
+    client.end;
+}
+
 module.exports = {
     getAllUsers,
     addUser,
     getAllLatestUsers,
-    checkForLogin
+    checkForLogin,
+    getProfileById
 };

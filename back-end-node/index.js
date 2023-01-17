@@ -12,6 +12,8 @@ app.get("/users", controller.getAllUsers);
 
 app.get("/latestUsers", controller.getAllLatestUsers);
 
+app.get("/profile", controller.getProfileById);
+
 app.post("/users", controller.addUser);
 
 app.post("/login", controller.checkForLogin);

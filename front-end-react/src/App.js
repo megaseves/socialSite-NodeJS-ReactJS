@@ -23,14 +23,14 @@ function App() {
                 <Route path={"/messages"} element={<Messages />} />
                 <Route path={"/login"} element={<Home />} />
                 <Route path={"/signup"} element={<Home />} />
-                <Route path={"/profile"} element={<Profile />} />
+                <Route path={"/profile/:id"} element={<Profile />} />
                 <Route path={"*"} element={<PageNotFound />} />
             </Routes>
             :
             <Routes>
                 <Route path={"/"} element={<Home />} />
-                <Route path={"/login"} element={<Login  />} />
-                <Route path={"/signup"} element={<Signup  />} />
+                <Route path={"/login"} element={<Login />} />
+                <Route path={"/signup"} element={<Signup />} />
                 <Route path={"*"} element={<Login />} />
             </Routes>
             }
