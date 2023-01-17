@@ -41,20 +41,15 @@ const checkForLogin = (req, res) => {
 
     client.query(`SELECT * FROM users WHERE email = $1 AND password = $2`, [email, password], (err, result) => {
         if(err){
-            res.send({err: err});
+            res.send({message: "Something goes wrong!"});
         }
-        if (result) {
-            if (result.rows.length === 0) {
-                console.log('Üres lista')
-                res.send({message: "Incorrect Username or Password!"})
-            } else {
-                res.send(result.rows);
-                console.log(result.rows)
-            }
-        } else {
+        if (result.rows.length === 0) {
+            // Empty array
             res.send({message: "Incorrect Username or Password!"})
+        } else {
+            // Correct data
+            res.send(result.rows);
         }
-
     });
     client.end;
 }
