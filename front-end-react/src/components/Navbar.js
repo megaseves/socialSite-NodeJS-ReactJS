@@ -28,14 +28,6 @@ export function Navbar() {
         window.location.href = '/';
     }
 
-    const toggleDropDownMenu = () => {
-        const dropDown = document.querySelector(".drop-down-container");
-        if (dropDown.classList.contains("hidden")) {
-            dropDown.classList.remove("hidden");
-        } else{
-            dropDown.classList.add("hidden");
-        }
-    }
 
     return(
         <div className={'navbar-container'}>
@@ -52,25 +44,27 @@ export function Navbar() {
                     </ul>
                 </div>
             {hasUsername() ?
+                <div>
                 <div className={'profile'}>
-                    <div className={'profile-ui'}>
+                    <div className={'profile-ui'} onClick={()=> window.location.assign("/profile")}>
                         <img src={'SocialSiteNoFace.jpg'} width={30} height={30} alt={'profile-avatar'} />
                         <span>{username}</span>
-                        <div ref={menuRef} id={'options-ui'}>
-                            <ul>
-                                <li onClick={() => setIsOpenDropDown(true)}><FontAwesomeIcon icon={faCaretDown} /></li>
-                            </ul>
-                        </div>
-                    </div>
-                    {isOpenDropDown ?
-                        <div ref={menuRef} className={'drop-down-container'}>
-                            <div className={'drop-down-btn'}>Profile</div>
-                            <div className={'drop-down-btn'} onClick={logout}>Logout</div>
-                        </div>
-                        :
-                        <div></div>
-                    }
 
+                    </div>
+                    <div ref={menuRef} className={'options-ui'}>
+                        <ul>
+                            <li onClick={() => setIsOpenDropDown(true)}><FontAwesomeIcon icon={faCaretDown} /></li>
+                        </ul>
+                    </div>
+                </div>
+                {isOpenDropDown ?
+                <div ref={menuRef} className={'drop-down-container'}>
+                    <div className={'drop-down-btn'} onClick={()=> window.location.assign("/profile")}>Profile</div>
+                    <div className={'drop-down-btn'} onClick={logout}>Logout</div>
+                </div>
+                :
+                <div></div>
+                }
                 </div>
                 :
                 <div className={'profile-ui-logout'}>
@@ -79,8 +73,6 @@ export function Navbar() {
 
                 </div>
             }
-
-
         </div>
     )
 }

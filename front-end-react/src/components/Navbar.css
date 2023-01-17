@@ -55,7 +55,11 @@
     margin-right: 8px;
 }
 
-#options-ui {
+.profile-ui span {
+    margin-right: 35px;
+}
+
+.options-ui {
     width: 25px;
     height: 22px;
     text-align: center;
@@ -63,8 +67,11 @@
     cursor: pointer;
     margin-left: 10px;
     padding-top: 4px;
+    position: absolute;
+    right: 36px;
+    top: 5px;
 }
-#options-ui:hover {
+.options-ui:hover {
     background-color: #004f00;
 }
 .profile-ui-logout {
