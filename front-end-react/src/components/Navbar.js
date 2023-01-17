@@ -1,11 +1,41 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './Navbar.css';
 import {getUsername, hasUsername} from "./localStorage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretDown} from "@fortawesome/free-solid-svg-icons";
 
 export function Navbar() {
+    const [isOpenDropDown, setIsOpenDropDown] = useState(false);
     const username = getUsername();
+
+    let menuRef = useRef();
+
+    useEffect(() => {
+        let handler = (event) => {
+            if (!menuRef.current.contains(event.target)) {
+                setIsOpenDropDown(false);
+            }
+        }
+       document.addEventListener("mousedown", handler);
+
+       return () => {
+           document.removeEventListener("mousedown", handler);
+       }
+    });
+
+    const logout = () => {
+        localStorage.setItem("username", "");
+        window.location.href = '/';
+    }
+
+    const toggleDropDownMenu = () => {
+        const dropDown = document.querySelector(".drop-down-container");
+        if (dropDown.classList.contains("hidden")) {
+            dropDown.classList.remove("hidden");
+        } else{
+            dropDown.classList.add("hidden");
+        }
+    }
 
     return(
         <div className={'navbar-container'}>
@@ -22,19 +52,26 @@ export function Navbar() {
                     </ul>
                 </div>
             {hasUsername() ?
-                <div className={'profile-ui'}>
-                    <img src={'SocialSiteNoFace.jpg'} width={30} height={30} alt={'profile-avatar'} />
-                    <span>{username}</span>
-                    <div className={'options-ui'}>
-                        <ul>
-                            <li onClick={()=> {
-                                localStorage.setItem("username", "");
-                                window.location.href = '/';
-                            } }><FontAwesomeIcon icon={faCaretDown} /></li>
-                        </ul>
+                <div className={'profile'}>
+                    <div className={'profile-ui'}>
+                        <img src={'SocialSiteNoFace.jpg'} width={30} height={30} alt={'profile-avatar'} />
+                        <span>{username}</span>
+                        <div ref={menuRef} id={'options-ui'}>
+                            <ul>
+                                <li onClick={() => setIsOpenDropDown(true)}><FontAwesomeIcon icon={faCaretDown} /></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                    {isOpenDropDown ?
+                        <div ref={menuRef} className={'drop-down-container'}>
+                            <div className={'drop-down-btn'}>Profile</div>
+                            <div className={'drop-down-btn'} onClick={logout}>Logout</div>
+                        </div>
+                        :
+                        <div></div>
+                    }
 
+                </div>
                 :
                 <div className={'profile-ui-logout'}>
                     <div className="login-btn" onClick={() => window.location.href = '/login'}>Login</div>

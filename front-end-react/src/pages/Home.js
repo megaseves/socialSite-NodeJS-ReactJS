@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import api from '../api/users';
 import '../App.css';
 import './Home.css';
@@ -7,6 +7,12 @@ import {hasUsername, getUsername } from "../components/localStorage";
 
 export function Home() {
     const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
+
     const fetchUsers = async () => {
         try {
             const response = await api.get('latestUsers');
@@ -21,7 +27,7 @@ export function Home() {
 
         }
     }
-    fetchUsers()
+
 
     return (
         <div className={'home-container'}>

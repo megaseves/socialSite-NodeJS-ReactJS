@@ -55,7 +55,7 @@
     margin-right: 8px;
 }
 
-.options-ui {
+#options-ui {
     width: 25px;
     height: 22px;
     text-align: center;
@@ -64,7 +64,7 @@
     margin-left: 10px;
     padding-top: 4px;
 }
-.options-ui:hover {
+#options-ui:hover {
     background-color: #004f00;
 }
 .profile-ui-logout {
@@ -96,5 +96,28 @@
 }
 .login-btn:hover {
     color: green;
+    cursor: pointer;
+}
+.profile {
+    position: relative;
+}
+.drop-down-container {
+    position: absolute;
+    width: 92px;
+    font-size: 13px;
+    background-color: #242526;
+    right: 32px;
+    top: 40px;
+    margin: 0;
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+}
+.drop-down-btn {
+    padding: 8px;
+}
+.drop-down-btn:hover {
+    background-color: #393a3b;
+    border-radius: 8px;
     cursor: pointer;
 }
