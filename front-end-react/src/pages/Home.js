@@ -45,7 +45,7 @@ export function Home() {
             <div className={'registered-container'}>
                 {
                     users.map(user =>
-                        <div className={'name-card'} key={user.id}>
+                        <div className={'name-card'} key={user.email}>
                             <h3>{user.username}</h3>
                             <p>{user.email}</p>
                         </div>)

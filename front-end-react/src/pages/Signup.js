@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
 import { useForm } from "react-hook-form";
-import {useNavigate} from "react-router-dom";
 import {checkEmail} from "../api/ApiFetch";
 
 
 
 export default function Signup() {
-    const navigate = useNavigate();
 
     const { register, formState: {errors}, handleSubmit,} = useForm();
     const [err, setErr] = useState();

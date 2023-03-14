@@ -11,7 +11,7 @@ export function Profile() {
 
     useEffect( () => {
         fetchProfile(id, setUser);
-    }, [fetchProfile]);
+    }, [id]);
 
 
     return(
