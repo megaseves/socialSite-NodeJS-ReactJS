@@ -7,11 +7,11 @@
     flex-wrap: wrap;
 }
 .name-card {
-    width: 200px;
-    height: 80px;
+    width: 230px;
+    height: 110px;
     background-color: #242526;
     padding: 20px;
-    margin: 25px;
+    margin: 15px;
     border-top: 1px solid green;
 }
 .design-line {
