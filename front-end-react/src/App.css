@@ -1,4 +1,11 @@
-* { color: white; margin: 0; padding: 0; }
+* { color: white; margin: 0; padding: 0; box-sizing: border-box;}
 a { color: green; text-decoration: none; }
 ul, li { list-style: none; }
 body { background-color: #18191a }
+
+:root {
+  --mainColor: green;
+  --bgColor: #18191a;
+  --secBgColor: #242526;
+  --thiBgColor: #3a3b3c;
+}

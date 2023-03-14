@@ -31,9 +31,15 @@ export function Navbar() {
 
     return(
         <div className={'navbar-container'}>
-
-                <div className={'logo-ui'}>
-                    <img src={'/socialSiteLogo.png'} width={40} height={40} alt={'logo'} onClick={()=> window.location.assign("/")} />
+                <div className={"logo-and-search"}>
+                    <div className={'logo-ui'}>
+                        <img src={'/socialSiteLogo.png'} width={40} height={40} alt={'logo'} onClick={()=> window.location.assign("/")} />
+                    </div>
+                    <div className={"search-bar-container"}>
+                        <label className={"search-bar-label"}>
+                            <input className={"search-bar"} type="text" placeholder={"Type to search..."}/>
+                        </label>
+                    </div>
                 </div>
 
                 <div className={'menu-ui'}>
