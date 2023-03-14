@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function checkLogin(values, setErr) {
+export async function apiFetch(values, setErr) {
     try {
         axios({
             method: "post",

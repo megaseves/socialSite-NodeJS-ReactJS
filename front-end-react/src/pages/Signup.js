@@ -1,13 +1,64 @@
-import React from 'react';
-import {useFormik} from "formik";
-import axios from "axios";
+import React, {useEffect, useRef, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import {checkLogin} from "../api/CheckLogin";
+
 
 
 export default function Signup() {
     const navigate = useNavigate();
 
+    const userRef = useRef();
+    const emailRef = useRef();
+    const pwdRef = useRef();
+
+    const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
+    const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    //const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+    const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z]).{8,24}$/;
+
+    useEffect(()=> {
+        userRef.current.focus();
+    }, []);
+
+    const [username, setUsername] = useState('');
+    const [validUsername, setValidUsername] = useState(false);
+    const [usernameFocus, setUsernameFocus] = useState(false);
+
+    const [email, setEmail] = useState('');
+    const [validEmail, setValidEmail] = useState(false);
+    const [emailFocus, setEmailFocus] = useState(false);
+
+
+    const [password, setPassword] = useState('');
+    const [validPassword, setValidPassword] = useState(false);
+    const [passwordFocus, setPasswordFocus] = useState(false);
+
+    const [errMsg, setErrMsg] = useState('');
+    const [success, setSuccess] = useState(false);
+
+
+    useEffect(()=> {
+       setValidUsername(isValidUsername);
+       setValidPassword(isValidPassword);
+       setValidEmail(isValidEmail);
+       console.log(email)
+    }, [username, password, email, usernameFocus, passwordFocus, emailFocus]);
+
+    const isValidUsername = () => {
+        return username && USER_REGEX.test(username) && usernameFocus;
+    }
+    const isValidEmail = () => {
+        return email && EMAIL_REGEX.test(email) && emailFocus;
+    }
+
+    const isValidPassword = () => {
+        return password && PWD_REGEX.test(password) && passwordFocus;
+    }
+
+    useEffect(()=> {
+        setErrMsg('');
+    }, [username])
+
+/*
     const onSubmit = (values) => {
         console.log("submitted");
         console.log(values);
@@ -31,7 +82,7 @@ export default function Signup() {
                 headers: {'Content-Type': 'application/json'},
                 data: values
             })
-            await checkLogin(values);
+            await apiFetch(values);
         } catch (err) {
             if (err.response) {
                 console.log(err.response.data);
@@ -41,30 +92,38 @@ export default function Signup() {
             }
         }
     }
-
+*/
     return(
         <div className={'form-container'}>
             <h2>Register</h2>
 
+            <p className={errMsg ? "error" : "hide"} aria-live={'assertive'}>{errMsg}</p>
+
             <div className={'get-form'}>
-                <form onSubmit={handleSubmit}>
+                <form>
 
                     <p>Username</p>
-                    <input value={values.username} onBlur={handleBlur} onChange={handleChange} id={'username'} type={'text'} name={'username'} placeholder={'Enter your username'} />
+                    <div className={!validUsername ?  "hide" : "correct-data"} ></div>
+                    <input ref={userRef} required autoComplete={'off'} aria-describedby={'uidnote'} aria-invalid={validUsername? "false" : "true"} onChange={(e) => setUsername(e.target.value)} onFocus={()=> setUsernameFocus(true) } onBlur={()=> setUsernameFocus(false)} type={'text'} name={'username'} placeholder={'Enter your username'} />
+                    <p id={'uidnote'} className={usernameFocus && username && !validUsername ? "error" : "hide"}>Must begin with a letter <br/>4 to 24 characters</p>
 
                     <p>Email</p>
-                    <input value={values.email} onBlur={handleBlur} onChange={handleChange} id={'email'} type={'email'} name={'email'} placeholder={'Enter your email'} />
+                    <div className={!validEmail ?  "hide" : "correct-data"} ></div>
+                    <input ref={emailRef} required autoComplete={'off'} aria-describedby={'uidnote'} aria-invalid={validEmail? "false" : "true"} onChange={(e) => setEmail(e.target.value)} onFocus={()=> setEmailFocus(true) } onBlur={()=> setEmailFocus(false)} type={'text'} name={'email'} placeholder={'Enter your email'} />
+                    <p id={'uidnote'} className={emailFocus && email && !validEmail ? "error" : "hide"}>Must begin with a letter <br/>4 to 24 characters</p>
 
                     <p>Password</p>
-                    <input value={values.password} onBlur={handleBlur} onChange={handleChange} id={'password'} type={'password'} name={'password'} placeholder={'Enter your password'} />
+                    <div className={!validPassword ?  "hide" : "correct-data"} ></div>
+                    <input ref={pwdRef} required autoComplete={'off'} aria-describedby={'uidnote'} aria-invalid={validPassword? "false" : "true"} onChange={(e) => setPassword(e.target.value)} onFocus={()=> setPasswordFocus(true) } onBlur={()=> setPasswordFocus(false)} type={'password'} name={'password'} placeholder={'Enter your password'} />
+                    <p id={'uidnote'} className={passwordFocus && password && !validPassword ? "error" : "hide"}>Kaki</p>
 
 
                     <button type={'submit'} onClick={async event => {
                         event.preventDefault();
-                        await fetchSignUp().then(()=>navigate('/'));
-
+                        navigate('/');
                     }
                     }>Submit</button>
+
                 </form>
             </div>
         </div>
