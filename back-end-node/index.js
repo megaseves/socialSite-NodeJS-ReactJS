@@ -18,6 +18,9 @@ app.post("/users", controller.addUser);
 
 app.post("/login", controller.checkForLogin);
 
+app.post("/check-register", controller.checkForRegister);
+
+
 
 const port = 8080;
 app.listen(port,'localhost', function(error){

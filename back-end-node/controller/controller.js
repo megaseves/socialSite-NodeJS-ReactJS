@@ -18,6 +18,7 @@ const addUser = async (req, res) => {
            VALUES ($1, $2, $3, current_date)`, [user.username, user.password, user.email] ,(err, result) => {
                 if(!err){
                     console.log("Successfully inserted")
+                    res.send({result: result.rows, message: "", ok:true})
                 } else {
                     console.log(err.message);
                 }
@@ -42,18 +43,40 @@ const checkForLogin = (req, res) => {
 
     client.query(`SELECT * FROM users WHERE email = $1 AND password = $2`, [email, password], (err, result) => {
         if(err){
-            res.send({message: "Something goes wrong!"});
+            res.send({message: "Something goes wrong!", ok:false});
         }
         if (result.rows.length === 0) {
             // Empty array
-            res.send({message: "Incorrect Username or Password!"})
+            res.send({message: "Incorrect Username or Password!", ok:false})
         } else {
             // Correct data
-            res.send(result.rows);
+            res.send({result: result.rows, message: "Incorrect Username or Password!", ok:true})
         }
     });
     client.end;
 }
+
+const checkForRegister = (req, res) => {
+    const email = req.body.email;
+
+    client.query(`SELECT * FROM users WHERE email = $1`, [email], (err, result) => {
+        if(err){
+            res.send({message: "Something goes wrong!"});
+        }
+        if (result.rows.length === 0) {
+            // Empty array
+            res.send({message: "It's OK!", ok: true})
+            console.log("It's OK!")
+        } else {
+            // Correct data
+            console.log("Already registered email!")
+            console.log(result.rows)
+            res.send({message: "Already registered email!", ok: false})
+        }
+    });
+    client.end;
+}
+
 
 const getProfileById = async (req, res) => {
     const id = req.query.id;
@@ -73,5 +96,6 @@ module.exports = {
     addUser,
     getAllLatestUsers,
     checkForLogin,
+    checkForRegister,
     getProfileById
 };
