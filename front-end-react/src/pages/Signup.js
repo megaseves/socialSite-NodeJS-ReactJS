@@ -1,4 +1,5 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect} from 'react';
+import { useForm } from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 
 
@@ -6,57 +7,17 @@ import {useNavigate} from "react-router-dom";
 export default function Signup() {
     const navigate = useNavigate();
 
-    const userRef = useRef();
-    const emailRef = useRef();
-    const pwdRef = useRef();
-
     const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
     const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     //const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
     const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z]).{8,24}$/;
 
-    useEffect(()=> {
-        userRef.current.focus();
-    }, []);
 
-    const [username, setUsername] = useState('');
-    const [validUsername, setValidUsername] = useState(false);
-    const [usernameFocus, setUsernameFocus] = useState(false);
+    const { register, formState: {errors}, handleSubmit,} = useForm();
+    const onSubmit = (data) => {
+        console.log(data)
+    };
 
-    const [email, setEmail] = useState('');
-    const [validEmail, setValidEmail] = useState(false);
-    const [emailFocus, setEmailFocus] = useState(false);
-
-
-    const [password, setPassword] = useState('');
-    const [validPassword, setValidPassword] = useState(false);
-    const [passwordFocus, setPasswordFocus] = useState(false);
-
-    const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
-
-
-    useEffect(()=> {
-       setValidUsername(isValidUsername);
-       setValidPassword(isValidPassword);
-       setValidEmail(isValidEmail);
-       console.log(email)
-    }, [username, password, email, usernameFocus, passwordFocus, emailFocus]);
-
-    const isValidUsername = () => {
-        return username && USER_REGEX.test(username) && usernameFocus;
-    }
-    const isValidEmail = () => {
-        return email && EMAIL_REGEX.test(email) && emailFocus;
-    }
-
-    const isValidPassword = () => {
-        return password && PWD_REGEX.test(password) && passwordFocus;
-    }
-
-    useEffect(()=> {
-        setErrMsg('');
-    }, [username])
 
 /*
     const onSubmit = (values) => {
@@ -97,32 +58,38 @@ export default function Signup() {
         <div className={'form-container'}>
             <h2>Register</h2>
 
-            <p className={errMsg ? "error" : "hide"} aria-live={'assertive'}>{errMsg}</p>
-
             <div className={'get-form'}>
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)} >
 
                     <p>Username</p>
-                    <div className={!validUsername ?  "hide" : "correct-data"} ></div>
-                    <input ref={userRef} required autoComplete={'off'} aria-describedby={'uidnote'} aria-invalid={validUsername? "false" : "true"} onChange={(e) => setUsername(e.target.value)} onFocus={()=> setUsernameFocus(true) } onBlur={()=> setUsernameFocus(false)} type={'text'} name={'username'} placeholder={'Enter your username'} />
-                    <p id={'uidnote'} className={usernameFocus && username && !validUsername ? "error" : "hide"}>Must begin with a letter <br/>4 to 24 characters</p>
+                    <input placeholder={"Enter your username..."}
+                        {...register("name",{required: true, minLength: 4, maxLength: 14})} />
+                    <error className={"error"}>
+                        <p>{errors.name?.type === "required" && "Name is required!"}</p>
+                        <p>{errors.name?.type === "minLength" && "Username should be in 4-14 letters!"}</p>
+                        <p>{errors.name?.type === "maxLength" && "Username should be in 4-14 letters!"}</p>
+                    </error>
 
                     <p>Email</p>
-                    <div className={!validEmail ?  "hide" : "correct-data"} ></div>
-                    <input ref={emailRef} required autoComplete={'off'} aria-describedby={'uidnote'} aria-invalid={validEmail? "false" : "true"} onChange={(e) => setEmail(e.target.value)} onFocus={()=> setEmailFocus(true) } onBlur={()=> setEmailFocus(false)} type={'text'} name={'email'} placeholder={'Enter your email'} />
-                    <p id={'uidnote'} className={emailFocus && email && !validEmail ? "error" : "hide"}>Must begin with a letter <br/>4 to 24 characters</p>
+                    <input placeholder={"Enter your email..."}
+                        {...register("email", {required: true, pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/})}/>
+                    <error className={"error"}>
+                        <p>{errors.email?.type === "required" && "Email is required!"}</p>
+                        <p>{errors.email?.type === "pattern" && "Entered email is in wrong format! Example: example@gmail.com"}</p>
+                    </error>
+
 
                     <p>Password</p>
-                    <div className={!validPassword ?  "hide" : "correct-data"} ></div>
-                    <input ref={pwdRef} required autoComplete={'off'} aria-describedby={'uidnote'} aria-invalid={validPassword? "false" : "true"} onChange={(e) => setPassword(e.target.value)} onFocus={()=> setPasswordFocus(true) } onBlur={()=> setPasswordFocus(false)} type={'password'} name={'password'} placeholder={'Enter your password'} />
-                    <p id={'uidnote'} className={passwordFocus && password && !validPassword ? "error" : "hide"}>Kaki</p>
+                    <input type={"password"} placeholder={"Enter your password..."}
+                        {...register("password", {
+                            required: true,
+                            pattern: /^(?=.*[a-z])(?=.*[A-Z]).{8,24}$/})}/>
+                    <error className={"error"}>
+                        <p>{errors.password?.type === "required" && "Password is required!"}</p>
+                        <p>{errors.password?.type === "pattern" && "Password should contain Capital, small letter and min 8 character!"}</p>
+                    </error>
 
-
-                    <button type={'submit'} onClick={async event => {
-                        event.preventDefault();
-                        navigate('/');
-                    }
-                    }>Submit</button>
+                    <button type={'submit'} >Submit</button>
 
                 </form>
             </div>

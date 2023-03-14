@@ -10,9 +10,7 @@
     margin-bottom: 30px;
     text-align: center;
 }
-.get-form {
-    text-align: center;
-}
+
 .get-form p {
     color: grey;
     margin: 10px 0;
@@ -69,11 +67,9 @@ div.correct-data {
     text-align: center;
 }
 
-p.error {
+.error p {
     color: red;
-    font-size: 20px;
 }
-
 
 .hide {
     display: none;
