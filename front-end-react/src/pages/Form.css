@@ -11,7 +11,7 @@
     text-align: center;
 }
 
-.get-form p {
+.form-header {
     color: grey;
     margin: 10px 0;
     text-align: left;
@@ -65,10 +65,13 @@ div.correct-data {
     background-color: red;
     padding: 10px;
     text-align: center;
+    color: white;
+
 }
 
 .error p {
     color: red;
+    margin: 10px 0;
 }
 
 .hide {

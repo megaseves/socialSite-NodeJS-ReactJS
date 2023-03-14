@@ -13,7 +13,7 @@ export default function Signup() {
 
     const onSubmit = (registerData) => {
         checkEmail(registerData, setErr);
-        console.log(err);
+        console.log(err)
     };
 
     return(
@@ -23,7 +23,7 @@ export default function Signup() {
             <div className={'get-form'}>
                 <form onSubmit={handleSubmit(onSubmit)} >
 
-                    <p>Username</p>
+                    <p className={"form-header"}>Username</p>
                     <input placeholder={"Enter your username..."}
                         {...register("username",{required: true, minLength: 4, maxLength: 14})} />
                     <error className={"error"}>
@@ -32,16 +32,20 @@ export default function Signup() {
                         <p>{errors.username?.type === "maxLength" && "Username should be in 4-14 letters!"}</p>
                     </error>
 
-                    <p>Email</p>
+                    <p className={"form-header"}>Email</p>
                     <input placeholder={"Enter your email..."}
                         {...register("email", {required: true, pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/})}/>
                     <error className={"error"}>
                         <p>{errors.email?.type === "required" && "Email is required!"}</p>
                         <p>{errors.email?.type === "pattern" && "Entered email is in wrong format! Example: example@gmail.com"}</p>
                     </error>
+                    {err?
+                        <p className={'err-message'}>{err}</p>
+                        :
+                        <p></p>
+                    }
 
-
-                    <p>Password</p>
+                    <p className={"form-header"}>Password</p>
                     <input type={"password"} placeholder={"Enter your password..."}
                         {...register("password", {
                             required: true,
@@ -54,6 +58,7 @@ export default function Signup() {
                     <button type={'submit'}>Submit</button>
 
                 </form>
+
             </div>
         </div>
     )

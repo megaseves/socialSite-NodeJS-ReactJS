@@ -58,11 +58,12 @@ export async function checkEmail(registerData, setErr) {
                 data: registerData
             }).then(data => {
                 console.log(data.data.ok)
-                console.log(data.data.message)
 
                 if (data.data.ok) {
                     console.log("MICSODAAA")
                     fetchSignUp(registerData, setErr);
+                } else {
+                    setErr(data.data.message);
                 }
             })
         } catch (err) {
