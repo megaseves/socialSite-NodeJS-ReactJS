@@ -8,7 +8,7 @@ export async function fetchAllUsers(setUsers) {
         }).then(data => {
             if (data.data.ok) {
                 setUsers(data.data.result);
-                console.log(data.data.result);
+                //console.log(data.data.result);
             } else {
                 setUsers("");
             }
