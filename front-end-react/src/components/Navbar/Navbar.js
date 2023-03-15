@@ -1,13 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React from 'react';
 import './Navbar.css';
-import {getId, getUsername, hasUsername} from "../localStorage";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCaretDown} from "@fortawesome/free-solid-svg-icons";
 import {SearchBar} from "./SearchBar";
 import {ProfileUI} from "./ProfileUI";
 
 export function Navbar() {
-
 
     return(
         <div className={'navbar-container'}>

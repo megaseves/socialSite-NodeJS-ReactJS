@@ -1,5 +1,29 @@
 import axios from "axios";
 
+export async function fetchAllUsers(setUsers) {
+    try {
+        axios({
+            method: "get",
+            url: `http://localhost:8080/users`
+        }).then(data => {
+            if (data.data.ok) {
+                setUsers(data.data.result);
+                console.log(data.data.result);
+            } else {
+                setUsers("");
+            }
+
+        })
+    } catch (err) {
+        if (err.response) {
+            console.log(err.response.data);
+            console.log(err.response.status);
+        } else {
+            console.log(err.message);
+        }
+    }
+}
+
 export async function apiFetch(values, setErr) {
     try {
         axios({

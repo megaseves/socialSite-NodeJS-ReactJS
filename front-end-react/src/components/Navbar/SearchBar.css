@@ -8,7 +8,11 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
 }
 .search-result {
+    height: 46px;
     padding: 5px 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 .search-result:hover {
     background-color: var(--thiBgColor);
@@ -23,4 +27,8 @@
 .search-result-relation {
     font-size: 12px;
     color: #989898;
+}
+
+.search-result-more {
+    color: var(--mainColor);
 }

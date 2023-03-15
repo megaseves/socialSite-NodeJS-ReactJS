@@ -2,10 +2,11 @@ const client = require('../db/dbconnection');
 
 
 const getAllUsers = (req, res) => {
-    client.query(`Select * from users`, (err, result)=>{
+    client.query(`Select user_id, username, email, created_on from users`, (err, result)=>{
         if(!err){
-            res.send(result.rows);
+            res.send({result: result.rows, message: "It's OK!", ok:true})
         } else {
+            res.send({result: "", message: "It's NOT ok!", ok:false})
             console.log(err.message);
         }
     });
