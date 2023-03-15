@@ -47,7 +47,7 @@ export function SearchBar() {
 
                         filterUser.slice(0, 5).map((value) => {
                             return (
-                                <div className="search-result" key={value.email}>
+                                <div className="search-result" key={value.email} onClick={()=> window.location.assign(`/profile/${value.user_id}`)}>
                                     <p className="search-result-name">{value.username}</p>
                                     <span className="search-result-relation">Friend</span>
                                 </div>
