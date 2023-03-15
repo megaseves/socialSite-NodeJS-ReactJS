@@ -1,0 +1,26 @@
+.search-result-container {
+    position: absolute;
+    margin: 10px 0 0 5px;
+    background-color: var(--secBgColor);
+    min-width: 185px;
+    padding: 5px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+}
+.search-result {
+    padding: 5px 10px;
+}
+.search-result:hover {
+    background-color: var(--thiBgColor);
+    border-radius: 8px;
+}
+
+.search-result-name {
+
+}
+
+
+.search-result-relation {
+    font-size: 12px;
+    color: #989898;
+}

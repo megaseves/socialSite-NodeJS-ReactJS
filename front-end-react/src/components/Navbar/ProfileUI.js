@@ -1,10 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react';
-import './Navbar.css';
-import {getId, getUsername, hasUsername} from "./localStorage";
+import React, {useEffect, useRef, useState} from "react";
+import {getId, getUsername, hasUsername} from "../localStorage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretDown} from "@fortawesome/free-solid-svg-icons";
 
-export function Navbar() {
+export function ProfileUI() {
     const [isOpenDropDown, setIsOpenDropDown] = useState(false);
     const username = getUsername();
 
@@ -28,27 +27,8 @@ export function Navbar() {
         localStorage.setItem("id", "");
         window.location.href = '/';
     }
-
-    return(
-        <div className={'navbar-container'}>
-                <div className={"logo-and-search"}>
-                    <div className={'logo-ui'}>
-                        <img src={'/socialSiteLogo.png'} width={40} height={40} alt={'logo'} onClick={()=> window.location.assign("/")} />
-                    </div>
-                    <div className={"search-bar-container"}>
-                        <label className={"search-bar-label"}>
-                            <input className={"search-bar"} type="text" placeholder={"Type to search..."}/>
-                        </label>
-                    </div>
-                </div>
-
-                <div className={'menu-ui'}>
-                    <ul>
-                        <li onClick={()=> window.location.assign("/")}>Home</li>
-                        <li onClick={()=> window.location.assign("/watch")}>Watch</li>
-                        <li onClick={()=> window.location.assign("/messages")}>Messages</li>
-                    </ul>
-                </div>
+    return (
+        <>
             {hasUsername() ?
                 <div>
                 <div className={'profile'}>
@@ -79,6 +59,6 @@ export function Navbar() {
 
                 </div>
             }
-        </div>
+        </>
     )
 }
