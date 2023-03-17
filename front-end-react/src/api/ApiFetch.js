@@ -24,7 +24,7 @@ export async function fetchAllUsers(setUsers) {
     }
 }
 
-export async function apiFetch(values, setErr) {
+export async function apiFetch(values, setErr, setMyDetails) {
     try {
         axios({
             method: "post",
@@ -36,10 +36,11 @@ export async function apiFetch(values, setErr) {
                 setErr(data.data.message);
             } else {
                 const user = data.data.result[0];
-                console.log(user)
+                console.log(user);
+                setMyDetails(user);
                 localStorage.setItem("username", user.username);
                 localStorage.setItem("id", user.user_id);
-                window.open('/', '_self')
+                window.open('/', '_self');
                 //window.location.reload(false);
             }
         })

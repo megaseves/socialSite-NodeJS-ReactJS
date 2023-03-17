@@ -3,7 +3,7 @@ import {useFormik} from "formik";
 import './Form.css';
 import {apiFetch} from "../api/ApiFetch";
 
-export function Login() {
+export function Login(props) {
 
     const [err, setErr] = useState('');
 
@@ -35,7 +35,7 @@ export function Login() {
                     <a href="/" className={'forgot-password'}>Forgot password?</a>
                     <button type={'submit'} onClick={async event => {
                         event.preventDefault();
-                        await apiFetch(values, setErr);
+                        await apiFetch(values, setErr, props.setMyDetails);
                     }
                     }>Submit</button>
                 </form>

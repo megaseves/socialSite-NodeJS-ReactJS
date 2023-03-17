@@ -10,12 +10,15 @@ import {hasUsername} from "./components/localStorage";
 import {PageNotFound} from "./components/PageNotFound";
 import {Profile} from "./pages/Profile";
 import {SearchResults} from "./components/SearchResults";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 function App() {
     const [users, setUsers] = useState("");
-
+    const [myDetails, setMyDetails] = useState('');
+    useEffect(()=> {
+        console.log(myDetails);
+    }, [myDetails, setMyDetails]);
   return (
     <>
         <Router>
@@ -34,9 +37,9 @@ function App() {
             :
             <Routes>
                 <Route path={"/"} element={<Home />} />
-                <Route path={"/login"} element={<Login />} />
+                <Route path={"/login"} element={<Login setMyDetails={setMyDetails} />} />
                 <Route path={"/signup"} element={<Signup />} />
-                <Route path={"*"} element={<Login />} />
+                <Route path={"*"} element={<Login setMyDetails={setMyDetails} />} />
             </Routes>
             }
         </Router>
