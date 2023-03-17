@@ -1,3 +1,45 @@
+.search-result-comp-container {
+    display: flex;
+
+}
+.search-filters {
+    width: 300px;
+    background-color: var(--secBgColor);
+    height: 100%;
+    position: fixed;
+    z-index: 99;
+    border-right: 1px solid #393a3b;
+    padding: 10px;
+}
+.search-filters h2 {
+    font-size: 20px;
+}
+.search-filters h4 {
+    font-size: 16px;
+    padding: 10px 0;
+}
+.search-filters-header {
+    width: 100%;
+    border-bottom: 1px solid #393a3b;
+}
+.search-filters-header p {
+    padding: 10px 0;
+}
+.search-filter {
+    width: 100%;
+    margin: 0;
+    padding: 15px 20px;
+    border-radius: 10px;
+}
+.search-filter:hover {
+    background-color: var(--thiBgColor);
+    cursor: pointer;
+}
+
+.search-result-comp-content {
+    width: 440px;
+    margin-left: 400px;
+}
 .search-result-comp-usernames {
     width: 30vw;
     background-color: var(--secBgColor);
@@ -33,4 +75,8 @@
 }
 .search-result-add-friend:hover {
     text-decoration: underline;
+}
+
+.active-filter {
+    background-color: var(--thiBgColor);
 }

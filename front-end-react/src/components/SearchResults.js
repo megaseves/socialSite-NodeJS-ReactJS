@@ -17,7 +17,21 @@ export function SearchResults(props) {
 
     return(
         <div className={'search-result-comp-container'}>
-            <h2>Search</h2>
+
+            <div className="search-filters">
+                <div className={"search-filters-header"}>
+                    <h2>Search results for</h2>
+                    <p>{q}</p>
+                </div>
+                <h4>Filters</h4>
+                <div className="search-filter active-filter">
+                    <p>All</p>
+                </div>
+                <div className="search-filter">
+                    <p>People</p>
+                </div>
+            </div>
+
             <div className="search-result-comp-content">
 
                 {filterUser.length > 0 &&
@@ -37,8 +51,9 @@ export function SearchResults(props) {
                         )
                     })
                 }
-
             </div>
+
+
         </div>
     )
 }
