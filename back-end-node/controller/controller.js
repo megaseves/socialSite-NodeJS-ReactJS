@@ -1,4 +1,5 @@
 const client = require('../db/dbconnection');
+const bcrypt = require("bcrypt");
 
 
 const getAllUsers = (req, res) => {
@@ -15,13 +16,17 @@ const getAllUsers = (req, res) => {
 
 const addUser = async (req, res) => {
     const user = req.body;
+
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
     await client.query(`INSERT INTO users (username, password, email, created_on)
-           VALUES ($1, $2, $3, current_date)`, [user.username, user.password, user.email] ,(err, result) => {
+           VALUES ($1, $2, $3, current_date)`, [user.username, hashedPassword, user.email] ,(err, result) => {
                 if(!err){
                     console.log("Successfully inserted")
                     res.send({result: result.rows, message: "", ok:true})
                 } else {
                     console.log(err.message);
+                    res.send({message: err.message, ok:false});
                 }
         });
     client.end;
@@ -39,19 +44,23 @@ const getAllLatestUsers = (req, res) => {
 }
 
 const checkForLogin = (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
+    const {email, password} = req.body;
 
-    client.query(`SELECT * FROM users WHERE email = $1 AND password = $2`, [email, password], (err, result) => {
-        if(err){
-            res.send({message: "Something goes wrong!", ok:false});
-        }
+    client.query(`SELECT * FROM users WHERE email = $1`, [email], async (err, result) => {
         if (result.rows.length === 0) {
             // Empty array
-            res.send({message: "Incorrect Username or Password!", ok:false})
+            console.log(result.rows);
+            res.send({message: "Email is incorrect!", ok: false});
+        } else if (err) {
+            res.send({message: "Something is wrong!", ok: false});
         } else {
-            // Correct data
-            res.send({result: result.rows, message: "Incorrect Username or Password!", ok:true})
+            console.log(result.rows[0].password)
+            const validPassword = await bcrypt.compare(password, result.rows[0].password);
+            if(!validPassword) {
+               res.send({message: "Password is incorrect!", ok: false});
+            } else {
+               res.send({result: result.rows, message: "It's OK!", ok: true})
+            }
         }
     });
     client.end;
@@ -60,8 +69,10 @@ const checkForLogin = (req, res) => {
 const checkForRegister = (req, res) => {
     const email = req.body.email;
 
-    client.query(`SELECT * FROM users WHERE email = $1`, [email], (err, result) => {
-        if(err){
+    client.query(`SELECT *
+                  FROM users
+                  WHERE email = $1`, [email], (err, result) => {
+        if (err) {
             res.send({message: "Something goes wrong!"});
         }
         if (result.rows.length === 0) {

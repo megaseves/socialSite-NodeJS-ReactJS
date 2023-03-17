@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS friends CASCADE;
 CREATE TABLE users (
   user_id serial PRIMARY KEY,
   username VARCHAR (50) NOT NULL,
-  password VARCHAR (50) NOT NULL,
+  password TEXT NOT NULL,
   email VARCHAR (255) UNIQUE NOT NULL,
   created_on TIMESTAMP NOT NULL
 );
@@ -22,13 +22,13 @@ CREATE TABLE friends (
 );
 
 INSERT INTO users (username, password, email, created_on)
-    VALUES ('Lufy', 'megaS022', 'megaseves@gmail.com', current_date);
+    VALUES ('Lufy', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'megaseves@gmail.com', current_date);
 INSERT INTO users (username, password, email, created_on)
-    VALUES ('Szalami', 'megaS022', 'szalami@gmail.com', current_date);
+    VALUES ('Szalami', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'szalami@gmail.com', current_date);
 INSERT INTO users (username, password, email, created_on)
-    VALUES ('Akarmi', 'megaS022', 'akarmi@gmail.com', current_date);
+    VALUES ('Akarmi', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'akarmi@gmail.com', current_date);
 INSERT INTO users (username, password, email, created_on)
-    VALUES ('Valami', 'megaS022', 'valami@gmail.com', current_date);
+    VALUES ('Valami', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'valami@gmail.com', current_date);
 
 INSERT INTO friends (user_id, friend_id)
     VALUES  (1, 3);
