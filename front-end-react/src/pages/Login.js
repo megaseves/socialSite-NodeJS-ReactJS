@@ -2,10 +2,12 @@ import React, {useState} from 'react';
 import {useFormik} from "formik";
 import './Form.css';
 import {apiFetch} from "../api/ApiFetch";
+import {useSignIn} from "react-auth-kit";
 
 export function Login(props) {
 
     const [err, setErr] = useState('');
+    const signIn = useSignIn();
 
     const { values, handleBlur, handleChange } = useFormik({
         initialValues: {
@@ -35,7 +37,7 @@ export function Login(props) {
                     <a href="/" className={'forgot-password'}>Forgot password?</a>
                     <button type={'submit'} onClick={async event => {
                         event.preventDefault();
-                        await apiFetch(values, setErr, props.setMyDetails);
+                        await apiFetch(values, setErr, signIn, props.cookies);
                     }
                     }>Submit</button>
                 </form>

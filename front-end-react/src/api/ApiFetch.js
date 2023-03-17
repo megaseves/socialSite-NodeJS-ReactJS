@@ -24,24 +24,30 @@ export async function fetchAllUsers(setUsers) {
     }
 }
 
-export async function apiFetch(values, setErr, setMyDetails) {
+export async function apiFetch(values, setErr, signIn, cookies) {
     try {
         axios({
             method: "post",
             url: "http://localhost:8080/login",
             data: values
         }).then(data => {
-            if(!data.data.ok) {
+            if(data.status !== 200) {
                 //console.log(data.data.message);
                 setErr(data.data.message);
-            } else {
-                const user = data.data.result[0];
-                console.log(user);
-                setMyDetails(user);
-                localStorage.setItem("username", user.username);
-                localStorage.setItem("id", user.user_id);
+            } else if (data.status === 200) {
+                console.log(data.data.accessToken);
+                const userToken = data.data.accessToken;
+
+                signIn({
+                    token: userToken,
+                    expiresIn: 3600,
+                    tokenType: "Bearer",
+                    authState: { email: values.email }
+                })
+                 cookies.set('token', userToken);
+                //localStorage.setItem("username", user.username);
+                //localStorage.setItem("id", user.user_id);
                 window.open('/', '_self');
-                //window.location.reload(false);
             }
         })
 

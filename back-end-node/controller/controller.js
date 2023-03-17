@@ -1,5 +1,6 @@
 const client = require('../db/dbconnection');
 const bcrypt = require("bcrypt");
+const jwtTokens = require("../utils/jwt-helpers");
 
 
 const getAllUsers = (req, res) => {
@@ -59,7 +60,10 @@ const checkForLogin = (req, res) => {
             if(!validPassword) {
                res.send({message: "Password is incorrect!", ok: false});
             } else {
-               res.send({result: result.rows, message: "It's OK!", ok: true})
+                let tokens = jwtTokens(result.rows[0]);
+                res.cookie('refresh_token',tokens.refreshToken,{httpOnly:true});
+                res.json(tokens);
+                //res.send({result: result.rows, message: "It's OK!", ok: true})
             }
         }
     });

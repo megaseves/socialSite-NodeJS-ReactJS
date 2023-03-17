@@ -1,14 +1,17 @@
 const express = require('express');
 const cors = require('cors');
 const controller = require("./controller/controller");
+const dotenv = require("dotenv");
+const authenticateToken = require("./middleware/authorization");
 
+dotenv.config();
 
 const app = express();
 app.use(cors())
 app.use(express.json())
 
 
-app.get("/users", controller.getAllUsers);
+app.get("/users", authenticateToken ,controller.getAllUsers);
 
 app.get("/latestUsers", controller.getAllLatestUsers);
 

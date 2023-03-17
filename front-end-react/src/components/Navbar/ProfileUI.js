@@ -1,11 +1,14 @@
 import React, {useEffect, useRef, useState} from "react";
-import {getId, getUsername, hasUsername} from "../localStorage";
+import {getId} from "../localStorage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretDown} from "@fortawesome/free-solid-svg-icons";
+import {useIsAuthenticated, useSignOut} from "react-auth-kit";
 
 export function ProfileUI() {
     const [isOpenDropDown, setIsOpenDropDown] = useState(false);
-    const username = getUsername();
+
+    const signOut = useSignOut();
+    const isAuthenticated = useIsAuthenticated();
 
     let menuRef = useRef();
 
@@ -23,18 +26,20 @@ export function ProfileUI() {
     });
 
     const logout = () => {
-        localStorage.setItem("username", "");
+/*        localStorage.setItem("username", "");
         localStorage.setItem("id", "");
-        window.location.href = '/';
+        ;*/
+        signOut();
+        window.location.href = '/'
     }
     return (
         <>
-            {hasUsername() ?
+            {isAuthenticated() ?
                 <div>
                 <div className={'profile'}>
                     <div className={'profile-ui'} onClick={()=> window.location.assign(`/profile/${getId()}`)}>
                         <img src={'/SocialSiteNoFace.jpg'} width={30} height={30} alt={'profile-avatar'} />
-                        <span>{username}</span>
+                        <span>username</span>
 
                     </div>
                     <div ref={menuRef} className={'options-ui'}>
