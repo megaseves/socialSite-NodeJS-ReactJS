@@ -24,7 +24,7 @@ export function SearchBar(props) {
 
     useEffect(() => {
         fetchAllUsers(props.setUsers);
-    }, []);
+    }, [props.setUsers]);
 
     // eslint-disable-next-line array-callback-return
     const filterUser = props.users && props.users.filter((value) => {
