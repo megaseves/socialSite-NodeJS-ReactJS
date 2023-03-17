@@ -60,9 +60,12 @@ export function SearchBar(props) {
 
                         filterUser.slice(0, 5).map((value) => {
                             return (
-                                <div className="search-result" key={value.email} onClick={()=> window.location.assign(`/profile/${value.user_id}`)}>
-                                    <p className="search-result-name">{value.username}</p>
-                                    <span className="search-result-relation">Friend</span>
+                                <div className={"sr-container"}>
+                                    <div className="search-result" key={value.email} onClick={()=> window.location.assign(`/profile/${value.user_id}`)}>
+                                        <p className="search-result-name">{value.username}</p>
+                                        <span className="search-result-relation">Friend</span>
+                                    </div>
+                                    <span className="search-add-friend" onClick={()=> window.location.assign(`/`)} >Add friend</span>
                                 </div>
                             )
                         })
@@ -70,13 +73,15 @@ export function SearchBar(props) {
                         <p className={"search-result-history-text"}>There is no history!</p>
                     }
                     {searchTerm &&
-                         <div className="search-result" onClick={Q_LINK}>
-                            <p className="search-result-more">Search: "{searchTerm}"</p>
-                         </div>
+                        <div className={"sr-container"}>
+                             <div id={"search-more"} className="search-result" onClick={Q_LINK}>
+                                <p className="search-result-more">Search: "{searchTerm}"</p>
+                             </div>
+                        </div>
                     }
                 </div>
             }
 
         </div>
-    );
+    )
 }

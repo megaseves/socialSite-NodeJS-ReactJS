@@ -1,0 +1,36 @@
+.search-result-comp-usernames {
+    width: 30vw;
+    background-color: var(--secBgColor);
+
+    margin: 2vw;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0 1px 3px, rgba(0, 0, 0, 0.08) 0 1px 2px;
+}
+.search-result-comp-usernames:hover {
+    opacity: 0.8;
+}
+
+.search-result-details span {
+    color: var(--textColor);
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.search-result-comp-name:hover {
+    cursor: pointer;
+    color: var(--mainColor);
+}
+
+.search-result-add-friend {
+    float: right;
+    color: var(--mainColor);
+    font-size: 12px;
+    cursor: pointer;
+    position: relative;
+    right: 0;
+    top: 11px;
+}
+.search-result-add-friend:hover {
+    text-decoration: underline;
+}

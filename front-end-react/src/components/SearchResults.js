@@ -23,9 +23,16 @@ export function SearchResults(props) {
                 {filterUser.length > 0 &&
                     filterUser.map((value) => {
                         return (
-                            <div className="search-result-comp-usernames" key={value.email} onClick={()=> window.location.assign(`/profile/${value.user_id}`)}>
-                                <p className="search-result-name">{value.username}</p>
-                                <span className="search-result-relation">Friend</span>
+                            <div className="search-result-comp-usernames" key={value.email}  >
+                                <div className="search-result-header">
+                                    <span className="search-result-comp-name" onClick={()=> window.location.assign(`/profile/${value.user_id}`)} >{value.username}</span>
+                                    <span className="search-result-add-friend">Add friend</span>
+                                </div>
+
+                                <div className="search-result-details">
+                                    <span className="search-result-relation">Friend</span>
+                                    <span className="search-result-city">~ City: -</span>
+                                </div>
                             </div>
                         )
                     })

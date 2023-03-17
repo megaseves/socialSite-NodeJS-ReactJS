@@ -10,6 +10,17 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
 }
 
+.sr-container {
+    min-width: 100px;
+    height: 46px;
+    border-radius: 10px;
+
+}
+.sr-container:hover {
+    background-color: var(--thiBgColor);
+    border-radius: 8px;
+}
+
 .search-result {
     height: 46px;
     padding: 5px 10px;
@@ -17,14 +28,12 @@
     justify-content: center;
     flex-direction: column;
     cursor: pointer;
+    margin: 0;
 }
-.search-result:hover {
-    background-color: var(--thiBgColor);
-    border-radius: 8px;
-}
+
 
 .search-result-name {
-
+    padding-right: 70px;
 }
 
 
@@ -41,4 +50,22 @@
     font-size: 12px;
     text-align: center;
     color: var(--textColor);
+}
+
+.search-add-friend {
+    position: relative;
+    right: 10px;
+    float: right;
+    top: -30px;
+    font-size: 12px;
+    color: var(--mainColor);
+
+}
+.search-add-friend:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.search-result-more {
+    min-width: 150px;
 }
