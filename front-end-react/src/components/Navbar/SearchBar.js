@@ -2,25 +2,38 @@ import React, {useEffect, useRef, useState} from "react";
 import './SearchBar.css';
 import {fetchAllUsers} from "../../api/ApiFetch";
 
-export function SearchBar() {
+export function SearchBar(props) {
     const [searchTerm, setSearchTerm] = useState("");
-    const [users, setUsers] = useState("");
+
     const [isShowSearchBar, setIsShowSearchBar] = useState(false);
+
+    const Q_LINK = () => { window.location.assign(`/search/people/?q=${searchTerm}`)  };
+
+
+/*    const handleSearch = () => {
+      const q = document.querySelector('.search-result-more').dataset.value;
+      console.log(q);
+      if (q) {
+          setSearchParams({q});
+      } else {
+          setSearchParams({});
+      }
+    };*/
 
     let searchRef = useRef();
 
     useEffect(() => {
-        fetchAllUsers(setUsers);
+        fetchAllUsers(props.setUsers);
     }, []);
 
     // eslint-disable-next-line array-callback-return
-    const filterUser = users && users.filter((value) => {
+    const filterUser = props.users && props.users.filter((value) => {
        if(searchTerm === "") {
             return "";
         } else if(value.username.toLowerCase().includes(searchTerm.toLowerCase())) {
             return value;
         }
-    })
+    });
 
     useEffect(() => {
         let handler = (event) => {
@@ -37,7 +50,7 @@ export function SearchBar() {
     return (
         <div className={"search-bar-container"}>
             <label className={"search-bar-label"}>
-                <input ref={searchRef} className={"search-bar"} type="text" placeholder={"Type to search..."} onChange={(event) => setSearchTerm(event.target.value)} onClick={()=> setIsShowSearchBar(true)} />
+                <input ref={searchRef} className={"search-bar"} type="text" placeholder={"Type to search..."} onKeyDown={(e)=> e.key === 'Enter' && Q_LINK()} onChange={(event) => setSearchTerm(event.target.value)} onClick={()=> setIsShowSearchBar(true)} />
             </label>
             {isShowSearchBar &&
 
@@ -57,7 +70,7 @@ export function SearchBar() {
                         <p className={"search-result-history-text"}>There is no history!</p>
                     }
                     {searchTerm &&
-                         <div className="search-result">
+                         <div className="search-result" onClick={Q_LINK}>
                             <p className="search-result-more">Search: "{searchTerm}"</p>
                          </div>
                     }

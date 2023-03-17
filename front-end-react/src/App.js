@@ -9,13 +9,17 @@ import {Login} from "./pages/Login";
 import {hasUsername} from "./components/localStorage";
 import {PageNotFound} from "./components/PageNotFound";
 import {Profile} from "./pages/Profile";
+import {SearchResults} from "./components/SearchResults";
+import {useState} from "react";
+
 
 function App() {
+    const [users, setUsers] = useState("");
 
   return (
     <>
-        <Navbar  />
         <Router>
+            <Navbar users={users} setUsers={setUsers} />
             {hasUsername() ?
             <Routes>
                 <Route path={"/"} element={<Home />} />
@@ -24,6 +28,7 @@ function App() {
                 <Route path={"/login"} element={<Home />} />
                 <Route path={"/signup"} element={<Home />} />
                 <Route path={"/profile/:id"} element={<Profile />} />
+                <Route path={"/search/people/"} element={<SearchResults users={users} />} />
                 <Route path={"*"} element={<PageNotFound />} />
             </Routes>
             :

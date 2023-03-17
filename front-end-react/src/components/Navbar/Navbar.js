@@ -3,7 +3,7 @@ import './Navbar.css';
 import {SearchBar} from "./SearchBar";
 import {ProfileUI} from "./ProfileUI";
 
-export function Navbar() {
+export function Navbar(props) {
 
     return(
         <div className={'navbar-container'}>
@@ -11,7 +11,7 @@ export function Navbar() {
                     <div className={'logo-ui'}>
                         <img src={'/socialSiteLogo.png'} width={40} height={40} alt={'logo'} onClick={()=> window.location.assign("/")} />
                     </div>
-                    <SearchBar />
+                    <SearchBar setUsers={props.setUsers} users={props.users}/>
                 </div>
 
                 <div className={'menu-ui'}>
