@@ -105,7 +105,7 @@ export async function fetchProfileById(id, setUser) {
 
 
 
-export async function checkEmail(registerData, setErr) {
+export async function checkEmail(registerData, setErr, signIn) {
         try {
             axios({
                 method: "post",
@@ -113,11 +113,10 @@ export async function checkEmail(registerData, setErr) {
                 headers: {'Content-Type': 'application/json'},
                 data: registerData
             }).then(data => {
-                console.log(data.data.ok)
 
-                if (data.data.ok) {
+                if (data.status === 200) {
                     console.log("MICSODAAA")
-                    fetchSignUp(registerData, setErr);
+                    fetchSignUp(registerData, setErr, signIn);
                 } else {
                     setErr(data.data.message);
                 }
@@ -132,7 +131,7 @@ export async function checkEmail(registerData, setErr) {
         }
 }
 
-export async function fetchSignUp(registerData, setErr) {
+export async function fetchSignUp(registerData, setErr, signIn) {
         try {
             axios({
                 method: "post",
@@ -143,9 +142,10 @@ export async function fetchSignUp(registerData, setErr) {
                 //console.log(data.data.ok);
                 //console.log(data.data.message);
                 console.log("HETEEE");
-                if (data.data.ok) {
+                if (data.status === 200) {
+                    console.log("YES")
                     console.log(registerData)
-                    apiFetch(registerData, setErr);
+                    apiFetch(registerData, setErr, signIn);
                 }
             })
         } catch (err) {

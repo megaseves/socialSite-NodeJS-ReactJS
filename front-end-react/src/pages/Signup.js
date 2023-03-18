@@ -4,13 +4,13 @@ import {checkEmail} from "../api/ApiFetch";
 
 
 
-export default function Signup() {
+export default function Signup(props) {
 
     const { register, formState: {errors}, handleSubmit,} = useForm();
     const [err, setErr] = useState();
 
     const onSubmit = (registerData) => {
-        checkEmail(registerData, setErr);
+        checkEmail(registerData, setErr, props.signIn);
         console.log(err)
     };
 

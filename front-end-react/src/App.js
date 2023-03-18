@@ -10,7 +10,7 @@ import {PageNotFound} from "./components/PageNotFound";
 import {Profile} from "./pages/Profile";
 import {SearchResults} from "./components/SearchResults";
 import {useState} from "react";
-import {RequireAuth, useAuthHeader} from "react-auth-kit";
+import {RequireAuth, useAuthHeader, useSignIn} from "react-auth-kit";
 import jwt_decode from 'jwt-decode';
 import {ProfileById} from "./pages/ProfileById";
 
@@ -21,7 +21,8 @@ function App() {
     const authHeader = useAuthHeader();
     let token = authHeader().slice(7);
     const userDetail = token && jwt_decode(token);
-    //console.log(userDetail)
+
+    const signIn = useSignIn();
 
   return (
     <>
@@ -30,10 +31,9 @@ function App() {
 
             <Route path={"/"} element={ <Home userDetail={userDetail} /> }/>
             <Route path={"/login"} element={<Login />} />
-            <Route path={"/signup"} element={<Signup />} />
+            <Route path={"/signup"} element={<Signup signIn={signIn} />} />
             <Route path={"/profile/:id"} element={<ProfileById />} />
             <Route path={"*"} element={<PageNotFound />} />
-
 
             <Route path={"/watch"} element={
                 <RequireAuth loginPath={"/login"} >
