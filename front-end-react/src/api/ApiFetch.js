@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export async function fetchAllUsers(setUsers, token) {
-    console.log(token)
     try {
         await axios({
             method: "get",

@@ -28,16 +28,25 @@ function App() {
         <Routes>
 
             <Route path={"/"} element={
-                <RequireAuth loginPath={"/login"} >
-                    <Home userDetail={userDetail} />
-                </RequireAuth>
+                <Home userDetail={userDetail} />
             } />
+
             <Route path={"/login"} element={<Login />} />
             <Route path={"/signup"} element={<Signup />} />
 
+            <Route path={"/watch"} element={
+                <RequireAuth loginPath={"/login"} >
+                    <Watch />
+                </RequireAuth>
+            }/>
 
-            <Route path={"/watch"} element={<Watch />} />
-            <Route path={"/messages"} element={<Messages />} />
+            <Route path={"/messages"} element={
+                <RequireAuth loginPath={"/login"} >
+                    <Messages />
+                </RequireAuth>
+            }/>
+
+
             <Route path={"/profile/:id"} element={<Profile />} />
             <Route path={"/search/people/"} element={<SearchResults users={users} />} />
             <Route path={"*"} element={<PageNotFound />} />
