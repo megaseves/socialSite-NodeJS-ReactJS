@@ -2,11 +2,12 @@ import React, {useEffect, useState} from 'react';
 import api from '../api/users';
 import '../App.css';
 import './Home.css';
-import {hasUsername, getUsername } from "../components/localStorage";
 
 
-export function Home() {
+export function Home(props) {
     const [users, setUsers] = useState([]);
+
+    const userDetail = props.userDetail;
 
     useEffect(() => {
         fetchUsers();
@@ -32,10 +33,10 @@ export function Home() {
     return (
         <div className={'home-container'}>
             <h1>Welcome
-                {hasUsername()?
-                    <span> {getUsername()}!</span>
+                {userDetail.username ?
+                    <span> {userDetail.username}!</span>
                     :
-                    <span>to the SocialSite!</span>
+                    <span> to the SocialSite!</span>
                 }
             </h1>
             <div className={'design-line'}></div>

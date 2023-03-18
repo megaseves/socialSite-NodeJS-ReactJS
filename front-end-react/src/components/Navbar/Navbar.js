@@ -11,7 +11,7 @@ export function Navbar(props) {
                     <div className={'logo-ui'}>
                         <img src={'/socialSiteLogo.png'} width={40} height={40} alt={'logo'} onClick={()=> window.location.assign("/")} />
                     </div>
-                    <SearchBar setUsers={props.setUsers} users={props.users}/>
+                    <SearchBar setUsers={props.setUsers} users={props.users} token={props.token}/>
                 </div>
 
                 <div className={'menu-ui'}>
@@ -21,7 +21,7 @@ export function Navbar(props) {
                         <li onClick={()=> window.location.assign("/messages")}>Messages</li>
                     </ul>
                 </div>
-                <ProfileUI />
+                <ProfileUI userDetail={props.userDetail} />
         </div>
     )
 }

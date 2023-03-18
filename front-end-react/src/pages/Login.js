@@ -37,7 +37,7 @@ export function Login(props) {
                     <a href="/" className={'forgot-password'}>Forgot password?</a>
                     <button type={'submit'} onClick={async event => {
                         event.preventDefault();
-                        await apiFetch(values, setErr, signIn, props.cookies);
+                        await apiFetch(values, setErr, signIn);
                     }
                     }>Submit</button>
                 </form>

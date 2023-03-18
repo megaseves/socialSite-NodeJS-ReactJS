@@ -1,18 +1,21 @@
 import axios from "axios";
 
-export async function fetchAllUsers(setUsers) {
+export async function fetchAllUsers(setUsers, token) {
+    console.log(token)
     try {
-        axios({
+        await axios({
             method: "get",
-            url: `http://localhost:8080/users`
+            url: `http://localhost:8080/users`,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         }).then(data => {
-            if (data.data.ok) {
+
+            if (data.data.result.length > 0) {
                 setUsers(data.data.result);
-                //console.log(data.data.result);
             } else {
                 setUsers("");
             }
-
         })
     } catch (err) {
         if (err.response) {
@@ -24,7 +27,7 @@ export async function fetchAllUsers(setUsers) {
     }
 }
 
-export async function apiFetch(values, setErr, signIn, cookies) {
+export async function apiFetch(values, setErr, signIn) {
     try {
         axios({
             method: "post",
@@ -42,9 +45,9 @@ export async function apiFetch(values, setErr, signIn, cookies) {
                     token: userToken,
                     expiresIn: 3600,
                     tokenType: "Bearer",
-                    authState: { email: values.email }
+                    authState: { email: values.email}
                 })
-                 cookies.set('token', userToken);
+                 //cookies.set('token', userToken);
                 //localStorage.setItem("username", user.username);
                 //localStorage.setItem("id", user.user_id);
                 window.open('/', '_self');

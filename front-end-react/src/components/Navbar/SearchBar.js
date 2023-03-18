@@ -4,9 +4,7 @@ import {fetchAllUsers} from "../../api/ApiFetch";
 
 export function SearchBar(props) {
     const [searchTerm, setSearchTerm] = useState("");
-
     const [isShowSearchBar, setIsShowSearchBar] = useState(false);
-
     const Q_LINK = () => { window.location.assign(`/search/people/?q=${searchTerm}`)  };
 
 
@@ -22,9 +20,9 @@ export function SearchBar(props) {
 
     let searchRef = useRef();
 
-    useEffect(() => {
-        fetchAllUsers(props.setUsers);
-    }, [props.setUsers]);
+    useEffect( () => {
+        fetchAllUsers(props.setUsers, props.token);
+    }, [props.setUsers, props.token]);
 
     // eslint-disable-next-line array-callback-return
     const filterUser = props.users && props.users.filter((value) => {
@@ -50,7 +48,8 @@ export function SearchBar(props) {
     return (
         <div className={"search-bar-container"}>
             <label className={"search-bar-label"}>
-                <input ref={searchRef} className={"search-bar"} type="text" placeholder={"Type to search..."} onKeyDown={(e)=> e.key === 'Enter' && Q_LINK()} onChange={(event) => setSearchTerm(event.target.value)} onClick={()=> setIsShowSearchBar(true)} />
+                <input ref={searchRef} className={"search-bar"} type="text" placeholder={"Type to search..."} onKeyDown={(e)=> e.key === 'Enter' && Q_LINK()}
+                       onChange={(event) => setSearchTerm(event.target.value)} onClick={()=> setIsShowSearchBar(true)} />
             </label>
             {isShowSearchBar &&
 
@@ -60,7 +59,7 @@ export function SearchBar(props) {
 
                         filterUser.slice(0, 5).map((value) => {
                             return (
-                                <div className={"sr-container"}>
+                                <div className={"sr-container"} key={value.email}>
                                     <div className="search-result" key={value.email} onClick={()=> window.location.assign(`/profile/${value.user_id}`)}>
                                         <p className="search-result-name">{value.username}</p>
                                         <span className="search-result-relation">Friend</span>

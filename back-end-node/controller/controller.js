@@ -6,12 +6,13 @@ const jwtTokens = require("../utils/jwt-helpers");
 const getAllUsers = (req, res) => {
     client.query(`Select user_id, username, email, created_on from users`, (err, result)=>{
         if(!err){
-            res.send({result: result.rows, message: "It's OK!", ok:true})
+            res.send({result: result.rows, message: "It's OK!"})
         } else {
-            res.send({result: "", message: "It's NOT ok!", ok:false})
+            res.send({result: "", message: "It's NOT ok!"})
             console.log(err.message);
         }
     });
+    console.log(req.headers);
     client.end;
 }
 

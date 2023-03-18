@@ -8,7 +8,7 @@ import {BrowserRouter} from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-      <AuthProvider authType={"cookie"} authName={"_auth"} cookieDomain={window.location.hostname} coockieSecure={false}>
+      <AuthProvider authType={"cookie"} authName={"_auth"} cookieDomain={window.location.hostname} coockieSecure={window.location.protocol === "https:"}>
 
           <BrowserRouter>
               <App />

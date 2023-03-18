@@ -9,39 +9,30 @@ import {Login} from "./pages/Login";
 import {PageNotFound} from "./components/PageNotFound";
 import {Profile} from "./pages/Profile";
 import {SearchResults} from "./components/SearchResults";
-import {useEffect, useState} from "react";
-import {RequireAuth} from "react-auth-kit";
-import Cookies from "universal-cookie/es6";
-import jwt_decode from "jwt-decode";
-
+import {useState} from "react";
+import {RequireAuth, useAuthHeader} from "react-auth-kit";
+import jwt_decode from 'jwt-decode';
 
 
 function App() {
     const [users, setUsers] = useState("");
 
-
-
-    const cookies = new Cookies();
-    let token = cookies.get('token');
-
-    const decoded = token && jwt_decode(token);
-
-    useEffect(()=> {
-        console.log(cookies.get('token'));
-        console.log(decoded);
-    }, [cookies]);
+    const authHeader = useAuthHeader();
+    let token = authHeader().slice(7);
+    const userDetail = token && jwt_decode(token);
+    //console.log(userDetail)
 
   return (
     <>
-        <Navbar users={users} setUsers={setUsers} />
+        <Navbar users={users} setUsers={setUsers} userDetail={userDetail} token={token} />
         <Routes>
 
             <Route path={"/"} element={
-                <RequireAuth loginPath={"/login"}>
-                    <Home />
+                <RequireAuth loginPath={"/login"} >
+                    <Home userDetail={userDetail} />
                 </RequireAuth>
             } />
-            <Route path={"/login"} element={<Login cookies={cookies} />} />
+            <Route path={"/login"} element={<Login />} />
             <Route path={"/signup"} element={<Signup />} />
 
 

@@ -1,14 +1,16 @@
 import React, {useEffect, useRef, useState} from "react";
-import {getId} from "../localStorage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretDown} from "@fortawesome/free-solid-svg-icons";
 import {useIsAuthenticated, useSignOut} from "react-auth-kit";
 
-export function ProfileUI() {
+export function ProfileUI(props) {
     const [isOpenDropDown, setIsOpenDropDown] = useState(false);
 
     const signOut = useSignOut();
     const isAuthenticated = useIsAuthenticated();
+
+    const userDetail = props.userDetail;
+
 
     let menuRef = useRef();
 
@@ -26,9 +28,6 @@ export function ProfileUI() {
     });
 
     const logout = () => {
-/*        localStorage.setItem("username", "");
-        localStorage.setItem("id", "");
-        ;*/
         signOut();
         window.location.href = '/'
     }
@@ -37,9 +36,9 @@ export function ProfileUI() {
             {isAuthenticated() ?
                 <div>
                 <div className={'profile'}>
-                    <div className={'profile-ui'} onClick={()=> window.location.assign(`/profile/${getId()}`)}>
+                    <div className={'profile-ui'} onClick={()=> window.location.assign(`/profile/${userDetail.user_id}`)}>
                         <img src={'/SocialSiteNoFace.jpg'} width={30} height={30} alt={'profile-avatar'} />
-                        <span>username</span>
+                        <span>{userDetail.username}</span>
 
                     </div>
                     <div ref={menuRef} className={'options-ui'}>
@@ -50,7 +49,7 @@ export function ProfileUI() {
                 </div>
                 {isOpenDropDown ?
                 <div ref={menuRef} className={'drop-down-container'}>
-                    <div className={'drop-down-btn'} onClick={()=> window.location.assign(`/profile/${getId()}`)}>Profile</div>
+                    <div className={'drop-down-btn'} onClick={()=> window.location.assign(`/profile/${userDetail.user_id}`)}>Profile</div>
                     <div className={'drop-down-btn'} onClick={logout}>Logout</div>
                 </div>
                 :
