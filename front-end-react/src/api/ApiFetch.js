@@ -157,3 +157,20 @@ export async function fetchSignUp(registerData, setErr, signIn) {
             }
         }
 }
+export async function uploadImage(formData) {
+        try {
+            axios({
+                method: "post",
+                url: "http://localhost:8080/putAnImage",
+                headers: {'Content-Type': 'multipart/form-data'},
+                data: formData
+            })
+        } catch (err) {
+            if (err.response) {
+                console.log(err.response.data);
+                console.log(err.response.status);
+            } else {
+                console.log(err.message);
+            }
+        }
+}

@@ -1,6 +1,7 @@
 const client = require('../db/dbconnection');
 const bcrypt = require("bcrypt");
 const jwtTokens = require("../utils/jwt-helpers");
+const {PutObjectCommand} = require("@aws-sdk/client-s3");
 
 
 const getAllUsers = (req, res) => {
@@ -121,6 +122,29 @@ const getProfile = async (req, res) => {
     client.end;
 }
 
+
+const addImage = async (req, res) => {
+    console.log("Body: ", req.body);
+    console.log("File: ", req.file);
+
+    /*req.file.buffer
+
+    const params = {
+        Bucket: bucketName,
+        Key: req.file.originalname,
+        Body: req.file.buffer,
+        ContentType: req.file.mimetype,
+
+    };
+
+    const command = new PutObjectCommand(params);
+    await s3.send(command);*/
+
+    res.send({});
+}
+
+
+
 module.exports = {
     getAllUsers,
     addUser,
@@ -128,5 +152,6 @@ module.exports = {
     checkForLogin,
     checkForRegister,
     getProfileById,
-    getProfile
+    getProfile,
+    addImage
 };
