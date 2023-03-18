@@ -35,8 +35,20 @@ function App() {
             <Route path={"/"} element={ <Home userDetail={userDetail} /> }/>
             <Route path={"/login"} element={<Login />} />
             <Route path={"/signup"} element={<Signup signIn={signIn} />} />
-            <Route path={"/profile/:id"} element={<ProfileById />} />
+
+
+            <Route path={"/profile/:id/"} element={<ProfileById />}>
+
+                <Route index element={<Posts />} />
+                <Route path={"posts"} element={<Posts />} />
+                <Route path={"friends"} element={<Friends />} />
+                <Route path={"photos"} element={<Photos />} />
+            </Route>
+
+
             <Route path={"*"} element={<PageNotFound />} />
+
+
 
             <Route path={"/watch"} element={
                 <RequireAuth loginPath={"/login"} >
