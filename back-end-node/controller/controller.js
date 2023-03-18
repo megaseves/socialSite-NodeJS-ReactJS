@@ -12,7 +12,7 @@ const getAllUsers = (req, res) => {
             console.log(err.message);
         }
     });
-    console.log(req.headers);
+    //console.log(req.headers);
     client.end;
 }
 
@@ -97,9 +97,22 @@ const checkForRegister = (req, res) => {
 
 const getProfileById = async (req, res) => {
     const id = req.query.id;
+    await client.query(`SELECT user_id, username, email, created_on FROM users WHERE user_id = $1`, [id], (err, result)=>{
+        if(!err){
+            console.log("PROFILE By Id: " + JSON.stringify(result.rows[0]));
+            res.send(JSON.stringify(result.rows[0]));
+        } else {
+            console.log(err.message);
+        }
+    });
+    client.end;
+}
+const getProfile = async (req, res) => {
+    const id = req.query.id;
+
     await client.query(`SELECT * FROM users WHERE user_id = $1`, [id], (err, result)=>{
         if(!err){
-            console.log("I found it: " + JSON.stringify(result.rows[0]));
+            console.log("MY PROFILE: " + JSON.stringify(result.rows[0]));
             res.send(JSON.stringify(result.rows[0]));
         } else {
             console.log(err.message);
@@ -114,5 +127,6 @@ module.exports = {
     getAllLatestUsers,
     checkForLogin,
     checkForRegister,
-    getProfileById
+    getProfileById,
+    getProfile
 };

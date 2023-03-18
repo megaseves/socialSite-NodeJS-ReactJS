@@ -36,7 +36,7 @@ export function ProfileUI(props) {
             {isAuthenticated() ?
                 <div>
                 <div className={'profile'}>
-                    <div className={'profile-ui'} onClick={()=> window.location.assign(`/profile/${userDetail.user_id}`)}>
+                    <div className={'profile-ui'} onClick={()=> window.location.assign("/profile")}>
                         <img src={'/SocialSiteNoFace.jpg'} width={30} height={30} alt={'profile-avatar'} />
                         <span>{userDetail.username}</span>
 
@@ -49,7 +49,7 @@ export function ProfileUI(props) {
                 </div>
                 {isOpenDropDown ?
                 <div ref={menuRef} className={'drop-down-container'}>
-                    <div className={'drop-down-btn'} onClick={()=> window.location.assign(`/profile/${userDetail.user_id}`)}>Profile</div>
+                    <div className={'drop-down-btn'} onClick={()=> window.location.assign("/profile")}>Profile</div>
                     <div className={'drop-down-btn'} onClick={logout}>Logout</div>
                 </div>
                 :

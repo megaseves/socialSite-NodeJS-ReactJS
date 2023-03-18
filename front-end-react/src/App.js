@@ -12,6 +12,7 @@ import {SearchResults} from "./components/SearchResults";
 import {useState} from "react";
 import {RequireAuth, useAuthHeader} from "react-auth-kit";
 import jwt_decode from 'jwt-decode';
+import {ProfileById} from "./pages/ProfileById";
 
 
 function App() {
@@ -27,12 +28,12 @@ function App() {
         <Navbar users={users} setUsers={setUsers} userDetail={userDetail} token={token} />
         <Routes>
 
-            <Route path={"/"} element={
-                <Home userDetail={userDetail} />
-            } />
-
+            <Route path={"/"} element={ <Home userDetail={userDetail} /> }/>
             <Route path={"/login"} element={<Login />} />
             <Route path={"/signup"} element={<Signup />} />
+            <Route path={"/profile/:id"} element={<ProfileById />} />
+            <Route path={"*"} element={<PageNotFound />} />
+
 
             <Route path={"/watch"} element={
                 <RequireAuth loginPath={"/login"} >
@@ -46,11 +47,18 @@ function App() {
                 </RequireAuth>
             }/>
 
+            <Route path={"/search/people/"} element={
+                <RequireAuth loginPath={"/login"} >
+                    <SearchResults users={users} />
+                </RequireAuth>
+            }/>
 
-            <Route path={"/profile/:id"} element={<Profile />} />
-            <Route path={"/search/people/"} element={<SearchResults users={users} />} />
-            <Route path={"*"} element={<PageNotFound />} />
-            <Route path={"*"} element={<Login />} />
+            <Route path={"/profile"} element={
+                <RequireAuth loginPath={"/login"} >
+                    <Profile userDetail={userDetail} token={token} />
+                </RequireAuth>
+            }/>
+
         </Routes>
     </>
   );

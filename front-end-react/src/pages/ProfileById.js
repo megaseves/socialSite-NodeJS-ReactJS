@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {fetchProfile} from "../api/ApiFetch";
+import {fetchProfileById} from "../api/ApiFetch";
+import {useParams} from "react-router-dom";
 
-export function Profile(props) {
-
+export function ProfileById() {
 
     const [user, setUser] = useState({});
 
-    const userDetail = props.userDetail;
+    const {id} = useParams();
 
     useEffect( () => {
-        fetchProfile(userDetail.user_id, setUser, props.token);
-    }, [props.token, userDetail]);
+        fetchProfileById(id, setUser);
+    }, [id, user]);
 
 
     return(

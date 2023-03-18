@@ -63,11 +63,14 @@ export async function apiFetch(values, setErr, signIn) {
     }
 }
 
-export async function fetchProfile(id, setUser) {
+export async function fetchProfile(id, setUser, token) {
     try {
         axios({
             method: "get",
-            url: `http://localhost:8080/profile?id=${id}`
+            url: `http://localhost:8080/profile?id=${id}`,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         }).then(data => {
             setUser(data.data);
             //console.log(data.data);
@@ -81,6 +84,26 @@ export async function fetchProfile(id, setUser) {
         }
     }
 }
+export async function fetchProfileById(id, setUser) {
+    try {
+        axios({
+            method: "get",
+            url: `http://localhost:8080/profile/id/?id=${id}`
+        }).then(data => {
+            setUser(data.data);
+            //console.log(data.data);
+        })
+    } catch (err) {
+        if (err.response) {
+            console.log(err.response.data);
+            console.log(err.response.status);
+        } else {
+            console.log(err.message);
+        }
+    }
+}
+
+
 
 export async function checkEmail(registerData, setErr) {
         try {
