@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {fetchProfile} from "../api/ApiFetch";
 import './Profile.css';
-import {Friends} from "../components/Friends/Friends";
-import {Posts} from "../components/Posts/Posts";
+import {Link, Outlet} from "react-router-dom";
 
 export function Profile(props) {
 
@@ -26,8 +25,9 @@ export function Profile(props) {
                             <h4 className={"user-name-friends"}>0 friends</h4>
                         </div>
                         <div className="tab-menu">
-                            <div className="tab-menu-link active"><span className="tab-menu-link-content">Posts</span></div>
-                            <div className="tab-menu-link">Friends</div>
+                            <Link to={"/profile/posts"}><div className="tab-menu-link active">Posts</div></Link>
+                            <Link to={"/profile/friends"}><div className="tab-menu-link">Friends</div></Link>
+                            <Link to={"/profile/photos"}><div className="tab-menu-link">Photos</div></Link>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@ export function Profile(props) {
             </div>
 
             <div className="profile-content">
-                <Posts />
+                <Outlet />
             </div>
 
         </div>

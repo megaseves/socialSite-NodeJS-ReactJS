@@ -13,6 +13,9 @@ import {useState} from "react";
 import {RequireAuth, useAuthHeader, useSignIn} from "react-auth-kit";
 import jwt_decode from 'jwt-decode';
 import {ProfileById} from "./pages/ProfileById";
+import {Friends} from "./components/Friends/Friends";
+import {Posts} from "./components/Posts/Posts";
+import {Photos} from "./components/Photos/Photos";
 
 
 function App() {
@@ -57,8 +60,20 @@ function App() {
                 <RequireAuth loginPath={"/login"} >
                     <Profile userDetail={userDetail} token={token} />
                 </RequireAuth>
-            }/>
+            }>
+                <Route index element={<Posts />} />
+                <Route path={"posts"} element={<Posts />} />
+                <Route path={"friends"} element={<Friends />} />
+                <Route path={"photos"} element={<Photos />} />
+            </Route>
 
+            {/*
+            <Route path={"/profile/friends"} element={
+                <RequireAuth loginPath={"/login"} >
+                    <Profile userDetail={userDetail} token={token} />
+                </RequireAuth>
+            }/>
+*/}
         </Routes>
     </>
   );
