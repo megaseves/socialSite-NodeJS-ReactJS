@@ -48,7 +48,8 @@ export function Home(props) {
                     users.map(user =>
                         <div className={'name-card'} key={user.email}>
                             <h3>{user.username}</h3>
-                            <p>{user.email}</p>
+                            <p className={"name-card-text"}>{user.email}</p>
+                            <p className={"name-card-text"}>City: -</p>
                         </div>)
                 }
             </div>

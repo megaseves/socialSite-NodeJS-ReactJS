@@ -7,12 +7,17 @@
     flex-wrap: wrap;
 }
 .name-card {
-    width: 230px;
+    width: 250px;
     height: 110px;
     background-color: #242526;
     padding: 20px;
     margin: 15px;
     border-top: 1px solid green;
+}
+.name-card-text {
+    font-size: 11px;
+    color: var(--textColor);
+    padding: 2px 0;
 }
 .design-line {
     width: 500px;
