@@ -7,7 +7,7 @@ export function Profile(props) {
 
     const [user, setUser] = useState({});
     const userDetail = props.userDetail;
-    console.log(user);
+    //console.log(user.avatar);
     useEffect( () => {
         fetchProfile(userDetail.user_id, setUser, props.token);
     }, [props.token, userDetail]);
@@ -18,7 +18,7 @@ export function Profile(props) {
 
                 <div className="cover-image"></div>
                 <div className="user_details">
-                    <div className="user-image"></div>
+                    <div className="user-image"><img className={"user-image-avatar"} src={user.avatar} alt={"avatar"} /></div>
                     <div className="user-content">
                         <div className="user-name">
                             <h1>{user.username}</h1>

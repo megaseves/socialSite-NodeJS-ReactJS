@@ -71,9 +71,8 @@ export async function fetchProfile(id, setUser, token) {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then(data => {
+        }).then(async data => {
             setUser(data.data);
-            //console.log(data.data);
         })
     } catch (err) {
         if (err.response) {
@@ -84,6 +83,8 @@ export async function fetchProfile(id, setUser, token) {
         }
     }
 }
+
+
 export async function fetchProfileById(id, setUser) {
     try {
         axios({

@@ -42,7 +42,7 @@ function App() {
                 <Route index element={<Posts />} />
                 <Route path={"posts"} element={<Posts />} />
                 <Route path={"friends"} element={<Friends />} />
-                <Route path={"photos"} element={<Photos />} />
+                <Route path={"photos"} element={<Photos userDetail={userDetail} />} />
             </Route>
 
 
@@ -76,7 +76,7 @@ function App() {
                 <Route index element={<Posts />} />
                 <Route path={"posts"} element={<Posts />} />
                 <Route path={"friends"} element={<Friends />} />
-                <Route path={"photos"} element={<Photos />} />
+                <Route path={"photos"} element={<Photos userDetail={userDetail} />} />
             </Route>
 
             {/*

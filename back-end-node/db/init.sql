@@ -6,6 +6,7 @@ CREATE TABLE users (
   username VARCHAR (50) NOT NULL,
   password TEXT NOT NULL,
   email VARCHAR (255) UNIQUE NOT NULL,
+  avatar TEXT,
   created_on TIMESTAMP NOT NULL
 );
 
@@ -21,14 +22,14 @@ CREATE TABLE friends (
       ON UPDATE CASCADE
 );
 
-INSERT INTO users (username, password, email, created_on)
-    VALUES ('Lufy', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'megaseves@gmail.com', current_date);
-INSERT INTO users (username, password, email, created_on)
-    VALUES ('Szalami', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'szalami@gmail.com', current_date);
-INSERT INTO users (username, password, email, created_on)
-    VALUES ('Akarmi', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'akarmi@gmail.com', current_date);
-INSERT INTO users (username, password, email, created_on)
-    VALUES ('Valami', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'valami@gmail.com', current_date);
+INSERT INTO users (username, password, email, avatar, created_on)
+    VALUES ('Lufy', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'megaseves@gmail.com', '', current_date);
+INSERT INTO users (username, password, email, avatar, created_on)
+    VALUES ('Szalami', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'szalami@gmail.com', '', current_date);
+INSERT INTO users (username, password, email, avatar, created_on)
+    VALUES ('Akarmi', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'akarmi@gmail.com', '', current_date);
+INSERT INTO users (username, password, email, avatar, created_on)
+    VALUES ('Valami', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'valami@gmail.com', '', current_date);
 
 INSERT INTO friends (user_id, friend_id)
     VALUES  (1, 3);

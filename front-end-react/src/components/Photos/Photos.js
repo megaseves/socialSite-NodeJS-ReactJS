@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from "axios";
 
-export function Photos() {
+export function Photos(props) {
 
     const [file, setFile] = useState()
     const [caption, setCaption] = useState("")
@@ -12,6 +12,7 @@ export function Photos() {
     const formData = new FormData();
     formData.append("image", file)
     formData.append("caption", caption)
+    formData.append("user_id", props.userDetail.user_id)
     await axios.post("http://localhost:8080/putAnImage", formData, { headers: {'Content-Type': 'multipart/form-data'}})
     }
 
