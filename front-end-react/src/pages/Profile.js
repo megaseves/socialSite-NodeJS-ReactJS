@@ -18,7 +18,7 @@ export function Profile(props) {
 
                 <div className="cover-image"></div>
                 <div className="user_details">
-                    <div className="user-image"><img className={"user-image-avatar"} src={user.avatar} alt={"avatar"} /></div>
+                    <div className="user-image" style={{background: `url(${user.avatar})`}} ></div>
                     <div className="user-content">
                         <div className="user-name">
                             <h1>{user.username}</h1>

@@ -10,7 +10,7 @@ export function ProfileById() {
 
     useEffect( () => {
         fetchProfileById(id, setUser);
-    }, [id, user]);
+    }, [id]);
 
 
     return(
@@ -19,7 +19,7 @@ export function ProfileById() {
 
                 <div className="cover-image"></div>
                 <div className="user_details">
-                    <div className="user-image"></div>
+                    <div className="user-image" style={{background: `url(${user.avatar})`}} ></div>
                     <div className="user-content">
                         <div className="user-name">
                             <h1>{user.username}</h1>

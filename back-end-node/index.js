@@ -36,21 +36,6 @@ const app = express();
 app.use(cors())
 app.use(express.json())
 
-
-app.get("/profile/avatarConverter", async (req, res) => {
-    const imageName = req.headers.imagename;
-
-    const getObjectParams = {
-                Bucket: bucketName,
-                Key: imageName
-            }
-
-    const command = new GetObjectCommand(getObjectParams);
-    const url = await getSignedUrl(s3, command);
-
-    res.send({imageURL: url});
-});
-
 //TODO TEST
 app.post("/putAnImage", upload.single('image'), async (req, result) => {
     console.log("Body: ", req.body);
