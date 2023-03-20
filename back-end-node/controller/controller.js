@@ -5,7 +5,7 @@ const {PutObjectCommand} = require("@aws-sdk/client-s3");
 
 
 const getAllUsers = (req, res) => {
-    client.query(`Select user_id, username, email, created_on from users`, (err, result)=>{
+    client.query(`Select user_id, username, email, avatar, created_on from users`, (err, result)=>{
         if(!err){
             res.send({result: result.rows, message: "It's OK!"})
         } else {

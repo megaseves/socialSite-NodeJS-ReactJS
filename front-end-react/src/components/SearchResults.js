@@ -37,15 +37,23 @@ export function SearchResults(props) {
                 {filterUser.length > 0 &&
                     filterUser.map((value) => {
                         return (
-                            <div className="search-result-comp-usernames" key={value.email}  >
-                                <div className="search-result-header">
-                                    <span className="search-result-comp-name" onClick={()=> window.location.assign(`/profile/${value.user_id}`)} >{value.username}</span>
-                                    <span className="search-result-add-friend">Add friend</span>
-                                </div>
+                            <div className="search-result-comp-usernames" key={value.email} >
+                                <div className="search-box" onClick={()=> window.location.assign(`/profile/${value.user_id}`)}>
+                                    <div className="sr-avatar" style={{backgroundImage: `url(https://social-site-facebook-copy-project.s3.eu-central-1.amazonaws.com/${value.avatar})`}} ></div>
+                                    <div className="sr-comp">
+                                        <div className="search-result-header">
+                                            <span className="search-result-comp-name" onClick={()=> window.location.assign(`/profile/${value.user_id}`)} >{value.username}</span>
 
-                                <div className="search-result-details">
-                                    <span className="search-result-relation">Friend</span>
-                                    <span className="search-result-city">~ City: -</span>
+                                        </div>
+
+                                        <div className="search-result-details">
+                                            <span className="search-result-relation">Friend</span>
+                                            <span className="search-result-city">~ City: -</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="search-add-friend" onClick={()=> alert("CSÁÁÁ")}>
+                                    <span className="search-result-add-friend" >Add friend</span>
                                 </div>
                             </div>
                         )

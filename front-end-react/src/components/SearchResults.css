@@ -36,21 +36,29 @@
     cursor: pointer;
 }
 
+
 .search-result-comp-content {
     width: 440px;
     margin-left: 400px;
 }
 .search-result-comp-usernames {
-    width: 30vw;
+    width: 330px;
     background-color: var(--secBgColor);
 
     margin: 2vw;
-    padding: 10px;
+
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.08) 0 1px 3px, rgba(0, 0, 0, 0.08) 0 1px 2px;
+
+    display: flex;
+    justify-content: space-between;
 }
 .search-result-comp-usernames:hover {
-    opacity: 0.8;
+    cursor: pointer;
+}
+
+.search-result-header {
+    width: 210px;
 }
 
 .search-result-details span {
@@ -58,25 +66,50 @@
     font-size: 12px;
     margin-right: 5px;
 }
-
-.search-result-comp-name:hover {
-    cursor: pointer;
-    color: var(--mainColor);
+.search-add-friend {
+    width: 110px;
 }
-
+.search-add-friend:hover {
+    background-color: var(--mainColor);
+    border-radius: 0 10px 10px 0;
+    opacity: 0.8;
+}
+.search-add-friend:hover span {
+    color: white;
+}
 .search-result-add-friend {
     float: right;
     color: var(--mainColor);
     font-size: 12px;
-    cursor: pointer;
     position: relative;
-    right: 0;
-    top: 11px;
-}
-.search-result-add-friend:hover {
-    text-decoration: underline;
+    left: 10px;
+    top: 0;
+
 }
 
 .active-filter {
     background-color: var(--thiBgColor);
+}
+
+.search-box {
+    width: 100%;
+    display: flex;
+    padding: 10px;
+}
+.search-box:hover {
+    opacity: 0.8;
+    background-color: #2c2c2c;
+    border-radius: 10px 0 0 10px;
+}
+
+.sr-comp {
+    width: 155px;
+    margin-left: 12px;
+    margin-top: 5px;
+}
+
+.sr-avatar {
+    width: 50px;
+    height: 50px;
+    background-size: cover;
 }
