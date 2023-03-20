@@ -83,7 +83,56 @@ export async function fetchProfile(id, setUser, token) {
         }
     }
 }
+export async function convertImage(imageName, setUrl) {
+    try {
+        axios({
+            method: "get",
+            url: "http://localhost:8080/convertImageToURL",
+            headers: {
+                'Content-Type': 'application/json',
+                imageurl: imageName
+            }
+        }).then(data => {
+            if(data.status !== 200) {
+                console.log("Nem jo valami");
+            } else if (data.status === 200) {
+                console.log(data.data);
+                setUrl(data.data.imageURL);
+            }
+        })
 
+    } catch (err) {
+        if (err.response) {
+            console.log(err.response.data);
+            console.log(err.response.status);
+        } else {
+            console.log(err.message)
+        }
+    }
+}
+
+export async function convertImageToURL(imageName, setUrl, token) {
+    try {
+        axios({
+            method: "get",
+            url: `http://localhost:8080/convertImageToURL`,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                imageURL: imageName
+            }
+        }).then(data => {
+            console.log(data.data.imageURL);
+            //setUrl(data.data.imageURL);
+        })
+    } catch (err) {
+        if (err.response) {
+            console.log(err.response.data);
+            console.log(err.response.status);
+        } else {
+            console.log(err.message);
+        }
+    }
+}
 
 export async function fetchProfileById(id, setUser) {
     try {

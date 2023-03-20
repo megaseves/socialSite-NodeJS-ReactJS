@@ -36,6 +36,23 @@ const app = express();
 app.use(cors())
 app.use(express.json())
 
+app.get("/convertImageToURL", async (req, res) => {
+   const imageName = req.headers.imageurl || '';
+   console.log("Mi a csöcs vvan??", imageName);
+
+   const objectParams = {
+        Bucket: bucketName,
+        Key: imageName
+    }
+
+    const commandImageURL = new GetObjectCommand(objectParams);
+    const imageURL = await getSignedUrl(s3, commandImageURL);
+
+    console.log(imageURL)
+    res.send({})
+    //res.send({imageURL: imageURL})
+});
+
 //TODO TEST
 app.post("/putAnImage", upload.single('image'), async (req, result) => {
     console.log("Body: ", req.body);
@@ -58,18 +75,16 @@ app.post("/putAnImage", upload.single('image'), async (req, result) => {
     const command = new PutObjectCommand(params);
     await s3.send(command);
 
-
-    const objectParams = {
+     const objectParams = {
         Bucket: bucketName,
         Key: imageName
     }
 
     const commandImageURL = new GetObjectCommand(objectParams);
-    const imageUrl = await getSignedUrl(s3, commandImageURL);
-
+    const imageURL = await getSignedUrl(s3, commandImageURL);
 
     await client.query(`UPDATE users SET avatar = ($1)
-        WHERE user_id = ($2)`, [imageUrl, userId] ,async (err, res) => {
+        WHERE user_id = ($2)`, [imageURL, userId] ,async (err, res) => {
         if (!err) {
             console.log("Successfully inserted Avatar")
             result.send({});
@@ -90,7 +105,7 @@ app.get("/profile/id", controller.getProfileById);
 
 app.get("/profile", authenticateToken, controller.getProfile);
 
-app.post("/users", controller.addUser);
+app.post("/users", controller.registerNewUser);
 
 app.post("/login", controller.checkForLogin);
 

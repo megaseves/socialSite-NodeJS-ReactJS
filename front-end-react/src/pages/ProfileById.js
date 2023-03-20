@@ -10,6 +10,7 @@ export function ProfileById() {
 
     useEffect( () => {
         fetchProfileById(id, setUser);
+
     }, [id]);
 
 

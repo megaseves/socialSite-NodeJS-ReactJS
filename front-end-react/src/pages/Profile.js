@@ -1,16 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {fetchProfile} from "../api/ApiFetch";
+import {convertImage, fetchProfile} from "../api/ApiFetch";
 import './Profile.css';
 import {Link, Outlet} from "react-router-dom";
 
 export function Profile(props) {
 
     const [user, setUser] = useState({});
+    const [url, setUrl] = useState("");
     const userDetail = props.userDetail;
-    //console.log(user.avatar);
-    useEffect( () => {
+
+    useEffect(  () => {
         fetchProfile(userDetail.user_id, setUser, props.token);
-    }, [props.token, userDetail]);
+        //convertImage(user.avatar, setUrl);
+        //console.log(url)
+        //convertImageToURL(user.avatar, setUrl, props.token);
+    }, [url, user.avatar, props.token, userDetail]);
 
     return(
         <div className={'profile-container'}>
