@@ -23,13 +23,13 @@ CREATE TABLE friends (
 );
 
 INSERT INTO users (username, password, email, avatar, created_on)
-    VALUES ('Lufy', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'megaseves@gmail.com', 'https://social-site-facebook-copy-project.s3.eu-central-1.amazonaws.com/defaultAvatar.jpg', current_date);
+    VALUES ('Lufy', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'megaseves@gmail.com', 'defaultAvatar.jpg', current_date);
 INSERT INTO users (username, password, email, avatar, created_on)
-    VALUES ('Szalami', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'szalami@gmail.com', 'https://social-site-facebook-copy-project.s3.eu-central-1.amazonaws.com/defaultAvatar.jpg', current_date);
+    VALUES ('Szalami', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'szalami@gmail.com', 'defaultAvatar.jpg', current_date);
 INSERT INTO users (username, password, email, avatar, created_on)
-    VALUES ('Akarmi', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'akarmi@gmail.com', 'https://social-site-facebook-copy-project.s3.eu-central-1.amazonaws.com/defaultAvatar.jpg', current_date);
+    VALUES ('Akarmi', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'akarmi@gmail.com', 'defaultAvatar.jpg', current_date);
 INSERT INTO users (username, password, email, avatar, created_on)
-    VALUES ('Valami', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'valami@gmail.com', 'https://social-site-facebook-copy-project.s3.eu-central-1.amazonaws.com/defaultAvatar.jpg', current_date);
+    VALUES ('Valami', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'valami@gmail.com', 'defaultAvatar.jpg', current_date);
 
 INSERT INTO friends (user_id, friend_id)
     VALUES  (1, 3);

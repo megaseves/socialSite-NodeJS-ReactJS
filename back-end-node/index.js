@@ -53,10 +53,10 @@ app.get("/convertImageToURL", async (req, res) => {
     //res.send({imageURL: imageURL})
 });
 
-//TODO TEST
-app.post("/putAnImage", upload.single('image'), async (req, result) => {
-    console.log("Body: ", req.body);
-    console.log("File: ", req.file);
+//TODO move into another file this function
+app.post("/uploadAvatar", upload.single('image'), async (req, result) => {
+    //console.log("Body: ", req.body);
+    //console.log("File: ", req.file);
 
     const userId = req.body.user_id;
 
@@ -75,16 +75,19 @@ app.post("/putAnImage", upload.single('image'), async (req, result) => {
     const command = new PutObjectCommand(params);
     await s3.send(command);
 
-     const objectParams = {
+/*     const objectParams = {
         Bucket: bucketName,
         Key: imageName
     }
 
+
     const commandImageURL = new GetObjectCommand(objectParams);
     const imageURL = await getSignedUrl(s3, commandImageURL);
+*/
+    console.log(imageName)
 
     await client.query(`UPDATE users SET avatar = ($1)
-        WHERE user_id = ($2)`, [imageURL, userId] ,async (err, res) => {
+        WHERE user_id = ($2)`, [imageName, userId] ,async (err, res) => {
         if (!err) {
             console.log("Successfully inserted Avatar")
             result.send({});
