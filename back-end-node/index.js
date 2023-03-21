@@ -61,7 +61,7 @@ app.post("/uploadAvatar", upload.single('image'), async (req, result) => {
     const userId = req.body.user_id;
 
     // resize image
-    const buffer = await sharp(req.file.buffer).resize({fit: "contain", width: 200, height: 200 }).toBuffer()
+    const buffer = await sharp(req.file.buffer).resize({fit: "cover", width: 200, height: 200 }).toBuffer()
 
     const imageName = randomImageName();
     const params = {

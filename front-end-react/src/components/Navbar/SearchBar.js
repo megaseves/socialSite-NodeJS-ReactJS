@@ -64,7 +64,9 @@ export function SearchBar(props) {
                                         <p className="search-result-name">{value.username}</p>
                                         <span className="search-result-relation">Friend</span>
                                     </div>
-                                    <span className="search-add-friend" onClick={()=> window.location.assign(`/`)} >Add friend</span>
+                                    <div className="add-friend-container" onClick={()=> window.location.assign(`/`)}>
+                                        <span className="search-result-add-friend" >Add friend</span>
+                                    </div>
                                 </div>
                             )
                         })

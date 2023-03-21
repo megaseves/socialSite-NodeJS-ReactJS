@@ -22,7 +22,7 @@ const registerNewUser = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-    const defaultImageURL = "https://social-site-facebook-copy-project.s3.eu-central-1.amazonaws.com/defaultAvatar.jpg";
+    const defaultImageURL = "defaultAvatar.jpg";
 
     await client.query(`INSERT INTO users (username, password, email, avatar, created_on)
            VALUES ($1, $2, $3, $4, current_date)`, [user.username, hashedPassword, user.email, defaultImageURL] ,(err, result) => {

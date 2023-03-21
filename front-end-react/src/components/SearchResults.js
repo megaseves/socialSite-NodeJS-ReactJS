@@ -52,7 +52,7 @@ export function SearchResults(props) {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="search-add-friend" onClick={()=> alert("CSÁÁÁ")}>
+                                <div className="search-add-friend" onClick={()=> window.location.assign('/')}>
                                     <span className="search-result-add-friend" >Add friend</span>
                                 </div>
                             </div>

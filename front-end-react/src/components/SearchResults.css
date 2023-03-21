@@ -68,6 +68,8 @@
 }
 .search-add-friend {
     width: 110px;
+    display: flex;
+    align-items: center;
 }
 .search-add-friend:hover {
     background-color: var(--mainColor);
