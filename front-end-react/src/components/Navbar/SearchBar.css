@@ -1,7 +1,7 @@
 .search-result-container {
     position: absolute;
     top: 45px;
-    z-index: 1;
+    z-index: 100;
     margin: 10px 0 0 5px;
     background-color: var(--secBgColor);
     min-width: 185px;
@@ -46,6 +46,7 @@
 
 .search-result-more {
     color: var(--mainColor);
+    padding-left: 10px;
 }
 
 .search-result-history-text {

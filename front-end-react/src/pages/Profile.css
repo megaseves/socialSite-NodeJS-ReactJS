@@ -21,9 +21,13 @@
     left: 40px;
     width: 206px;
     height: 206px;
+    cursor: pointer;
+    transition: top 0.2s;
     /*border: 3px solid var(--secBgColor);*/
 }
-
+.user-image:hover {
+    top: -56px;
+}
 
 .user-content {
     position: relative;

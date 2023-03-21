@@ -7,7 +7,7 @@
     background-color: var(--secBgColor);
     height: 100%;
     position: fixed;
-    z-index: 99;
+    z-index: 5;
     border-right: 1px solid #393a3b;
     padding: 10px;
 }
