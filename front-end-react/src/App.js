@@ -24,6 +24,7 @@ function App() {
     const authHeader = useAuthHeader();
     let token = authHeader().slice(7);
     const userDetail = token && jwt_decode(token);
+    //console.log(userDetail)
 
     const signIn = useSignIn();
 

@@ -20,7 +20,7 @@ export function ProfileById() {
 
                 <div className="cover-image"></div>
                 <div className="user_details">
-                    <div className="user-image" style={{background: `url(https://social-site-facebook-copy-project.s3.eu-central-1.amazonaws.com/${user.avatar})`}} ></div>
+                    <div className="user-image" style={{background: `url(https://social-site-facebook-copy-project.s3.eu-central-1.amazonaws.com/${user.avatar || "defaultAvatar.jpg"})`}} ></div>
                     <div className="user-content">
                         <div className="user-name">
                             <h1>{user.username}</h1>

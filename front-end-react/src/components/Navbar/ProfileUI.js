@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretDown} from "@fortawesome/free-solid-svg-icons";
 import {useIsAuthenticated, useSignOut} from "react-auth-kit";
+import {fetchProfile} from "../../api/ApiFetch";
 
 export function ProfileUI(props) {
     const [isOpenDropDown, setIsOpenDropDown] = useState(false);
@@ -11,8 +12,13 @@ export function ProfileUI(props) {
 
     const userDetail = props.userDetail;
 
-
     let menuRef = useRef();
+
+    const [user, setUser] = useState({});
+
+    useEffect( () => {
+        fetchProfile(userDetail.user_id, setUser, props.token);
+    }, [props.token, userDetail]);
 
     useEffect(() => {
         let handler = (event) => {
@@ -37,7 +43,7 @@ export function ProfileUI(props) {
                 <div>
                 <div className={'profile'}>
                     <div className={'profile-ui'} onClick={()=> window.location.assign("/profile")}>
-                        <img src={'/SocialSiteNoFace.jpg'} width={30} height={30} alt={'profile-avatar'} />
+                        <div className="profile-avatar" style={{backgroundImage: `url(https://social-site-facebook-copy-project.s3.eu-central-1.amazonaws.com/${user.avatar || "defaultAvatar.jpg"})`}}></div>
                         <span>{userDetail.username}</span>
 
                     </div>

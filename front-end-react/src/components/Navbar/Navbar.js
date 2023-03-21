@@ -24,7 +24,7 @@ export function Navbar(props) {
                         <li onClick={()=> window.location.assign("/messages")}>Messages</li>
                     </ul>
                 </div>
-                <ProfileUI userDetail={props.userDetail} />
+                <ProfileUI userDetail={props.userDetail} token={props.token} />
         </div>
     )
 }

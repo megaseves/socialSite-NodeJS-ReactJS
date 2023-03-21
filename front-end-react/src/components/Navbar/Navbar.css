@@ -145,3 +145,10 @@
     border-radius: 8px;
     cursor: pointer;
 }
+.profile-avatar {
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    margin-right: 8px;
+    border-radius: 16px;
+}
