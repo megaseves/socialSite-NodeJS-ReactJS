@@ -124,26 +124,118 @@ const getProfile = async (req, res) => {
     client.end;
 }
 
+const addFriend = async (req, res) => {
+    const user_id = req.body.user_id;
+    const friend_id = req.body.friend_id;
+    const status = 'request';
 
-const addImage = async (req, res) => {
-    console.log("Body: ", req.body);
-    console.log("File: ", req.file);
+    await client.query(`SELECT * FROM friends WHERE user_id = $1 AND friend_id = $2`, [user_id, friend_id], async (err, result) => {
+        if (!err) {
+            if (result.rows[0] === undefined) {
 
-    /*req.file.buffer
+                //console.log("She/He is NOT my friend");
+                await client.query(`INSERT INTO friends (user_id, friend_id, status)
+                                    VALUES ($1, $2, $3)`, [user_id, friend_id, status], (err, result) => {
+                    if (!err) {
+                        //console.log("SUCESSFULY INSERT TO FRIEND");
+                        res.send("SUCESSFULY INSERT TO FRIEND");
+                    } else {
+                        //console.log("ERROR addFriend: ", err.message);
+                        res.send("ERROR addFriend: ", err.message);
+                    }
+                });
 
-    const params = {
-        Bucket: bucketName,
-        Key: req.file.originalname,
-        Body: req.file.buffer,
-        ContentType: req.file.mimetype,
+            } else {
+                //console.log(result.rows[0]);
+                //console.log("He/She is already my Friend");
+                res.send({message: "He/She is already my Friend", ok: false});
+            }
 
-    };
-
-    const command = new PutObjectCommand(params);
-    await s3.send(command);*/
-
-    res.send({});
+        } else {
+            //console.log("ERROR addFriend: ", err.message);
+            res.send("ERROR addFriend: ", err.message);
+        }
+    });
+    client.end;
 }
+
+const checkFriendStatus = async (req, res, error) => {
+    const user_id = req.body.user_id;
+    const friend_id = req.body.friend_id;
+    const defaultStatus = 'request';
+
+    let isSent = false;
+/*    console.log("She/He is NOT my friend");
+    res.send({friendStatus: "Add friend"});*/
+
+    if(user_id === friend_id) {
+        console.log("This is you");
+        isSent = true;
+        res.send({friendStatus: "This is you", code: 0});
+    }
+
+    if(!isSent) {
+        await client.query(`SELECT user_id, friend_id, status FROM friends 
+         WHERE user_id = $1 AND friend_id = $2`, [user_id, friend_id], async (err, result) => {
+        if (!err) {
+            if (result.rows[0] !== undefined) {
+
+                    await client.query(`SELECT user_id, friend_id, status FROM friends 
+                         WHERE user_id = $1 AND friend_id = $2 AND status = $3`, [user_id, friend_id, 'request'], async (err, result) => {
+                        if (!err) {
+                            if (result.rows[0] !== undefined) {
+
+                                console.log("Cancel request");
+                                isSent = true;
+                                res.send({friendStatus: "Cancel request", code: 2});
+
+                            }
+
+                            if (!isSent) {
+
+                                await client.query(`SELECT *
+                                                    FROM friends
+                                                    WHERE user_id = $1
+                                                      AND friend_id = $2
+                                                      AND status = $3`, [user_id, friend_id, 'friend'], async (err, result) => {
+                                    if (!err) {
+                                        if (result.rows[0] !== undefined) {
+                                            console.log("You are friends");
+                                            isSent = true;
+                                            res.send({friendStatus: "Friend", code: 3});
+                                        }
+
+                                    } else {
+                                        console.log("ERROR addFriend: ", err.message);
+                                        res.send("ERROR addFriend: ", err.message);
+                                    }
+
+                                });
+
+                            }
+
+                        } else {
+                             console.log("ERROR addFriend: ", error.message);
+                             res.send("ERROR addFriend: ", error.message);
+                        }
+                    });
+
+            } else {
+
+                console.log("You are NOT friend yet");
+                res.send({friendStatus: "Add friend", code: 1});
+
+            }
+        } else {
+             console.log("ERROR addFriend: ", error.message);
+             res.send("ERROR addFriend: ", error.message);
+        }
+
+    });
+    }
+    client.end;
+}
+
 
 
 
@@ -155,5 +247,6 @@ module.exports = {
     checkForRegister,
     getProfileById,
     getProfile,
-    addImage
+    addFriend,
+    checkFriendStatus
 };

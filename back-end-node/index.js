@@ -36,23 +36,6 @@ const app = express();
 app.use(cors())
 app.use(express.json())
 
-app.get("/convertImageToURL", async (req, res) => {
-   const imageName = req.headers.imageurl || '';
-   console.log("Mi a csöcs vvan??", imageName);
-
-   const objectParams = {
-        Bucket: bucketName,
-        Key: imageName
-    }
-
-    const commandImageURL = new GetObjectCommand(objectParams);
-    const imageURL = await getSignedUrl(s3, commandImageURL);
-
-    console.log(imageURL)
-    res.send({})
-    //res.send({imageURL: imageURL})
-});
-
 //TODO move into another file this function
 app.post("/uploadAvatar", upload.single('image'), async (req, result) => {
     //console.log("Body: ", req.body);
@@ -107,6 +90,10 @@ app.get("/latestUsers", controller.getAllLatestUsers);
 app.get("/profile/id", controller.getProfileById);
 
 app.get("/profile", authenticateToken, controller.getProfile);
+
+app.get("/checkFriend", authenticateToken, controller.checkFriendStatus);
+
+app.post("/addFriend", authenticateToken, controller.addFriend);
 
 app.post("/users", controller.registerNewUser);
 

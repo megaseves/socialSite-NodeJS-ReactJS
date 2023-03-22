@@ -5,7 +5,7 @@ import {fetchAllUsers} from "../../api/ApiFetch";
 export function SearchBar(props) {
     const [searchTerm, setSearchTerm] = useState("");
     const [isShowSearchBar, setIsShowSearchBar] = useState(false);
-    const Q_LINK = () => { window.location.assign(`/search/people/?q=${searchTerm}`)  };
+    const Q_LINK = () => { window.location.assign(`/search/people/?q=${searchTerm}`) };
 
 
 /*    const handleSearch = () => {
@@ -46,6 +46,7 @@ export function SearchBar(props) {
        }
     });
     return (
+        <>
         <div className={"search-bar-container"}>
             <label className={"search-bar-label"}>
                 <input ref={searchRef} className={"search-bar"} type="text" placeholder={"Type to search..."} onKeyDown={(e)=> e.key === 'Enter' && Q_LINK()}
@@ -60,13 +61,17 @@ export function SearchBar(props) {
                         filterUser.slice(0, 5).map((value) => {
                             return (
                                 <div className={"sr-container"} key={value.email}>
-                                    <div className="search-result-avatar-container">
-                                         <div className="search-result-avatar" style={{backgroundImage: `url(https://social-site-facebook-copy-project.s3.eu-central-1.amazonaws.com/${value.avatar})`}} ></div>
+
+                                    <div className="sr-container-header">
+                                        <div className="search-result-avatar-container">
+                                             <div className="search-result-avatar" style={{backgroundImage: `url(https://social-site-facebook-copy-project.s3.eu-central-1.amazonaws.com/${value.avatar})`}} ></div>
+                                        </div>
+                                        <div className="search-result" key={value.email} onClick={()=> window.location.assign(`/profile/${value.user_id}`)}>
+                                            <p className="search-result-name">{value.username}</p>
+                                            <span className="search-result-relation">Friend</span>
+                                        </div>
                                     </div>
-                                    <div className="search-result" key={value.email} onClick={()=> window.location.assign(`/profile/${value.user_id}`)}>
-                                        <p className="search-result-name">{value.username}</p>
-                                        <span className="search-result-relation">Friend</span>
-                                    </div>
+
                                     <div className="add-friend-container" onClick={()=> window.location.assign(`/`)}>
                                         <span className="search-result-add-friend" >Add friend</span>
                                     </div>
@@ -87,5 +92,6 @@ export function SearchBar(props) {
             }
 
         </div>
+        </>
     )
 }

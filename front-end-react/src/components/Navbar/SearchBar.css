@@ -22,6 +22,9 @@
     border-radius: 8px;
 }
 
+.sr-container-header {
+    display: flex;
+}
 .search-result {
     padding: 5px 10px 5px 0;
     display: flex;
@@ -29,7 +32,6 @@
     flex-direction: column;
     cursor: pointer;
     margin: 0;
-    min-width: 120px;
 }
 
 

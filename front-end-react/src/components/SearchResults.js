@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './SearchResults.css';
 import {useSearchParams} from "react-router-dom";
+import {addFriend} from "../api/ApiFetch";
 
 export function SearchResults(props) {
     const [searchParams] = useSearchParams();
@@ -14,6 +15,14 @@ export function SearchResults(props) {
             return value;
         }
     });
+
+    useEffect(()=> {
+
+    }, []);
+
+    const addToFriend = (friend_id) => {
+        addFriend(props.user_id, friend_id, props.token);
+    }
 
     return(
         <div className={'search-result-comp-container'}>
@@ -52,7 +61,7 @@ export function SearchResults(props) {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="search-add-friend" onClick={()=> window.location.assign('/')}>
+                                <div className="search-add-friend" onClick={()=> addToFriend(value.user_id)}>
                                     <span className="search-result-add-friend" >Add friend</span>
                                 </div>
                             </div>

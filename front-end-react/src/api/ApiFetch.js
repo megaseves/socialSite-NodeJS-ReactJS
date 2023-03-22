@@ -207,13 +207,25 @@ export async function fetchSignUp(registerData, setErr, signIn) {
             }
         }
 }
-export async function uploadImage(formData) {
+
+
+export async function addFriend(user_id, friend_id, token) {
         try {
             axios({
                 method: "post",
-                url: "http://localhost:8080/putAnImage",
-                headers: {'Content-Type': 'multipart/form-data'},
-                data: formData
+                url: "http://localhost:8080/addFriend",
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                data: {
+                    user_id: user_id,
+                    friend_id: friend_id
+                }
+            }).then(data => {
+                if (data.status === 200) {
+                    console.log(data);
+                }
             })
         } catch (err) {
             if (err.response) {
@@ -224,3 +236,4 @@ export async function uploadImage(formData) {
             }
         }
 }
+

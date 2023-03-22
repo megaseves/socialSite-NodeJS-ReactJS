@@ -14,6 +14,7 @@ CREATE TABLE friends (
   id INT GENERATED ALWAYS AS IDENTITY,
   user_id int,
   friend_id int NOT NULL,
+  status VARCHAR (50),
   PRIMARY KEY (id),
   CONSTRAINT fk_user_id
   FOREIGN KEY (user_id)
@@ -23,13 +24,22 @@ CREATE TABLE friends (
 );
 
 INSERT INTO users (username, password, email, avatar, created_on)
-    VALUES ('Lufy', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'megaseves@gmail.com', 'defaultAvatar.jpg', current_date);
+    VALUES ('Schmiedt Attila', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'megaseves@gmail.com', 'myface.jpg', current_date);
 INSERT INTO users (username, password, email, avatar, created_on)
-    VALUES ('Szalami', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'szalami@gmail.com', 'defaultAvatar.jpg', current_date);
+    VALUES ('Polyák Lilla', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'polyak.lilla222@gmail.com', 'polyakLilla.jpg', current_date);
 INSERT INTO users (username, password, email, avatar, created_on)
-    VALUES ('Akarmi', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'akarmi@gmail.com', 'defaultAvatar.jpg', current_date);
+    VALUES ('Gubik Petra', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'gubik.petra25@gmail.com', 'gubikPetra.jpg', current_date);
 INSERT INTO users (username, password, email, avatar, created_on)
-    VALUES ('Valami', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'valami@gmail.com', 'defaultAvatar.jpg', current_date);
+    VALUES ('Miklósa Erika', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'miklosa.erika19@gmail.com', 'miklosaErika.jpg', current_date);
+INSERT INTO users (username, password, email, avatar, created_on)
+    VALUES ('Kovács Gyopár', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'kovacs.gyopar@gmail.com', 'kovacsGyopar.jpg', current_date);
+INSERT INTO users (username, password, email, avatar, created_on)
+    VALUES ('Janza Kata', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'janza.kata88@gmail.com', 'janzaKata.jpg', current_date);
+INSERT INTO users (username, password, email, avatar, created_on)
+    VALUES ('Dolhai Attila', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'dolhai.attila794@gmail.com', 'dolhaiAttila.jpg', current_date);
+INSERT INTO users (username, password, email, avatar, created_on)
+    VALUES ('Szabó P. Szilveszter', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'szilveszter7495@gmail.com', 'szaboPSzilveszter.jpg', current_date);
 
-INSERT INTO friends (user_id, friend_id)
-    VALUES  (1, 3);
+
+INSERT INTO friends (user_id, friend_id, status)
+    VALUES  (1, 3, 'request');

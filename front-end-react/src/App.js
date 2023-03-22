@@ -65,7 +65,7 @@ function App() {
 
             <Route path={"/search/people/"} element={
                 <RequireAuth loginPath={"/login"} >
-                    <SearchResults users={users} />
+                    <SearchResults users={users} user_id={userDetail.user_id} token={token} />
                 </RequireAuth>
             }/>
 
