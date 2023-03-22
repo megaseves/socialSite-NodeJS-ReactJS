@@ -19,9 +19,11 @@ export function Profile(props) {
     const open = () => {
         const uploadForm = document.querySelector('.upload-avatar-form');
         const uploadContainer = document.querySelector('.upload-avatar-container');
+        const uploadFormContainer = document.querySelector('.upload-avatar-form-container');
         if (!uploadForm.classList.contains("open")) {
             uploadForm.classList.add("open");
             uploadContainer.classList.add("open");
+            uploadFormContainer.classList.add("open");
         }
     }
 

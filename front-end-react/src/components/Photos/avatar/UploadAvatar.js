@@ -21,9 +21,11 @@ export function UploadAvatar(props) {
     const close = () => {
         const uploadForm = document.querySelector('.upload-avatar-form');
         const uploadContainer = document.querySelector('.upload-avatar-container');
+        const uploadFormContainer = document.querySelector('.upload-avatar-form-container');
         if (uploadForm.classList.contains("open")) {
             uploadForm.classList.remove("open");
             uploadContainer.classList.remove("open");
+            uploadFormContainer.classList.remove("open");
         }
     }
 
@@ -31,7 +33,8 @@ export function UploadAvatar(props) {
         <>
             <div className={'upload-avatar-container'} onClick={() => close()} >
             </div>
-            <div className="upload-avatar-form">
+            <div className="upload-avatar-form-container">
+                <div className="upload-avatar-form">
                 <form onSubmit={submit} onKeyDown={(e)=> e.key === 'Enter' && submit()}>
                     <div className="upload-comp">
                         <div className="upload-header">
@@ -56,8 +59,10 @@ export function UploadAvatar(props) {
                     </div>
 
 
-                </form>
+                    </form>
+                </div>
             </div>
+
         </>
     )
 }
