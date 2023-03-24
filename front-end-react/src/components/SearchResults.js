@@ -62,15 +62,24 @@ export function SearchResults(props) {
                                         </div>
 
                                         <div className="search-result-details">
-                                            {value.friend_status === null ?
-                                                    <></>
+                                            {value.user_id === props.user_id ?
+                                                    <span className="search-result-relation">You</span>
+                                                :
+                                                value.friend_status === null ?
+                                                    <>
+                                                        <span className="search-result-relation">City: -</span>
+                                                    </>
+
                                                 :
                                                 value.friend_status === 'request' ?
-                                                    <></>
+                                                    <>
+                                                        <span className="search-result-relation">City: -</span>
+                                                    </>
                                                 :
-                                                    <span className="search-result-relation">Friend ~</span>
+                                                    <>
+                                                    <span className="search-result-relation">Friend</span>
+                                                    </>
                                             }
-                                            <span className="search-result-city">City: -</span>
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +102,6 @@ export function SearchResults(props) {
                     })
                 }
             </div>
-
 
         </div>
     )

@@ -66,13 +66,23 @@ export function SearchBar(props) {
                                         </div>
                                         <div className="search-result" key={value.email} onClick={()=> window.location.assign(`/profile/${value.user_id}`)}>
                                             <p className="search-result-name">{value.username}</p>
-                                            {value.friend_status === null ?
-                                                    <></>
+                                            {value.user_id === props.user_id ?
+                                                    <span className="search-result-relation">You</span>
+                                                :
+                                                value.friend_status === null ?
+                                                    <>
+                                                        <span className="search-result-relation">City: -</span>
+                                                    </>
+
                                                 :
                                                 value.friend_status === 'request' ?
-                                                    <></>
+                                                    <>
+                                                        <span className="search-result-relation">City: -</span>
+                                                    </>
                                                 :
+                                                    <>
                                                     <span className="search-result-relation">Friend</span>
+                                                    </>
                                             }
                                         </div>
                                     </div>
