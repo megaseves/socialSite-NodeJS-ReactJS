@@ -5,7 +5,8 @@ const {PutObjectCommand} = require("@aws-sdk/client-s3");
 
 
 const getAllUsers = (req, res) => {
-    client.query(`Select user_id, username, email, avatar, created_on from users`, (err, result)=>{
+    client.query(`Select A.user_id, A.username, A.email, A.avatar, A.created_on, B.friend_id, B.status AS friend_status
+            from users A LEFT JOIN friends B ON A.user_id = B.friend_id`, (err, result)=>{
         if(!err){
             res.send({result: result.rows, message: "It's OK!"})
         } else {
@@ -158,86 +159,20 @@ const addFriend = async (req, res) => {
     });
     client.end;
 }
-
-const checkFriendStatus = async (req, res, error) => {
+const cancelRequest = async (req, res) => {
     const user_id = req.body.user_id;
     const friend_id = req.body.friend_id;
-    const defaultStatus = 'request';
 
-    let isSent = false;
-/*    console.log("She/He is NOT my friend");
-    res.send({friendStatus: "Add friend"});*/
-
-    if(user_id === friend_id) {
-        console.log("This is you");
-        isSent = true;
-        res.send({friendStatus: "This is you", code: 0});
-    }
-
-    if(!isSent) {
-        await client.query(`SELECT user_id, friend_id, status FROM friends 
-         WHERE user_id = $1 AND friend_id = $2`, [user_id, friend_id], async (err, result) => {
+    await client.query(`DELETE FROM friends WHERE user_id = $1 AND friend_id = $2`, [user_id, friend_id], async (err, result) => {
         if (!err) {
-            if (result.rows[0] !== undefined) {
-
-                    await client.query(`SELECT user_id, friend_id, status FROM friends 
-                         WHERE user_id = $1 AND friend_id = $2 AND status = $3`, [user_id, friend_id, 'request'], async (err, result) => {
-                        if (!err) {
-                            if (result.rows[0] !== undefined) {
-
-                                console.log("Cancel request");
-                                isSent = true;
-                                res.send({friendStatus: "Cancel request", code: 2});
-
-                            }
-
-                            if (!isSent) {
-
-                                await client.query(`SELECT *
-                                                    FROM friends
-                                                    WHERE user_id = $1
-                                                      AND friend_id = $2
-                                                      AND status = $3`, [user_id, friend_id, 'friend'], async (err, result) => {
-                                    if (!err) {
-                                        if (result.rows[0] !== undefined) {
-                                            console.log("You are friends");
-                                            isSent = true;
-                                            res.send({friendStatus: "Friend", code: 3});
-                                        }
-
-                                    } else {
-                                        console.log("ERROR addFriend: ", err.message);
-                                        res.send("ERROR addFriend: ", err.message);
-                                    }
-
-                                });
-
-                            }
-
-                        } else {
-                             console.log("ERROR addFriend: ", error.message);
-                             res.send("ERROR addFriend: ", error.message);
-                        }
-                    });
-
-            } else {
-
-                console.log("You are NOT friend yet");
-                res.send({friendStatus: "Add friend", code: 1});
-
-            }
+            res.send("OK")
         } else {
-             console.log("ERROR addFriend: ", error.message);
-             res.send("ERROR addFriend: ", error.message);
+            //console.log("ERROR addFriend: ", err.message);
+            res.send("ERROR addFriend: ", err.message);
         }
-
     });
-    }
     client.end;
 }
-
-
-
 
 module.exports = {
     getAllUsers,
@@ -248,5 +183,5 @@ module.exports = {
     getProfileById,
     getProfile,
     addFriend,
-    checkFriendStatus
+    cancelRequest
 };

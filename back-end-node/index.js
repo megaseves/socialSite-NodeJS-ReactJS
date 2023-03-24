@@ -91,9 +91,9 @@ app.get("/profile/id", controller.getProfileById);
 
 app.get("/profile", authenticateToken, controller.getProfile);
 
-app.get("/checkFriend", authenticateToken, controller.checkFriendStatus);
-
 app.post("/addFriend", authenticateToken, controller.addFriend);
+
+app.post("/cancelRequest", authenticateToken, controller.cancelRequest);
 
 app.post("/users", controller.registerNewUser);
 

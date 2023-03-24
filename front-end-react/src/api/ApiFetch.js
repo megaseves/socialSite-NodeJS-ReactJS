@@ -11,6 +11,10 @@ export async function fetchAllUsers(setUsers, token) {
         }).then(data => {
 
             if (data.data.result.length > 0) {
+
+                //let users = data.data.result;
+                //console.log(users)
+
                 setUsers(data.data.result);
             } else {
                 setUsers("");
@@ -237,3 +241,30 @@ export async function addFriend(user_id, friend_id, token) {
         }
 }
 
+export async function cancelRequest(user_id, friend_id, token) {
+        try {
+            axios({
+                method: "post",
+                url: "http://localhost:8080/cancelRequest",
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                data: {
+                    user_id: user_id,
+                    friend_id: friend_id
+                }
+            }).then(data => {
+                if (data.status === 200) {
+                    console.log(data);
+                }
+            })
+        } catch (err) {
+            if (err.response) {
+                console.log(err.response.data);
+                console.log(err.response.status);
+            } else {
+                console.log(err.message);
+            }
+        }
+}

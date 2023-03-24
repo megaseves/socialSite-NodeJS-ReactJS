@@ -20,7 +20,8 @@ import {Photos} from "./components/Photos/Photos";
 
 function App() {
     const [users, setUsers] = useState("");
-
+    const [friendStatus, setFriendStatus] = useState("");
+    //console.log(friendStatus);
     const authHeader = useAuthHeader();
     let token = authHeader().slice(7);
     const userDetail = token && jwt_decode(token);
@@ -65,7 +66,7 @@ function App() {
 
             <Route path={"/search/people/"} element={
                 <RequireAuth loginPath={"/login"} >
-                    <SearchResults users={users} user_id={userDetail.user_id} token={token} />
+                    <SearchResults users={users} setUsers={setUsers} user_id={userDetail.user_id} token={token} setFriendStatus={setFriendStatus} friendStatus={friendStatus} />
                 </RequireAuth>
             }/>
 
