@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './SearchResults.css';
 import {useSearchParams} from "react-router-dom";
 import {addFriend, cancelRequest} from "../api/ApiFetch";
@@ -16,10 +16,6 @@ export function SearchResults(props) {
             return value;
         }
     });
-
-    useEffect(()=> {
-
-    }, []);
 
     const addToFriend = (friend_id) => {
         addFriend(props.user_id, friend_id, props.token);
@@ -82,8 +78,6 @@ export function SearchResults(props) {
                                         :
                                         <span className="search-result-add-friend">Message</span>
                                     }
-
-
                                 </div>
 
 

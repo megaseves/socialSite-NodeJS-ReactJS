@@ -165,6 +165,7 @@ const cancelRequest = async (req, res) => {
 
     await client.query(`DELETE FROM friends WHERE user_id = $1 AND friend_id = $2`, [user_id, friend_id], async (err, result) => {
         if (!err) {
+            console.log(result.rows)
             res.send("OK")
         } else {
             //console.log("ERROR addFriend: ", err.message);

@@ -69,12 +69,11 @@
     margin-right: 5px;
 }
 .search-add-friend {
-    min-width: 110px;
+
     display: flex;
     align-items: center;
     justify-content: right;
 
-    margin-right: 25px;
 }
 
 
@@ -82,14 +81,14 @@
     float: right;
     color: white;
     font-size: 12px;
-    position: relative;
-    left: 10px;
-    top: 0;
+
     padding: 10px;
     background-color: var(--mainColor);
     border-radius: 8px;
     cursor: pointer;
+    margin-right: 15px;
 }
+
 .search-result-add-friend:hover {
     opacity: 0.8;
     text-decoration: darkgreen;

@@ -65,15 +65,11 @@
     min-width: 80px;
     cursor: pointer;
 }
-.add-friend-container:hover span {
-    color: white;
 
+.search-result-add-friend {
+    margin-right: 25px;
 }
-.add-friend-container:hover {
-    background-color: var(--mainColor);
-    border-radius: 0 10px 10px 0;
-    opacity: 0.8;
-}
+
 
 .search-result-more {
     min-width: 150px;

@@ -1,22 +1,20 @@
 import React, {useEffect, useRef, useState} from "react";
 import './SearchBar.css';
-import {fetchAllUsers} from "../../api/ApiFetch";
+import {addFriend, cancelRequest, fetchAllUsers} from "../../api/ApiFetch";
 
 export function SearchBar(props) {
     const [searchTerm, setSearchTerm] = useState("");
     const [isShowSearchBar, setIsShowSearchBar] = useState(false);
     const Q_LINK = () => { window.location.assign(`/search/people/?q=${searchTerm}`) };
 
-
-/*    const handleSearch = () => {
-      const q = document.querySelector('.search-result-more').dataset.value;
-      console.log(q);
-      if (q) {
-          setSearchParams({q});
-      } else {
-          setSearchParams({});
-      }
-    };*/
+    const addToFriend = (friend_id) => {
+        addFriend(props.user_id, friend_id, props.token);
+        window.location.reload();
+    }
+    const cancelRequestButton = (friend_id) => {
+        cancelRequest(props.user_id, friend_id, props.token);
+        window.location.reload();
+    }
 
     let searchRef = useRef();
 
@@ -73,7 +71,14 @@ export function SearchBar(props) {
                                     </div>
 
                                     <div className="add-friend-container" onClick={()=> window.location.assign(`/`)}>
-                                        <span className="search-result-add-friend" >Add friend</span>
+                                        {value.friend_status === null ?
+                                        <span className="search-result-add-friend" onClick={() => addToFriend(value.user_id)}>Add friend</span>
+                                        :
+                                        value.friend_status === 'request' ?
+                                        <span className="search-result-add-friend" onClick={() => cancelRequestButton(value.user_id)} >Cancel request</span>
+                                        :
+                                        <span className="search-result-add-friend">Message</span>
+                                        }
                                     </div>
                                 </div>
                             )
