@@ -62,8 +62,15 @@ export function SearchResults(props) {
                                         </div>
 
                                         <div className="search-result-details">
-                                            <span className="search-result-relation">Friend</span>
-                                            <span className="search-result-city">~ City: -</span>
+                                            {value.friend_status === null ?
+                                                    <></>
+                                                :
+                                                value.friend_status === 'request' ?
+                                                    <></>
+                                                :
+                                                    <span className="search-result-relation">Friend ~</span>
+                                            }
+                                            <span className="search-result-city">City: -</span>
                                         </div>
                                     </div>
                                 </div>
