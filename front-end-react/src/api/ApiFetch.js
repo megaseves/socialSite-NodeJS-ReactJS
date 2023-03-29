@@ -268,3 +268,26 @@ export async function cancelRequest(user_id, friend_id, token) {
             }
         }
 }
+
+export async function getAllFriend(user_id, token, setFriends) {
+    try {
+        axios({
+            method: "get",
+            url: `http://localhost:8080/friends`,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                user_id: user_id
+            }
+        }).then(data => {
+            //console.log(data.data);
+            setFriends(data.data)
+        })
+    } catch (err) {
+        if (err.response) {
+            console.log(err.response.data);
+            console.log(err.response.status);
+        } else {
+            console.log(err.message);
+        }
+    }
+}

@@ -1,0 +1,71 @@
+.friends-container {
+    width: 1000px;
+    background-color: var(--secBgColor);
+    margin: 30px auto;
+    border-radius: 10px;
+    padding: 20px;
+}
+.friends-header {
+
+}
+.friends-header h2 {
+    font-size: 20px;
+}
+
+.friends-header-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.friends-requests {
+    color: var(--mainColor);
+    padding: 10px;
+    border-radius: 10px;
+}
+.friends-requests:hover {
+    cursor: pointer;
+    background-color: var(--thiBgColor);
+}
+
+/*CONTAINER*/
+.friends-content {
+    display: grid;
+    grid-template-columns: 510px 510px;
+}
+
+.friend-card {
+    width: 450px;
+    border: 1px solid var(--thiBgColor);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+}
+.friend-card-avatar {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    margin-right: 20px;
+    border-radius: 10px;
+}
+.friend-card-details {
+    display: flex;
+    flex-direction: column;
+}
+.friend-card-name {
+    font-size: 22px;
+    font-weight: bold;
+}
+.friend-card-email {
+    font-size: 14px;
+    color: var(--textColor);
+}
+.friend-card-name:hover {
+    cursor: pointer;
+    color: var(--mainColor);
+}
+.friend-card-avatar:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}

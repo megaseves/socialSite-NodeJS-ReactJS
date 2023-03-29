@@ -175,6 +175,31 @@ const cancelRequest = async (req, res) => {
     client.end;
 }
 
+const getAllFriend = async (req, res) => {
+    const user_id = req.headers.user_id;
+
+    await client.query(`SELECT A.user_id, A.username, A.email, A.avatar, B.user_id, B.friend_id, B.status
+        AS friend_status FROM friends B
+            RIGHT JOIN users A
+                ON B.friend_id = A.user_id
+                    WHERE B.user_id = $1 AND B.status = $2`,
+                                [user_id, 'friend'], (err, result)=>{
+        if(!err){
+            if (result.rows[0] !== undefined) {
+                console.log("Friends: " + JSON.stringify(result.rows));
+                res.send(result.rows);
+            } else {
+                console.log("No friends");
+                res.send({massage: 'No friends'});
+            }
+        } else {
+            console.log(err.message);
+        }
+    });
+    client.end;
+}
+
+
 module.exports = {
     getAllUsers,
     registerNewUser,
@@ -184,5 +209,6 @@ module.exports = {
     getProfileById,
     getProfile,
     addFriend,
-    cancelRequest
+    cancelRequest,
+    getAllFriend
 };

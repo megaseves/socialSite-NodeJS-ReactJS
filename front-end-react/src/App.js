@@ -16,11 +16,14 @@ import {ProfileById} from "./pages/ProfileById";
 import {Friends} from "./components/Friends/Friends";
 import {Posts} from "./components/Posts/Posts";
 import {Photos} from "./components/Photos/Photos";
+import {FriendRequests} from "./components/Friends/FriendRequests";
 
 
 function App() {
     const [users, setUsers] = useState("");
-    const [friendStatus, setFriendStatus] = useState("");
+
+    const [friends, setFriends] = useState([]);
+    console.log(friends);
     //console.log(friendStatus);
     const authHeader = useAuthHeader();
     let token = authHeader().slice(7);
@@ -43,7 +46,7 @@ function App() {
 
                 <Route index element={<Posts />} />
                 <Route path={"posts"} element={<Posts />} />
-                <Route path={"friends"} element={<Friends />} />
+                <Route path={"friends"} element={<Friends user_id={userDetail.user_id} token={token} setFriends={setFriends} />} />
                 <Route path={"photos"} element={<Photos userDetail={userDetail} />} />
             </Route>
 
@@ -66,7 +69,7 @@ function App() {
 
             <Route path={"/search/people/"} element={
                 <RequireAuth loginPath={"/login"} >
-                    <SearchResults users={users} setUsers={setUsers} user_id={userDetail.user_id} token={token} setFriendStatus={setFriendStatus} friendStatus={friendStatus} />
+                    <SearchResults users={users} setUsers={setUsers} user_id={userDetail.user_id} token={token} />
                 </RequireAuth>
             }/>
 
@@ -77,10 +80,15 @@ function App() {
             }>
                 <Route index element={<Posts />} />
                 <Route path={"posts"} element={<Posts />} />
-                <Route path={"friends"} element={<Friends />} />
+                <Route path={"friends"} element={<Friends user_id={userDetail.user_id} token={token} setFriends={setFriends} friends={friends} />} />
                 <Route path={"photos"} element={<Photos userDetail={userDetail} />} />
             </Route>
 
+            <Route path={"/friends"} element={
+                <RequireAuth loginPath={"/login"} >
+                    <FriendRequests />
+                </RequireAuth>
+            }/>
             {/*
             <Route path={"/profile/friends"} element={
                 <RequireAuth loginPath={"/login"} >

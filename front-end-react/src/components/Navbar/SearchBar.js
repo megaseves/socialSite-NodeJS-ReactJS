@@ -58,7 +58,7 @@ export function SearchBar(props) {
 
                         filterUser.slice(0, 5).map((value) => {
                             return (
-                                <div className={"sr-container"} key={value.email}>
+                                <div className={"sr-container"} key={value.user_id}>
 
                                     <div className="sr-container-header">
                                         <div className="search-result-avatar-container">
