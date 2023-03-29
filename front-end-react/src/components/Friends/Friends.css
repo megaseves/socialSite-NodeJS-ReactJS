@@ -50,8 +50,9 @@
     border-radius: 10px;
 }
 .friend-card-details {
+    width: 300px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
 }
 .friend-card-name {
     font-size: 22px;
@@ -68,4 +69,59 @@
 .friend-card-avatar:hover {
     cursor: pointer;
     opacity: 0.7;
+}
+.fcd-name-email {
+    display: flex;
+    flex-direction: column;
+}
+
+.fcd-settings {
+    position: relative;
+}
+
+
+.fcd-setting-icon {
+    width: 20px;
+    height: 20px;
+
+    padding: 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.fcd-setting-icon:hover {
+    background-color: var(--thiBgColor);
+    cursor: pointer;
+}
+
+.fcd-setting-container {
+    display: none;
+    position: absolute;
+    width: 330px;
+    height: 60px;
+    top: 40px;
+    right: 0;
+    background-color: var(--secBgColor);
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    border-radius: 8px;
+    justify-content: center;
+
+}
+.unfriend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    margin-top: 0;
+    border-radius: 8px;
+}
+.unfriend:hover {
+    background-color: var(--thiBgColor);
+    cursor: pointer;
+    color: red;
+}
+.open {
+    display: flex;
 }

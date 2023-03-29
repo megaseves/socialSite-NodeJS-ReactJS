@@ -1,7 +1,7 @@
 * { color: white; margin: 0; padding: 0; box-sizing: border-box;}
 a { color: green; text-decoration: none; }
 ul, li { list-style: none; }
-body { background-color: #18191a }
+body { background-color: #18191a; overflow-x :hidden; }
 
 :root {
   --mainColor: green;
