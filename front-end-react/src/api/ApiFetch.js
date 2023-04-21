@@ -1,21 +1,21 @@
 import axios from "axios";
 
-export async function fetchAllUsers(setUsers, token) {
+export async function fetchAllUsers(user_id, setUsers, token) {
     try {
         await axios({
             method: "get",
             url: `http://localhost:8080/users`,
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
+                user_id: user_id
             }
         }).then(data => {
-
-            if (data.data.result.length > 0) {
+            if (data.data.length > 0) {
 
                 //let users = data.data.result;
                 //console.log(users)
 
-                setUsers(data.data.result);
+                setUsers(data.data);
             } else {
                 setUsers("");
             }

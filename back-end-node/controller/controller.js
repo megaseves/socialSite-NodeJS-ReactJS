@@ -5,12 +5,27 @@ const {PutObjectCommand} = require("@aws-sdk/client-s3");
 
 
 const getAllUsers = (req, res) => {
-    client.query(`Select A.user_id, A.username, A.email, A.avatar, A.created_on, B.friend_id, B.status AS friend_status
-            from users A LEFT JOIN friends B ON A.user_id = B.friend_id`, (err, result)=>{
+    const user_id = req.headers.user_id;
+    client.query(`SELECT u.user_id, u.username, u.email, u.avatar, u.created_on,
+                    CASE
+                        WHEN EXISTS(SELECT 1 FROM friends f WHERE f.user_id = u.user_id AND f.friend_id = $1)
+                            AND EXISTS(SELECT 1 FROM friends f WHERE f.user_id = $1 AND f.friend_id = u.user_id)
+                            THEN 'friend'
+                        WHEN EXISTS(SELECT 1 FROM friends f WHERE f.user_id = $1 AND f.friend_id = u.user_id)
+                            THEN 'pending'
+                        WHEN (u.user_id = $1) THEN 'you'
+                        ELSE 'not_friend'
+                    END AS status,
+                    CASE
+                        WHEN EXISTS(SELECT 1 FROM friends f WHERE f.user_id = $1 AND f.friend_id = u.user_id)
+                            THEN 1
+                        ELSE 0
+                    END AS sent_friend_request
+                FROM users u;`, [user_id] ,(err, result)=>{
         if(!err){
-            res.send({result: result.rows, message: "It's OK!"})
+            res.send(result.rows);
         } else {
-            res.send({result: "", message: "It's NOT ok!"})
+            res.send(err.message);
             console.log(err.message);
         }
     });
@@ -135,8 +150,7 @@ const addFriend = async (req, res) => {
             if (result.rows[0] === undefined) {
 
                 //console.log("She/He is NOT my friend");
-                await client.query(`INSERT INTO friends (user_id, friend_id, status)
-                                    VALUES ($1, $2, $3)`, [user_id, friend_id, status], (err, result) => {
+                await client.query(`INSERT INTO friends (user_id, friend_id) VALUES ($1, $2)`, [user_id, friend_id], (err, result) => {
                     if (!err) {
                         //console.log("SUCESSFULY INSERT TO FRIEND");
                         res.send("SUCESSFULY INSERT TO FRIEND");
@@ -149,7 +163,7 @@ const addFriend = async (req, res) => {
             } else {
                 //console.log(result.rows[0]);
                 //console.log("He/She is already my Friend");
-                res.send({message: "He/She is already my Friend", ok: false});
+                res.send("He/She is already my Friend");
             }
 
         } else {
@@ -178,19 +192,20 @@ const cancelRequest = async (req, res) => {
 const getAllFriend = async (req, res) => {
     const user_id = req.headers.user_id;
 
-    await client.query(`SELECT A.user_id, A.username, A.email, A.avatar, B.user_id, B.friend_id, B.status
-        AS friend_status FROM friends B
-            RIGHT JOIN users A
-                ON B.friend_id = A.user_id
-                    WHERE B.user_id = $1 AND B.status = $2`,
-                                [user_id, 'friend'], (err, result)=>{
+    await client.query(`SELECT u.user_id, u.username, u.avatar, u.email, u.created_on
+                            FROM friends f
+                        JOIN users u ON f.friend_id = u.user_id
+                            WHERE f.user_id = $1
+                            AND f.friend_id IN ( SELECT f2.user_id FROM friends f2
+                            WHERE f2.friend_id = $1 );`,
+                                [user_id], (err, result)=>{
         if(!err){
             if (result.rows[0] !== undefined) {
                 console.log("Friends: " + JSON.stringify(result.rows));
                 res.send(result.rows);
             } else {
                 console.log("No friends");
-                res.send({massage: 'No friends'});
+                res.send([]);
             }
         } else {
             console.log(err.message);

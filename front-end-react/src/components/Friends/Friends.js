@@ -50,23 +50,24 @@ export function Friends(props) {
 
             </div>
             <div className="friends-content">
-                {props.friends.map(friend =>
-                    <div className="friend-card" key={friend.friend_id}>
-                        <div className="friend-card-avatar" onClick={()=> window.location.assign(`/profile/${friend.friend_id}`)} style={{backgroundImage: `url(https://social-site-facebook-copy-project.s3.eu-central-1.amazonaws.com/${friend.avatar || "defaultAvatar.jpg"})`}} ></div>
+                {props.friends && props.friends.map(friend =>
+
+                    <div className="friend-card" key={friend.user_id}>
+                        <div className="friend-card-avatar" onClick={()=> window.location.assign(`/profile/${friend.user_id}`)} style={{backgroundImage: `url(https://social-site-facebook-copy-project.s3.eu-central-1.amazonaws.com/${friend.avatar || "defaultAvatar.jpg"})`}} ></div>
                         <div className="friend-card-details">
 
                             <div className="fcd-name-email">
-                                <span className="friend-card-name" onClick={()=> window.location.assign(`/profile/${friend.friend_id}`)}>
+                                <span className="friend-card-name" onClick={()=> window.location.assign(`/profile/${friend.user_id}`)}>
                                     {friend.username}
                                 </span>
                                 <span className="friend-card-email">
                                     {friend.email}
                                 </span>
                             </div>
-                            <div className={'setting'+friend.friend_id} onClick={() => open(friend.friend_id)}>
+                            <div className={'setting'+friend.user_id} onClick={() => open(friend.user_id)}>
                                 <div className="fcd-settings" >
                                         <FontAwesomeIcon className="fcd-setting-icon" icon={faEllipsis} />
-                                        <span ref={ref} className="fcd-setting-container" data-setting-container={friend.friend_id}>
+                                        <span ref={ref} className="fcd-setting-container" data-setting-container={friend.user_id}>
                                             <span className="unfriend">
                                                 Unfriend
                                             </span>

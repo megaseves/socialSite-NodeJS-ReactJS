@@ -49,7 +49,7 @@ export function SearchResults(props) {
                     filterUser.map((value) => {
 
                         return (
-                            <div className="search-result-comp-usernames" key={value.email}>
+                            <div className="search-result-comp-usernames" key={value.user_id}>
                                 <div className="search-box"
                                      onClick={() => window.location.assign(`/profile/${value.user_id}`)}>
                                     <div className="sr-avatar"
@@ -62,16 +62,16 @@ export function SearchResults(props) {
                                         </div>
 
                                         <div className="search-result-details">
-                                            {value.user_id === props.user_id ?
+                                            {value.status === 'you' ?
                                                     <span className="search-result-relation">You</span>
                                                 :
-                                                value.friend_status === null ?
+                                                value.status === 'not_friend' ?
                                                     <>
                                                         <span className="search-result-relation">City: -</span>
                                                     </>
 
                                                 :
-                                                value.friend_status === 'request' ?
+                                                value.status === 'pending' ?
                                                     <>
                                                         <span className="search-result-relation">City: -</span>
                                                     </>
@@ -86,10 +86,13 @@ export function SearchResults(props) {
 
 
                                 <div className="search-add-friend" >
-                                    {value.friend_status === null ?
+                                    {value.status === 'you' ?
+                                            <span className="search-result-add-friend" onClick={() => window.location.assign(`/profile`)}>View profile</span>
+                                            :
+                                    value.status === 'not_friend' ?
                                         <span className="search-result-add-friend" onClick={() => addToFriend(value.user_id)}>Add friend</span>
                                         :
-                                        value.friend_status === 'request' ?
+                                    value.status === 'pending' ?
                                         <span className="search-result-add-friend" onClick={() => cancelRequestButton(value.user_id)} >Cancel request</span>
                                         :
                                         <span className="search-result-add-friend">Message</span>

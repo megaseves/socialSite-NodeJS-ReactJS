@@ -7,6 +7,7 @@ export function SearchBar(props) {
     const [isShowSearchBar, setIsShowSearchBar] = useState(false);
     const Q_LINK = () => { window.location.assign(`/search/people/?q=${searchTerm}`) };
 
+    console.log(props.users)
     const addToFriend = (friend_id) => {
         addFriend(props.user_id, friend_id, props.token);
         window.location.reload();
@@ -19,7 +20,7 @@ export function SearchBar(props) {
     let searchRef = useRef();
 
     useEffect( () => {
-        fetchAllUsers(props.setUsers, props.token);
+        fetchAllUsers(props.user_id, props.setUsers, props.token);
     }, [props.setUsers, props.token]);
 
     // eslint-disable-next-line array-callback-return
@@ -66,16 +67,10 @@ export function SearchBar(props) {
                                         </div>
                                         <div className="search-result" key={value.email} onClick={()=> window.location.assign(`/profile/${value.user_id}`)}>
                                             <p className="search-result-name">{value.username}</p>
-                                            {value.user_id === props.user_id ?
+                                            {value.status === 'you' ?
                                                     <span className="search-result-relation">You</span>
                                                 :
-                                                value.friend_status === null ?
-                                                    <>
-                                                        <span className="search-result-relation">City: -</span>
-                                                    </>
-
-                                                :
-                                                value.friend_status === 'request' ?
+                                                value.status === 'not_friend' || value.status === 'pending'  ?
                                                     <>
                                                         <span className="search-result-relation">City: -</span>
                                                     </>
@@ -88,13 +83,16 @@ export function SearchBar(props) {
                                     </div>
 
                                     <div className="add-friend-container" onClick={()=> window.location.assign(`/`)}>
-                                        {value.friend_status === null ?
-                                        <span className="search-result-add-friend" onClick={() => addToFriend(value.user_id)}>Add friend</span>
-                                        :
-                                        value.friend_status === 'request' ?
-                                        <span className="search-result-add-friend" onClick={() => cancelRequestButton(value.user_id)} >Cancel request</span>
-                                        :
-                                        <span className="search-result-add-friend">Message</span>
+                                        {value.status === 'you' ?
+                                            <span className="search-result-add-friend" onClick={() => window.location.assign(`/profile`)}>View profile</span>
+                                            :
+                                        value.status === 'not_friend' ?
+                                            <span className="search-result-add-friend" onClick={() => addToFriend(value.user_id)}>Add friend</span>
+                                            :
+                                        value.status === 'pending' ?
+                                            <span className="search-result-add-friend" onClick={() => cancelRequestButton(value.user_id)} >Cancel request</span>
+                                            :
+                                            <span className="search-result-add-friend">Message</span>
                                         }
                                     </div>
                                 </div>

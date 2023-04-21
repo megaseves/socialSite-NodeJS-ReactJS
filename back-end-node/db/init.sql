@@ -11,11 +11,8 @@ CREATE TABLE users (
 );
 
 CREATE TABLE friends (
-  id INT GENERATED ALWAYS AS IDENTITY,
-  user_id int,
+  user_id int NOT NULL,
   friend_id int NOT NULL,
-  status VARCHAR (50),
-  PRIMARY KEY (id),
   CONSTRAINT fk_user_id
   FOREIGN KEY (user_id)
   REFERENCES users(user_id)
@@ -40,6 +37,39 @@ INSERT INTO users (username, password, email, avatar, created_on)
 INSERT INTO users (username, password, email, avatar, created_on)
     VALUES ('Szabó P. Szilveszter', '$2b$10$zBer8sfm1fvsdIyavx0K3OOPaF3w.ty7m0aq.mBouC12lvZF.chuy', 'szilveszter7495@gmail.com', 'szaboPSzilveszter.jpg', current_date);
 
+INSERT INTO friends (user_id, friend_id)
+    VALUES  (7, 1);
 
-INSERT INTO friends (user_id, friend_id, status)
-    VALUES  (1, 3, 'request');
+
+INSERT INTO friends (user_id, friend_id)
+    VALUES  (8, 1);
+INSERT INTO friends (user_id, friend_id)
+    VALUES  (1, 8);
+
+
+
+INSERT INTO friends (user_id, friend_id)
+    VALUES  (8, 2);
+
+
+INSERT INTO friends (user_id, friend_id)
+    VALUES  (1, 2);
+INSERT INTO friends (user_id, friend_id)
+    VALUES  (2, 1);
+
+INSERT INTO friends (user_id, friend_id)
+    VALUES  (1, 4);
+INSERT INTO friends (user_id, friend_id)
+    VALUES  (4, 1);
+
+
+INSERT INTO friends (user_id, friend_id)
+    VALUES  (1, 3);
+INSERT INTO friends (user_id, friend_id)
+    VALUES  (1, 5);
+
+
+INSERT INTO friends (user_id, friend_id)
+    VALUES  (2, 5);
+
+
