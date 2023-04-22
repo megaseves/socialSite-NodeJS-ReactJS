@@ -213,7 +213,7 @@ export async function fetchSignUp(registerData, setErr, signIn) {
 }
 
 
-export async function addFriend(user_id, friend_id, token) {
+export async function addFriend(user_id, friend_id, token, setUsers) {
         try {
             axios({
                 method: "post",
@@ -229,6 +229,7 @@ export async function addFriend(user_id, friend_id, token) {
             }).then(data => {
                 if (data.status === 200) {
                     console.log(data);
+                    fetchAllUsers(user_id, setUsers, token);
                 }
             })
         } catch (err) {

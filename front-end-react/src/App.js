@@ -8,7 +8,7 @@ import {Messages} from "./pages/Messages";
 import {Login} from "./pages/Login";
 import {PageNotFound} from "./components/PageNotFound";
 import {Profile} from "./pages/Profile";
-import {SearchResults} from "./components/SearchResults";
+import {SearchResults} from "./components/SearchResults/SearchResults";
 import {useState} from "react";
 import {RequireAuth, useAuthHeader, useSignIn} from "react-auth-kit";
 import jwt_decode from 'jwt-decode';
@@ -21,9 +21,9 @@ import {FriendRequests} from "./components/Friends/FriendRequests";
 
 function App() {
     const [users, setUsers] = useState("");
-
+    const [filterUsers, setFilterUsers] = useState([]);
     const [friends, setFriends] = useState([]);
-    console.log(friends);
+    //console.log(friends);
     //console.log(friendStatus);
     const authHeader = useAuthHeader();
     let token = authHeader().slice(7);
@@ -31,6 +31,7 @@ function App() {
     //console.log(userDetail)
 
     const signIn = useSignIn();
+
 
   return (
     <>
@@ -69,7 +70,7 @@ function App() {
 
             <Route path={"/search/people/"} element={
                 <RequireAuth loginPath={"/login"} >
-                    <SearchResults users={users} setUsers={setUsers} user_id={userDetail.user_id} token={token} />
+                    <SearchResults users={users} setUsers={setUsers} user_id={userDetail.user_id} token={token} filterUsers={filterUsers} setFilterUsers={setFilterUsers} />
                 </RequireAuth>
             }/>
 
