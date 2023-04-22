@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import './SearchResults.css';
 import {useSearchParams} from "react-router-dom";
 import {SearchResultCompContent} from "./SearchResultCompContent";
-import {addFriend, cancelRequest, fetchAllUsers} from "../../api/ApiFetch";
 
 export function SearchResults(props) {
     const [searchParams] = useSearchParams();
@@ -23,17 +22,6 @@ export function SearchResults(props) {
             props.setFilterUsers(filteredUsers);
          // eslint-disable-next-line
         }, [q, props.users, props.setUsers]);
-
-
-    const addToFriend = async (friend_id) => {
-        await addFriend(props.user_id, friend_id, props.token, props.setUsers);
-        await fetchAllUsers(props.user_id, props.setUsers, props.token);
-    };
-    const cancelRequestButton = async (friend_id) => {
-        await cancelRequest(props.user_id, friend_id, props.token);
-        await fetchAllUsers(props.user_id, props.setUsers, props.token);
-    };
-
 
     return(
         <div className={'search-result-comp-container'}>
@@ -56,7 +44,7 @@ export function SearchResults(props) {
 
                 {props.filterUsers.length > 0 &&
                     props.filterUsers.map((value) =>
-                        <SearchResultCompContent value={value} addToFriend={addToFriend} cancelRequestButton={cancelRequestButton} key={value.user_id} />
+                        <SearchResultCompContent value={value} addToFriend={props.addToFriend} cancelRequestButton={props.cancelRequestButton} key={value.user_id} />
                     )
                 }
             </div>

@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import './SearchBar.css';
-import {addFriend, cancelRequest, fetchAllUsers} from "../../api/ApiFetch";
+import {fetchAllUsers} from "../../api/ApiFetch";
 import {SearchBarResult} from "./SearchBarResult";
 
 export function SearchBar(props) {
@@ -9,12 +9,7 @@ export function SearchBar(props) {
     const Q_LINK = () => { window.location.assign(`/search/people/?q=${searchTerm}`) };
 
     //console.log(props.users)
-    const addToFriend = (friend_id) => {
-        addFriend(props.user_id, friend_id, props.token);
-    }
-    const cancelRequestButton = (friend_id) => {
-        cancelRequest(props.user_id, friend_id, props.token);
-    }
+
 
     let searchRef = useRef();
 
@@ -57,7 +52,7 @@ export function SearchBar(props) {
                     {filterUser.length > 0 || searchTerm.length > 0 ?
 
                         filterUser.slice(0, 5).map((value) =>
-                            <SearchBarResult value={value} addToFriend={addToFriend} cancelRequestButton={cancelRequestButton} key={value.user_id} />
+                            <SearchBarResult value={value} addToFriend={props.addToFriend} cancelRequestButton={props.cancelRequestButton} key={value.user_id} />
                         )
                     :
                         <p className={"search-result-history-text"}>There is no history!</p>

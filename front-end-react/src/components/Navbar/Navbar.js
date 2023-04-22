@@ -14,7 +14,7 @@ export function Navbar(props) {
                     <div className={'logo-ui'}>
                         <img src={'/socialSiteLogo.png'} width={40} height={40} alt={'logo'} onClick={()=> window.location.assign("/")} />
                     </div>
-                    {isAuthenticated() && <SearchBar setUsers={props.setUsers} users={props.users} token={props.token} user_id={props.userDetail.user_id}/>}
+                    {isAuthenticated() && <SearchBar setUsers={props.setUsers} users={props.users} token={props.token} user_id={props.userDetail.user_id} cancelRequestButton={props.cancelRequestButton} addToFriend={props.addToFriend}/>}
                 </div>
 
                 <div className={'menu-ui'}>

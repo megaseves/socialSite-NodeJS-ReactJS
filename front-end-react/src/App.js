@@ -17,6 +17,7 @@ import {Friends} from "./components/Friends/Friends";
 import {Posts} from "./components/Posts/Posts";
 import {Photos} from "./components/Photos/Photos";
 import {FriendRequests} from "./components/Friends/FriendRequests";
+import {addFriend, cancelRequest, fetchAllUsers} from "./api/ApiFetch";
 
 
 function App() {
@@ -32,10 +33,19 @@ function App() {
 
     const signIn = useSignIn();
 
+    const addToFriend = async (friend_id) => {
+        await addFriend(userDetail.user_id, friend_id, token, setUsers);
+        await fetchAllUsers(userDetail.user_id, setUsers, token);
+    };
+    const cancelRequestButton = async (friend_id) => {
+        await cancelRequest(userDetail.user_id, friend_id, token);
+        await fetchAllUsers(userDetail.user_id, setUsers, token);
+    };
+
 
   return (
     <>
-        <Navbar users={users} setUsers={setUsers} userDetail={userDetail} token={token} />
+        <Navbar users={users} setUsers={setUsers} userDetail={userDetail} token={token} addToFriend={addToFriend} cancelRequestButton={cancelRequestButton} />
         <Routes>
 
             <Route path={"/"} element={ <Home userDetail={userDetail} /> }/>
@@ -70,7 +80,7 @@ function App() {
 
             <Route path={"/search/people/"} element={
                 <RequireAuth loginPath={"/login"} >
-                    <SearchResults users={users} setUsers={setUsers} user_id={userDetail.user_id} token={token} filterUsers={filterUsers} setFilterUsers={setFilterUsers} />
+                    <SearchResults users={users} setUsers={setUsers} user_id={userDetail.user_id} token={token} filterUsers={filterUsers} setFilterUsers={setFilterUsers} addToFriend={addToFriend} cancelRequestButton={cancelRequestButton} />
                 </RequireAuth>
             }/>
 

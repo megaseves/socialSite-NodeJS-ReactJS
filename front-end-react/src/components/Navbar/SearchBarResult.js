@@ -25,7 +25,7 @@ export function SearchBarResult({value, addToFriend, cancelRequestButton}) {
                 </div>
             </div>
 
-            <div className="add-friend-container" onClick={()=> window.location.assign(`/`)}>
+            <div className="add-friend-container" >
                 {value.status === 'you' ?
                     <span className="search-result-add-friend" onClick={() => window.location.assign(`/profile`)}>View profile</span>
                     :
