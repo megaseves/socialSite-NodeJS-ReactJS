@@ -173,11 +173,12 @@ const addFriend = async (req, res) => {
     });
     client.end;
 }
-const cancelRequest = async (req, res) => {
+const removeFriend = async (req, res) => {
     const user_id = req.body.user_id;
     const friend_id = req.body.friend_id;
 
-    await client.query(`DELETE FROM friends WHERE user_id = $1 AND friend_id = $2`, [user_id, friend_id], async (err, result) => {
+    await client.query(`DELETE FROM friends
+WHERE (user_id = $1 AND friend_id = $2) OR (user_id = $2 AND friend_id = $1)`, [user_id, friend_id], async (err, result) => {
         if (!err) {
             console.log(result.rows)
             res.send("OK")
@@ -188,6 +189,7 @@ const cancelRequest = async (req, res) => {
     });
     client.end;
 }
+
 
 const getAllFriend = async (req, res) => {
     const user_id = req.headers.user_id;
@@ -224,6 +226,6 @@ module.exports = {
     getProfileById,
     getProfile,
     addFriend,
-    cancelRequest,
+    removeFriend,
     getAllFriend
 };

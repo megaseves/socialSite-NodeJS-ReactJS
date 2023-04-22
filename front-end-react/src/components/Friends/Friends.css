@@ -95,7 +95,7 @@
 }
 
 .fcd-setting-container {
-    display: none;
+    display: flex;
     position: absolute;
     width: 330px;
     height: 60px;

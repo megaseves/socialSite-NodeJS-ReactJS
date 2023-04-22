@@ -1,42 +1,30 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Friends.css';
-import {getAllFriend} from "../../api/ApiFetch";
+import {getAllFriend, removeFriend} from "../../api/ApiFetch";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEllipsis} from "@fortawesome/free-solid-svg-icons";
 
 
 export function Friends(props) {
 
-    let ref = useRef();
+    const [openModalId, setOpenModalId] = useState(null);
 
     useEffect( () => {
         getAllFriend(props.user_id, props.token, props.setFriends);
     }, [props.setFriends, props.user_id, props.token]);
 
-    const open = (friend_id) => {
-        const setting = document.querySelector(`.setting${friend_id}`);
-        const setting_container = setting.querySelector('[data-setting-container]');
-        if (!setting_container.classList.contains("open")) {
-            setting_container.classList.add("open");
+    const openFriendSetting = (id) => {
+        if (openModalId === id) {
+            setOpenModalId(null);
+        } else {
+            setOpenModalId(id);
         }
-    }
+    };
 
-    useEffect(() => {
-        let handler = (event) => {
-            const settings = document.querySelectorAll('.open');
-            if (!ref.current.contains(event.target)) {
-                settings.forEach(setting =>{
-                    setting.classList.remove('open');
-                })
-            }
-        }
-        document.addEventListener("mousedown", handler);
-
-        return () => {
-            document.removeEventListener("mousedown", handler);
-        }
-    });
-
+    const deleteFriend = async (friend_id) => {
+        await removeFriend(props.user_id, friend_id, props.token);
+        await getAllFriend(props.user_id, props.token, props.setFriends);
+    };
 
     return(
         <div className="friends-container">
@@ -64,20 +52,23 @@ export function Friends(props) {
                                     {friend.email}
                                 </span>
                             </div>
-                            <div className={'setting'+friend.user_id} onClick={() => open(friend.user_id)}>
+
+                            <div id={'setting'} className={'setting'+friend.user_id} onClick={() => openFriendSetting(friend.user_id)}>
                                 <div className="fcd-settings" >
                                         <FontAwesomeIcon className="fcd-setting-icon" icon={faEllipsis} />
-                                        <span ref={ref} className="fcd-setting-container" data-setting-container={friend.user_id}>
-                                            <span className="unfriend">
-                                                Unfriend
+
+                                        {openModalId === friend.user_id && (
+                                            <span className="fcd-setting-container" data-setting-container={friend.user_id}>
+                                                <span className="unfriend" onClick={() => deleteFriend(friend.user_id)}>
+                                                    Unfriend
+                                                </span>
                                             </span>
-                                        </span>
+                                        )}
+
                                 </div>
                             </div>
 
                         </div>
-
-
                     </div>
 
                 )}

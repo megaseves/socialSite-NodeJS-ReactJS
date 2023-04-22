@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {fetchProfile} from "../api/ApiFetch";
 import './Profile.css';
-import {Link, Outlet} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 import {UploadAvatar} from "../components/Photos/avatar/UploadAvatar";
+import {MenuLinkOnProfile} from "../components/MenuLinks/MenuLinkOnProfile";
 
 export function Profile(props) {
 
@@ -41,9 +42,9 @@ export function Profile(props) {
                             <h4 className={"user-name-friends"}>0 friends</h4>
                         </div>
                         <div className="tab-menu">
-                            <Link to={"/profile/posts"}><div className="tab-menu-link active">Posts</div></Link>
-                            <Link to={"/profile/friends"}><div className="tab-menu-link">Friends</div></Link>
-                            <Link to={"/profile/photos"}><div className="tab-menu-link">Photos</div></Link>
+                            <MenuLinkOnProfile title={'Posts'} to={"/profile/posts"} />
+                            <MenuLinkOnProfile title={'Friends'} to={"/profile/friends"} />
+                            <MenuLinkOnProfile title={'Photos'} to={"/profile/photos"} />
                         </div>
 
                     </div>

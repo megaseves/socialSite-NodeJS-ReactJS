@@ -95,7 +95,7 @@ app.get("/friends", authenticateToken, controller.getAllFriend);
 
 app.post("/addFriend", authenticateToken, controller.addFriend);
 
-app.post("/cancelRequest", authenticateToken, controller.cancelRequest);
+app.post("/removeFriend", authenticateToken, controller.removeFriend);
 
 app.post("/users", controller.registerNewUser);
 

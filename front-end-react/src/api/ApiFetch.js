@@ -242,11 +242,11 @@ export async function addFriend(user_id, friend_id, token, setUsers) {
         }
 }
 
-export async function cancelRequest(user_id, friend_id, token) {
+export async function removeFriend(user_id, friend_id, token) {
         try {
             axios({
                 method: "post",
-                url: "http://localhost:8080/cancelRequest",
+                url: "http://localhost:8080/removeFriend",
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`
@@ -292,3 +292,4 @@ export async function getAllFriend(user_id, token, setFriends) {
         }
     }
 }
+

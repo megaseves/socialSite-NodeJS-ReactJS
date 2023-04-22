@@ -17,7 +17,7 @@ import {Friends} from "./components/Friends/Friends";
 import {Posts} from "./components/Posts/Posts";
 import {Photos} from "./components/Photos/Photos";
 import {FriendRequests} from "./components/Friends/FriendRequests";
-import {addFriend, cancelRequest, fetchAllUsers} from "./api/ApiFetch";
+import {addFriend, fetchAllUsers, removeFriend} from "./api/ApiFetch";
 
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
         await fetchAllUsers(userDetail.user_id, setUsers, token);
     };
     const cancelRequestButton = async (friend_id) => {
-        await cancelRequest(userDetail.user_id, friend_id, token);
+        await removeFriend(userDetail.user_id, friend_id, token);
         await fetchAllUsers(userDetail.user_id, setUsers, token);
     };
 

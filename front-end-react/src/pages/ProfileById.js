@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {fetchProfileById} from "../api/ApiFetch";
-import {Link, Outlet, useParams} from "react-router-dom";
+import {Outlet, useParams} from "react-router-dom";
 import './ProfileById.css';
+import {MenuLinkOnProfile} from "../components/MenuLinks/MenuLinkOnProfile";
 
 export function ProfileById() {
 
@@ -27,9 +28,9 @@ export function ProfileById() {
                             <h4 className={"user-name-friends"}>0 friends</h4>
                         </div>
                         <div className="tab-menu">
-                            <Link to={`/profile/${id}/posts`}><div className="tab-menu-link active">Posts</div></Link>
-                            <Link to={`/profile/${id}/friends`}><div className="tab-menu-link">Friends</div></Link>
-                            <Link to={`/profile/${id}/photos`}><div className="tab-menu-link">Photos</div></Link>
+                            <MenuLinkOnProfile title={'Posts'} to={`/profile/${id}/posts`} />
+                            <MenuLinkOnProfile title={'Friends'} to={`/profile/${id}/friends`} />
+                            <MenuLinkOnProfile title={'Photos'} to={`/profile/${id}/photos`} />
                         </div>
                     </div>
                 </div>
