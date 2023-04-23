@@ -97,7 +97,7 @@
 .fcd-setting-container {
     display: flex;
     position: absolute;
-    width: 330px;
+    width: 120px;
     height: 60px;
     top: 40px;
     right: 0;
@@ -105,13 +105,15 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
     border-radius: 8px;
     justify-content: center;
+    align-items: center;
+    border: 1px solid var(--thiBgColor);
 
 }
 .unfriend {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 300px;
+    width: 100px;
     height: 40px;
     padding: 10px;
     margin-top: 0;
