@@ -16,8 +16,8 @@ import {ProfileById} from "./pages/ProfileById";
 import {Friends} from "./components/Friends/Friends";
 import {Posts} from "./components/Posts/Posts";
 import {Photos} from "./components/Photos/Photos";
-import {FriendRequests} from "./components/Friends/FriendRequests";
-import {addFriend, fetchAllUsers, getAllFriendRequest, removeFriend} from "./api/ApiFetch";
+import {FriendRequests} from "./components/Friends/FriendRequests/FriendRequests";
+import {addFriend, fetchAllUsers, getAllFriendRequest, getAllOwnRequest, removeFriend} from "./api/ApiFetch";
 
 
 function App() {
@@ -25,6 +25,7 @@ function App() {
     const [filterUsers, setFilterUsers] = useState([]);
     const [friends, setFriends] = useState([]);
     const [friendRequests, setFriendRequests] = useState({});
+    const [ownRequests, setOwnRequests] = useState({});
     //console.log(friends);
     //console.log(friendStatus);
     const authHeader = useAuthHeader();
@@ -38,11 +39,13 @@ function App() {
         await addFriend(userDetail.user_id, friend_id, token, setUsers);
         await fetchAllUsers(userDetail.user_id, setUsers, token);
         await getAllFriendRequest(userDetail.user_id, setFriendRequests, token);
+        await getAllOwnRequest(userDetail.user_id, setOwnRequests, token);
     };
     const cancelRequestButton = async (friend_id) => {
         await removeFriend(userDetail.user_id, friend_id, token);
         await fetchAllUsers(userDetail.user_id, setUsers, token);
         await getAllFriendRequest(userDetail.user_id, setFriendRequests, token);
+        await getAllOwnRequest(userDetail.user_id, setOwnRequests, token);
     };
 
 
@@ -100,7 +103,7 @@ function App() {
 
             <Route path={"/friends"} element={
                 <RequireAuth loginPath={"/login"} >
-                    <FriendRequests user_id={userDetail.user_id} token={token} friendRequests={friendRequests} setFriendRequests={setFriendRequests} addToFriend={addToFriend} cancelRequestButton={cancelRequestButton} />
+                    <FriendRequests user_id={userDetail.user_id} token={token} friendRequests={friendRequests} setFriendRequests={setFriendRequests} addToFriend={addToFriend} cancelRequestButton={cancelRequestButton} ownRequests={ownRequests} setOwnRequests={setOwnRequests} />
                 </RequireAuth>
             }/>
             {/*

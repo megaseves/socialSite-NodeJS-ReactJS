@@ -95,6 +95,8 @@ app.get("/friends", authenticateToken, controller.getAllFriend);
 
 app.get("/getAllFriendRequest", authenticateToken, controller.getAllFriendRequest);
 
+app.get("/getAllOwnRequest", authenticateToken, controller.getAllOwnRequest);
+
 app.post("/addFriend", authenticateToken, controller.addFriend);
 
 app.post("/removeFriend", authenticateToken, controller.removeFriend);

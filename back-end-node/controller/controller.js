@@ -159,6 +159,24 @@ const getAllFriendRequest = async (req, res) => {
     });
     client.end;
 }
+const getAllOwnRequest = async (req, res) => {
+    const user_id = req.headers.user_id;
+
+    await client.query(`SELECT u.user_id, u.username, u.avatar, u.email, u.created_on FROM friends f
+                        JOIN users u ON f.friend_id = u.user_id
+                        WHERE f.user_id = $1
+                            AND NOT EXISTS (
+                        SELECT 1 FROM friends f2 WHERE f2.user_id = f.friend_id AND f2.friend_id = f.user_id
+                    );`, [user_id], (err, result)=>{
+        if(!err){
+            //console.log(JSON.stringify(result.rows[0]));
+            res.send(result.rows);
+        } else {
+            console.log(err.message);
+        }
+    });
+    client.end;
+}
 
 const addFriend = async (req, res) => {
     const user_id = req.body.user_id;
@@ -248,5 +266,6 @@ module.exports = {
     addFriend,
     removeFriend,
     getAllFriend,
-    getAllFriendRequest
+    getAllFriendRequest,
+    getAllOwnRequest
 };

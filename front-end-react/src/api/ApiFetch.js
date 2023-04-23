@@ -59,6 +59,36 @@ export async function getAllFriendRequest(user_id, setFriendRequests, token) {
     }
 }
 
+export async function getAllOwnRequest(user_id, setOwnRequests, token) {
+    try {
+        await axios({
+            method: "get",
+            url: `http://localhost:8080/getAllOwnRequest`,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                user_id: user_id
+            }
+        }).then(data => {
+            if (data.data.length > 0) {
+
+                //let users = data.data.result;
+                //console.log(users)
+
+                setOwnRequests(data.data);
+            } else {
+                setOwnRequests({});
+            }
+        })
+    } catch (err) {
+        if (err.response) {
+            console.log(err.response.data);
+            console.log(err.response.status);
+        } else {
+            console.log(err.message);
+        }
+    }
+}
+
 export async function apiFetch(values, setErr, signIn) {
     try {
         axios({
