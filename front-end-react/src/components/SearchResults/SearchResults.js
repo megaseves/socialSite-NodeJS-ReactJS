@@ -6,7 +6,9 @@ import {SearchResultCompContent} from "./SearchResultCompContent";
 export function SearchResults(props) {
     const [searchParams] = useSearchParams();
     const q = searchParams.get('q') || '';
-/*    const [filterUsers, setFilterUsers] = useState([]);*/
+
+    //console.log(props.users)
+
 
     useEffect(() => {
             console.log('ok');

@@ -1,0 +1,102 @@
+.friend-requests-container {
+    display: flex;
+    width: 100vw;
+}
+
+.friends-container-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+}
+.friends-container-header h2 {
+    font-size: 24px;
+}
+
+
+.friend-requests-content-container {
+    width: 100vw;
+    height: 400px;
+    /*border: 1px solid red;*/
+    margin-left: 300px;
+}
+
+
+.friend-content-header {
+    margin-top: 30px;
+    width: 100%;
+   /* border: 1px solid green;*/
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+
+.friend-content-card-container {
+    width: 100%;
+    /*border: 1px solid pink;*/
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* FRIEND CARD */
+.friend-content-card {
+    width: 200px;
+    height: 340px;
+    border-radius: 10px;
+    border: 1px solid var(--thiBgColor);
+    background-color: var(--secBgColor);
+}
+
+.friend-requests-card-detail-container {
+    padding: 10px;
+}
+.friend-requests-card-avatar {
+    width: 198px;
+    height: 200px;
+    border-radius: 10px 10px 0 0;
+    /*border: 1px solid purple;*/
+    cursor: pointer;
+}
+.friend-requests-card-name {
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.friend-requests-card-name:hover {
+    color: var(--mainColor);
+}
+.friend-requests-card-mutual-friends {
+    font-size: 12px;
+    color: var(--textColor);
+}
+
+.friend-requests-card-confirm {
+    margin-top: 5px;
+    padding: 5px 0;
+}
+.request-friend-btn {
+    width: 100%;
+    height: 35px;
+    background-color: var(--textColor);
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.confirm-btn {
+    background-color: var(--mainColor);
+    cursor: pointer;
+}
+.confirm-btn:hover {
+    opacity: 0.7;
+}
+.remove-btn {
+    background-color: var(--thiBgColor);
+    cursor: pointer;
+}
+.remove-btn:hover {
+    opacity: 0.7;
+}

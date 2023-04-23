@@ -93,6 +93,8 @@ app.get("/profile", authenticateToken, controller.getProfile);
 
 app.get("/friends", authenticateToken, controller.getAllFriend);
 
+app.get("/getAllFriendRequest", authenticateToken, controller.getAllFriendRequest);
+
 app.post("/addFriend", authenticateToken, controller.addFriend);
 
 app.post("/removeFriend", authenticateToken, controller.removeFriend);
