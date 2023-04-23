@@ -9,7 +9,7 @@ export function Security() {
                 <div className="settings-content-container">
 
                     <div className="settings-content">
-                        <h5 className={"settings-content-title"}>Password</h5><p className={"settings-user-detail"}>******</p><a className={"settings-edit"} href="#">Edit</a>
+                        <h5 className={"settings-content-title"}>Password</h5><p className={"settings-user-detail"}>******</p><a className={"settings-edit"} href="/">Edit</a>
                     </div>
 
                 </div>

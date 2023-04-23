@@ -9,13 +9,13 @@ export function GeneralSettings({userDetail}) {
                 <div className="settings-content-container">
 
                     <div className="settings-content">
-                        <h5 className={"settings-content-title"}>Name</h5><p className={"settings-user-detail"}>{userDetail.username}</p><a className={"settings-edit"} href="#">Edit</a>
+                        <h5 className={"settings-content-title"}>Name</h5><p className={"settings-user-detail"}>{userDetail.username}</p><a className={"settings-edit"} href="/">Edit</a>
                     </div>
                     <div className="settings-content">
-                        <h5 className={"settings-content-title"}>Age</h5><p className={"settings-user-detail"}>-</p><a className={"settings-edit"} href="#">Edit</a>
+                        <h5 className={"settings-content-title"}>Age</h5><p className={"settings-user-detail"}>-</p><a className={"settings-edit"} href="/">Edit</a>
                     </div>
                     <div className="settings-content">
-                        <h5 className={"settings-content-title"}>City</h5><p className={"settings-user-detail"}>-</p><a className={"settings-edit"} href="#">Edit</a>
+                        <h5 className={"settings-content-title"}>City</h5><p className={"settings-user-detail"}>-</p><a className={"settings-edit"} href="/">Edit</a>
                     </div>
 
                 </div>

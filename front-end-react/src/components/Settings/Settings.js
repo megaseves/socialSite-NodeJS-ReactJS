@@ -17,6 +17,7 @@ export function Settings({userDetail}) {
         if (tab === '') {
             window.location.assign("?tab=profile");
         }
+    // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
