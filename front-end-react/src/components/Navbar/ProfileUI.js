@@ -56,6 +56,7 @@ export function ProfileUI(props) {
                 {isOpenDropDown ?
                 <div ref={menuRef} className={'drop-down-container'}>
                     <div className={'drop-down-btn'} onClick={()=> window.location.assign("/profile")}>Profile</div>
+                    <div className={'drop-down-btn'} onClick={()=> window.location.assign("/settings")}>Settings</div>
                     <div className={'drop-down-btn'} onClick={logout}>Logout</div>
                 </div>
                 :

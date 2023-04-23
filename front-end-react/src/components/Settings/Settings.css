@@ -1,0 +1,68 @@
+.settings {
+    display: flex;
+    width: 100vw;
+}
+
+.search-filter-settings {
+    display: flex;
+    gap: 12px;
+}
+
+.settings-container {
+    width: 100vw;
+    height: 400px;
+    margin-left: 300px;
+}
+.settings-content-header {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+.settings-content-container {
+    width: 100%;
+    /*border: 1px solid pink;*/
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.setting-menu-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.settings-content {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 10px;
+}
+.settings-content:hover {
+    background-color: var(--secBgColor);
+    cursor: pointer;
+}
+.settings-content-title {
+    flex: 1;
+}
+.settings-user-detail {
+    flex: 2;
+}
+.settings-edit {
+    flex: 0;
+}
+
+.warning {
+    background-color: #da2f2f;
+    justify-content: center;
+}
+.warning:hover {
+    background-color: #8a2222;
+}

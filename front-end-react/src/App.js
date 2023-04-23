@@ -1,4 +1,5 @@
 import './App.css';
+import './Scrollbar.css';
 import {Home} from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
 import Signup from "./pages/Signup";
@@ -18,6 +19,7 @@ import {Posts} from "./components/Posts/Posts";
 import {Photos} from "./components/Photos/Photos";
 import {FriendRequests} from "./components/Friends/FriendRequests/FriendRequests";
 import {addFriend, fetchAllUsers, getAllFriendRequest, getAllOwnRequest, removeFriend} from "./api/ApiFetch";
+import {Settings} from "./components/Settings/Settings";
 
 
 function App() {
@@ -106,6 +108,13 @@ function App() {
                     <FriendRequests user_id={userDetail.user_id} token={token} friendRequests={friendRequests} setFriendRequests={setFriendRequests} addToFriend={addToFriend} cancelRequestButton={cancelRequestButton} ownRequests={ownRequests} setOwnRequests={setOwnRequests} />
                 </RequireAuth>
             }/>
+
+            <Route path={"/settings"} element={
+                <RequireAuth loginPath={"/login"} >
+                    <Settings userDetail={userDetail} />
+                </RequireAuth>
+            }/>
+
             {/*
             <Route path={"/profile/friends"} element={
                 <RequireAuth loginPath={"/login"} >
